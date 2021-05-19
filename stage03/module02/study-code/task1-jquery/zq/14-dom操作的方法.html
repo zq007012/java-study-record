@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      width: 300px;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <div id="idDemo" name="nameDemo" value="valueDemo">
+      这是一张图片<br />
+      <img src="image/nami (12).jpg" /><br />
+      这是图片的说明
+      <span>这是span里的文字</span>
+    </div>
+  </body>
+  <script>
+    $(function () {
+      console.log($("#idDemo").val());
+      console.log($("#idDemo").text());
+      console.log($("#idDemo").html());
+      $("#idDemo").text("一枪一个");
+
+      $("#idDemo").html(
+        `Hero's never die<img src="image/nami (12).jpg" /><br />`
+      );
+      $("#idDemo").val();
+      $("#idDemo").attr("id" < "hh");
+    });
+  </script>
+</html>

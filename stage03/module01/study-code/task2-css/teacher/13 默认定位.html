@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    div {
+      width: 100px;
+      height: 50px;
+      border: 1px solid red;
+    }
+    span {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+    }
+    input {
+      width: 50px;
+      height: 50px;
+      border: 1px solid red;
+    }
+
+    a {
+      width: 50px;
+      height: 50px;
+      border: 1px solid red;
+      /* a标签是行内元素，无法改变宽高。但只要转换成行内块元素，就可以改变宽高了。 */
+      display: inline-block; /* 将a元素，显示成  行内块  */
+    }
+  </style>
+  <body>
+    <div>你好</div>
+    <div>你好</div>
+    <div>你好</div>
+    <hr />
+    <span>大家好</span>
+    <span>大家好</span>
+    <span>大家好</span>
+    <hr />
+    <input />
+    <input />
+    <input />
+
+    <h1>如何让span标签也可以改变宽高</h1>
+    <p>使用display属性，进行转换</p>
+
+    <hr />
+    <a href="">拉勾</a>
+    <a href="">拉勾</a>
+    <a href="">拉勾</a>
+  </body>
+</html>

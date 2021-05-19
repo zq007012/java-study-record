@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>content</title>
+  </head>
+  <style>
+    body {
+      margin: 0px, 0px;
+      padding: 0px, 0px;
+    }
+    #allContent {
+      width: 1200px;
+      height: 530px;
+      margin-left: auto;
+      margin-right: auto;
+      border-style: solid;
+      border-color: rgb(132, 211, 204);
+      border-width: 2px;
+      position: relative;
+      left: 0px;
+      top: 0px;
+    }
+
+    #bang {
+      position: relative;
+      left: -12px;
+      top: 25px;
+    }
+    .book {
+      margin-top: 60px;
+      width: 1200px;
+      height: 420px;
+      position: relative;
+      left: 0px;
+      top: 0px;
+    }
+
+    span {
+      display: inline-block;
+    }
+    .leftBook {
+      width: 690px;
+      height: 420px;
+      position: relative;
+      left: 0px;
+      top: 0px;
+      vertical-align: top;
+    }
+    .leftBookCover,
+    .leftBookIntro {
+      width: 330px;
+    }
+    .leftBookCover {
+      background-origin: content-box;
+      padding: 10px 0px;
+      height: 400px;
+      position: relative;
+      vertical-align: top;
+      text-align: left;
+    }
+    .leftCover {
+      height: 365px;
+      padding: 10px 0px;
+    }
+
+    .leftBookNo {
+      position: absolute;
+      left: 35px;
+      top: 20px;
+    }
+
+    .leftBookIntro {
+      height: 350px;
+      padding: 35px 0px;
+
+      vertical-align: top;
+    }
+    .leftIntro,
+    .rightIntro {
+      list-style-type: none;
+      font-size: 1em;
+    }
+    .leftIntro > li {
+      margin-bottom: 20px;
+    }
+
+    .rightBooks {
+      width: 500px;
+      height: 420px;
+    }
+    .rightBook {
+      width: 500px;
+      height: 210px;
+    }
+
+    .rightBookCover,
+    .rightBookIntro {
+      vertical-align: top;
+    }
+    .rightBookCover {
+      width: 200px;
+      background-origin: content-box;
+      padding: 5px 0px;
+      height: 200px;
+      text-align: center;
+      position: relative;
+    }
+    .rightBookIntro {
+      width: 280px;
+      height: 210px;
+      font-size: 1em;
+      text-align: left;
+      position: relative;
+      left: -35px;
+      top: 0px;
+    }
+    .rightCover {
+      height: 200px;
+    }
+
+    .rightBookNo {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+    }
+    .rightIntro > li {
+      margin-bottom: 10px;
+    }
+    .title {
+      font-size: 1.25em;
+      color: rgb(49, 170, 218);
+    }
+    .price {
+      color: rgb(163, 17, 47);
+      font-weight: bold;
+    }
+    .discount {
+      color: rgb(124, 200, 200);
+      font-style: italic;
+    }
+  </style>
+  <body>
+    <div id="allContent">
+      <div id="bang">
+        <img src="../image/bg_bang.gif" />
+      </div>
+      <div class="book">
+        <span class="leftBook">
+          <span class="leftBookCover">
+            <img class="leftCover" src="../image/book-01.jpg" />
+            <img class="leftBookNo" src="../image/bookNo1.gif" />
+          </span>
+          <span class="leftBookIntro">
+            <ul class="leftIntro">
+              <li class="title">偷影子的人</li>
+              <li>作者: [法] 马克·李伟（Marc Levv）著</li>
+              <li>出版社：湖南文艺出版社</li>
+              <li>当当价：<font class="price">￥17.90</font></li>
+              <li>
+                不知道姓氏的克蕾儿。这就是你在我生命里的角色，我童年时的小女孩，今日蜕变成了女人，一段青梅竹马的回忆，一个时间之神没有应允的愿望。一个老是受班上同学欺负的瘦弱小男孩，一位拥有一种特殊能力而强大；他能“偷别人的影子”
+              </li>
+            </ul>
+          </span>
+        </span>
+        <span class="rightBooks">
+          <span class="rightBook">
+            <span class="rightBookCover">
+              <img class="rightCover" src="../image/book-02.jpg" />
+              <img class="rightBookNo" src="../image/bookNo2.gif" />
+            </span>
+            <span class="rightBookIntro">
+              <ul class="rightIntro">
+                <li class="title">
+                  看见（央视知名记者、主持人柴静：十年个人成长的告白，中国社会变迁的备忘
+                </li>
+                <li>作者：柴静 著</li>
+                <li>出版社：广西师范大学出版社</li>
+                <li>
+                  <font class="price">￥29.40</font>&nbsp;
+                  <font class="discount">7.4折</font>
+                </li>
+              </ul>
+            </span>
+          </span>
+          <br />
+          <span class="rightBook">
+            <span class="rightBookCover">
+              <img class="rightCover" src="../image/book-03.jpg" />
+              <img class="rightBookNo" src="../image/bookNo3.gif" />
+            </span>
+            <span class="rightBookIntro">
+              <ul class="rightIntro">
+                <li class="title">改变孩子先改变自己</li>
+                <li>作者：贾容韬 贾毅 著</li>
+                <li>出版社：作家出版社</li>
+                <li>
+                  <font class="price">￥22.20</font>&nbsp;
+                  <font class="discount">7.4折</font>
+                </li>
+              </ul>
+            </span>
+          </span>
+        </span>
+      </div>
+    </div>
+  </body>
+  <script>
+    console.log(document.body.scrollHeight);
+  </script>
+</html>

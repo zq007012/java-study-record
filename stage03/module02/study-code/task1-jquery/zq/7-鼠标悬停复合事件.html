@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <img style="width: 300px" src="image/nami (12).jpg" />
+  </body>
+  <script>
+    $("img").hover(
+      function () {
+        $(this)
+          .css("border-style", "solid")
+          .css("border-width", "10px")
+          .css("border-color", "red");
+      },
+      function () {
+        $(this).css("border-style", "none");
+      }
+    );
+  </script>
+</html>

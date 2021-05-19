@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="demo1" onclick="thisDemo('点击按钮1')">点我一下试试1</button
+    ><br />
+    <button id="demo2">点我一下试试2</button>
+  </body>
+  <script>
+    var element = document.getElementById("demo2");
+    element.addEventListener("click", () => {
+      thisDemo("点击按钮2").bind(this);
+    });
+
+    var thisDemo = function (info) {
+      console.log("试试就试试");
+      console.log(this);
+
+      console.log(info);
+    };
+  </script>
+</html>

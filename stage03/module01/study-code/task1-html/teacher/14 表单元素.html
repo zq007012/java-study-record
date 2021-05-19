@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="baidu" method="GET">
+
+        <p>帐号：<input name="a" type="text" placeholder="请输入帐号..." maxlength="5" ></p>
+        <p>密码：<input name="b" type="password"></p>
+        <p>爱好：
+            <input name="hobby" type="checkbox"> 抽烟
+            <input name="hobby" type="checkbox" checked="checked"> 喝酒
+            <input name="hobby" type="checkbox"> 烫头
+            <input name="hobby" type="checkbox"> 泡澡
+        </p>
+        <p>性别：
+            <input type="radio" name="sex"> 男
+            <input type="radio" name="sex" checked="checked"> 女
+        </p>
+        <p>身份：
+            <input type="radio" name="role"> ceo
+            <input type="radio" name="role"> cto
+            <input type="radio" name="role"> coo
+            <input type="radio" name="role" checked="checked"> ufo
+        </p>
+        <p>头像：
+            <input type="file">
+        </p>
+        <p>血型：
+            <select>
+                <option>A型</option>
+                <option>B型</option>
+                <option>C型</option>
+                <option selected="selected">O型</option>
+            </select>
+        </p>
+        <p>个人简介：
+            <textarea cols="10" rows="5"></textarea>
+        </p>
+        <p>
+            <input type="reset" value="清空">
+            <input type="submit" value="提交">
+            <input type="button" value="取消">
+            <button>保存</button>
+        </p>
+    </form>
+
+
+    <button>测试</button>
+</body>
+</html>

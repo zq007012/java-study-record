@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="reload()">刷新</button><br />
+    <button onclick="showUrl()">显示当前页面的网址</button
+    ><span style="border-style: solid" id="url"></span><br />
+    <button onclick="skip()">跳转</button>
+  </body>
+  <script>
+    function reload() {
+      location.reload();
+    }
+    function showUrl() {
+      var url = location.href;
+      document.getElementById("url").innerHTML = decodeURI(url);
+    }
+    function skip() {
+      location.href = "https://www.baidu.com";
+    }
+  </script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    /* div p：后代选择器，div下的所有p标签都会被选取，忽略层级 */
+    /* div>p：子代选择器，div的子级元素p被选取，只选取一级 */
+    div > p {
+      color: red;
+    }
+  </style>
+
+  <body>
+    <!-- div有3个孩子：p、p、span -->
+    <!-- span有2个孩子：p、p -->
+
+    <div>
+      <p>数学</p>
+      <p>语文</p>
+      <span>
+        <p>古诗词</p>
+        <p>文言文</p>
+      </span>
+    </div>
+  </body>
+</html>

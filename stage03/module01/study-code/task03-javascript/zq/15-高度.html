@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="getHeight(demo)">
+    <div id="demo" style="height: 3000px; width: 300px; border-style: solid">
+      <span>span内文字</span>
+    </div>
+    <div id="demo" style="height: 3000px; width: 300px; border-style: solid">
+      <span>span内文字</span>
+    </div>
+    <div id="demo" style="height: 3000px; width: 300px; border-style: solid">
+      <span>span内文字</span>
+    </div>
+  </body>
+  <script>
+    function getHeight(id) {
+      var ele = document.getElementById(id);
+      console.log(document.body);
+      console.log(document.body.clientHeight);
+      console.log(document.getElementById("demo").clientHeight);
+      console.log(document.getElementById("demo").scrollHeight);
+    }
+  </script>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    ul {
+      list-style-type: none;
+      font-size: 2.5em;
+      padding-left: 0px;
+      font-weight: bold;
+    }
+    li {
+      display: inline;
+      margin-right: -12px;
+    }
+
+    @keyframes hiddenVisible {
+      0% {
+        color: black;
+      }
+      50% {
+        color: rgba(0, 0, 0, 0);
+      }
+      100% {
+        color: black;
+      }
+    }
+    .colon {
+      animation-name: hiddenVisible;
+      animation-duration: 1s;
+      animation-timing-function: ease-in;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+    }
+  </style>
+  <body onload="setClock()">
+    <ul>
+      <li id="year">2021</li>
+      <li>年</li>
+      <li id="month">12</li>
+      <li>月</li>
+      <li id="day">31</li>
+      <li>日&nbsp;&nbsp;</li>
+      <li id="hour">24</li>
+      <li class="colon">&nbsp;:&nbsp;</li>
+      <li id="minute">59</li>
+      <li class="colon">&nbsp;:&nbsp;</li>
+      <li id="second">59</li>
+    </ul>
+  </body>
+  <script>
+    var date, year, month, day, hour, minute, second, colonArr;
+
+    function setClock() {
+      year = document.getElementById("year");
+      month = document.getElementById("month");
+      day = document.getElementById("day");
+      hour = document.getElementById("hour");
+      minute = document.getElementById("minute");
+      second = document.getElementById("second");
+      colonArr = document.getElementsByClassName("colon");
+
+      setInterval(setTimer, 1000);
+    }
+
+    function setTimer() {
+      date = new Date();
+      year.innerHTML = date.getFullYear();
+      month.innerHTML = date.getMonth() + 1 + "";
+      day.innerHTML = date.getDate();
+      hour.innerHTML = date.getHours();
+      minute.innerHTML = date.getMinutes();
+      second.innerText = date.getSeconds() + "";
+    }
+  </script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <style>
+    .hasBorder {
+      border-style: solid;
+      border-width: 30px;
+      border-color: blueviolet;
+    }
+  </style>
+  <body>
+    <button>[false,false]</button><br />
+    <button>[true,false]</button><br />
+    <button>[false,true]</button><br />
+    <button>[true,true]</button><br />
+    <button>复制元素</button><br />
+    <div style="background-color: cornsilk; margin-bottom: 30px">
+      <span>
+        吃了吗?
+        <span>早就吃了</span>
+      </span>
+      <br />
+      <img height="400px" src="image/nami (3).jpg" />
+    </div>
+  </body>
+  <script>
+    $("div").click(function () {
+      $(this).toggleClass("hasBorder");
+    });
+    $("img").click(function () {
+      $(this).toggleClass("hasBorder");
+      event.stopPropagation();
+    });
+    $("button").click(function () {
+      var arr = JSON.parse($(this).text());
+      var withDataAndEvent = arr[0];
+      console.log(withDataAndEvent);
+      var deepWithDataAndEvent = arr[1];
+      console.log(deepWithDataAndEvent);
+
+      $("body").append(
+        $("div").first().clone(withDataAndEvent, deepWithDataAndEvent)
+      );
+      console.log(document);
+    });
+    $("div").remove;
+  </script>
+</html>

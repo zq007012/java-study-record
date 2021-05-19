@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      height: 450px;
+    }
+    button {
+      font-size: 2em;
+      padding: 5px 15px;
+    }
+  </style>
+  <body>
+    <div style="height: 460px">
+      <img style="height: 450px" id="container" src="image/nami (1).jpg" />
+    </div>
+    <button id="start" onclick="selectImage.start()">开始</button
+    >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="stop" onclick="selectImage.stop()">停止</button>
+  </body>
+  <script>
+    var selectImage = new Object();
+    selectImage.container = null;
+    selectImage.interValNumber = null;
+    selectImage.randomInt = null;
+    selectImage.hadStart = false;
+    selectImage.start = function () {
+      container = document.getElementById("container");
+      if (!selectImage.hadStart) {
+        console.log("开始随机换图");
+        selectImage.intervalNumber = setInterval(selectImage.randomChange, 100);
+        selectImage.hadStart = true;
+      } else {
+        console.log("已经开始随机换图");
+      }
+    };
+
+    selectImage.randomChange = function () {
+      randomInt = Math.round((Math.floor(Math.random() * 10) + 1) * 1.2);
+      container.src = "image/nami (" + randomInt + ").jpg";
+    };
+
+    selectImage.stop = function () {
+      clearInterval(selectImage.intervalNumber);
+      selectImage.hadStart = false;
+      console.log("停止随机换图");
+    };
+  </script>
+</html>

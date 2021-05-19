@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    button {
+      color: white;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      background-image: linear-gradient(
+        90deg,
+        rgb(122, 17, 122),
+        rgb(202, 12, 202),
+        rgb(116, 12, 202)
+      );
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <button id="btn1">click</button><br />
+    <button id="btn2">click mouseover</button>
+  </body>
+  <script>
+    $("#btn1").on("click", function () {
+      console.log("鼠标点击了btn1");
+    });
+    $("#btn2").on("click mouseover", function () {
+      if (event.type == "click") {
+        console.log("鼠标点击了btn2");
+      } else if (event.type == "mouseover") {
+        console.log("鼠标移动了btn2上");
+      }
+    });
+  </script>
+</html>

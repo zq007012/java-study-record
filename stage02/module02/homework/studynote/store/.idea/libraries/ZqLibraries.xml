@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ZqLibraries">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../ZqLibraries" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../ZqLibraries" recursive="false" />
+  </library>
+</component>

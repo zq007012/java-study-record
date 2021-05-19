@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .zoomIn {
+      transition-property: width height;
+      transition-duration: 1s;
+      transition-timing-function: ease-in;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <button id="btnZoomOut">放大图片</button>
+    <button id="btnZoomIn">缩小图片</button>
+    <button id="btnOriginSize">原始大小</button><br />
+    <img src="image/nami (7).jpg" height="400px" />
+  </body>
+  <script>
+    //给图片设置一个过渡动画的样式
+    $("img").css({
+      transitionProperty: "width height",
+      transitionDuration: "500ms",
+      transitionTimingFunction: "ease-in",
+    });
+
+    //恢复图片的原始尺寸
+    $("#btnOriginSize").click(function () {
+      $("img").css("height", "auto");
+    });
+    //缩小
+    $("#btnZoomIn").click(function () {
+      var height = $("img").height();
+      if (height > 50) {
+        height = height - 50;
+      }
+      $("img").css("height", height + "px");
+    });
+    //放大
+    $("#btnZoomOut").click(function () {
+      var height = $("img").height();
+      $("img").css("height", height + 50 + "px");
+    });
+
+    $(`img`).togglec;
+  </script>
+</html>

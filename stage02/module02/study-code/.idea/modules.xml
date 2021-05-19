@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jdbc_task01/jdbc_task01.iml" filepath="$PROJECT_DIR$/jdbc_task01/jdbc_task01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdbc_task02/jdbc_task02.iml" filepath="$PROJECT_DIR$/jdbc_task02/jdbc_task02.iml" />
+      <module fileurl="file://D:/拉勾教育Java就业急训营学习资料/第02阶段/模块2 JDBC&amp;XML/04 任务四 (综合案例)/04_代码/jdbc_task04/jdbc_task04.iml" filepath="D:/拉勾教育Java就业急训营学习资料/第02阶段/模块2 JDBC&amp;XML/04 任务四 (综合案例)/04_代码/jdbc_task04/jdbc_task04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module02.iml" filepath="$PROJECT_DIR$/module02.iml" />
+      <module fileurl="file://D:/拉勾教育Java就业急训营学习资料/第02阶段/模块2 JDBC&amp;XML/03 任务三 (XML)/04_代码/xml_task03/xml_task03.iml" filepath="D:/拉勾教育Java就业急训营学习资料/第02阶段/模块2 JDBC&amp;XML/03 任务三 (XML)/04_代码/xml_task03/xml_task03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zq-utils/zq-utils.iml" filepath="$PROJECT_DIR$/zq-utils/zq-utils.iml" />
+    </modules>
+  </component>
+</project>

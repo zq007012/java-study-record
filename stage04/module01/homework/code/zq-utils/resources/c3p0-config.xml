@@ -1,0 +1,30 @@
+<c3p0-config>
+    <!-- 主要是看named-config标签里的设置 -->
+    <!--默认配置, 下面的自定义配置没设置到的就是用默认配置里的内容, -->
+    <default-config>
+        <!-- 连接池创建好后就往里面放10个数据库连接-->
+        <property name="initialPoolSize">10</property>
+        <!-- 连接池里至少要有10个连接 -->
+        <property name="minPoolSize">10</property>
+        <!-- 连接池里至多有100个的连接 -->
+        <property name="maxPoolSize">100</property>
+        <!-- 连接池里的某个连接在30秒内没有使用过的话就会自动销毁, 如果为0, 则这个连接永远不会销毁 -->
+        <property name="maxIdleTime">30</property>
+    </default-config>
+
+    <!--配置连接池mysql, 一个named-config标签就是一个连接池-->
+    <named-config name="mysql">
+        <!-- 数据库驱动-->
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <!-- 数据库服务器的url-->
+        <!-- 开启数据库的批处理功能的url -->
+        <!-- jdbc:mysql://localhost:3306/db_demo?characterEncoding=utf-8&rewriteBatchedStatements=true -->
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/student_management_system?characterEncoding=UTF-8</property>
+        <!-- 用户 -->
+        <property name="user">root</property>
+        <!-- 密码 -->
+        <property name="password">123456</property>
+    </named-config>
+    <!--可以配置多个named-config, 为不同的url或不同的user的创建连接池-->
+
+</c3p0-config>

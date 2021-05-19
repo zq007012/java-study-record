@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    span {
+      display: inline-block;
+      width: 3em;
+      height: 1.4em;
+    }
+    a {
+      display: inline-block;
+      border-style: solid;
+      border-color: black;
+      background-color: rgba(136, 135, 129, 0.226);
+      width: 1.4em;
+      height: 1.4em;
+      text-decoration: none;
+      text-align: center;
+      color: black;
+    }
+    a:active {
+      background-color: rgba(136, 135, 129, 0.651);
+    }
+    table {
+      border-style: solid;
+      border-width: 5px;
+      border-collapse: collapse;
+      border-spacing: 0px;
+    }
+    td {
+      border-style: solid;
+      border-width: 3px;
+      font-size: 1.5em;
+      width: 10em;
+      height: 2em;
+      vertical-align: middle;
+      text-align: center;
+    }
+    .title {
+      background-color: darkgray;
+      font-weight: bolder;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <!--导入一个可以进行精确运算的程序库-->
+  <script src="js/math.min.js"></script>
+  <body>
+    <table>
+      <tr class="title">
+        <td>商品编号</td>
+        <td>名称</td>
+        <td>单价(元)</td>
+        <td>数量</td>
+        <td>总价(元)</td>
+      </tr>
+      <tr>
+        <td>1001</td>
+        <td>炸香肠</td>
+        <td>3</td>
+        <td>
+          <a href="javascript:void(0);">-</a><span>&nbsp;1&nbsp;</span
+          ><a href="# ">+</a>
+        </td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>1002</td>
+        <td>王八</td>
+        <td>8.8</td>
+        <td>
+          <a href="javascript:void(0);">-</a><span>&nbsp;1&nbsp;</span
+          ><a href="javascript:void(0);">+</a>
+        </td>
+        <td>8.8</td>
+      </tr>
+      <tr>
+        <td>1003</td>
+        <td>恐龙</td>
+        <td>1000</td>
+        <td>
+          <a href="javascript:void(0);">-</a><span>&nbsp;1&nbsp;</span
+          ><a href="javascript:void(0);">+</a>
+        </td>
+        <td>1000</td>
+      </tr>
+      <tr>
+        <td colspan="5" style="text-align: right">
+          <span>总价:&nbsp;</span>
+          <span id="allTotalPrice" style="color: red; font-weight: bolder"
+            >1011.8</span
+          >
+          <span>元</span>
+          <button style="font-size: 0.9em; margin-right: 5px">提交订单</button>
+        </td>
+      </tr>
+    </table>
+  </body>
+  <script>
+    //对math对象进行设置, 使之可以进行精确计算
+    math.config({
+      number: "BigNumber",
+    });
+
+    $("a").click(function () {
+      //1. 获取被点击的按钮
+      var thisEle = $(this);
+      //2. 根据被点击的按钮, 获取本行商品的 单价元素, 数量元素, 总价元素, 合计元素
+      var priceEle = thisEle.parent().prev();
+      var countEle = thisEle.siblings(`span`);
+      var totalPriceEle = thisEle.parent().next();
+      var allTotalPriceEle = $("#allTotalPrice");
+      //3. 获取本行商品的 单价 数量 总价 合计
+      var price = priceEle.text().trim();
+      var count = countEle.text().trim();
+      var totalPrice = totalPriceEle.text().trim();
+      var allTotalPrice = allTotalPriceEle.text().trim();
+      //4. 计算商品的数量
+      var symbol = $(this).text().trim();
+      count = math.evaluate(`${count}${symbol}1`);
+      //5. 如果数量小于1, 就弹出确认框
+      if (count < 1) {
+        var removeMe = confirm("是否删除该商品?");
+        //5.1 如果用户点击了确定就上出本行商品, 否则什么也不做
+        if (removeMe) {
+          //删除本行商品
+          thisEle.parent().parent().remove();
+          //修改总价的合计
+          allTotalPrice = math.evaluate(`${allTotalPrice}${symbol}${price}`);
+          allTotalPriceEle.text(allTotalPrice);
+        }
+
+        //弱国count<1, 那就不执行之后的语句了
+        return;
+      }
+      //修改本行商品的数量, 总价, 以及总价的合计
+      totalPrice = math.evaluate(`${totalPrice}${symbol}${price}`);
+      allTotalPrice = math.evaluate(`${allTotalPrice}${symbol}${price}`);
+      countEle.text(`${count}`);
+      totalPriceEle.text(totalPrice);
+      allTotalPriceEle.text(allTotalPrice);
+    });
+  </script>
+</html>

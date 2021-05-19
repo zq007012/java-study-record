@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <div style="background-color: rgba(255, 0, 0, 0.287)">
+      <span>汉库克</span><br />
+      <img height="400px" src="image/nami (7).jpg" />
+      <br />
+    </div>
+  </body>
+  <script>
+    $("div").append(
+      $(`<span>穗乃果</span>`),
+      $(`<br />`),
+      $(`<img height="400px" src="image/nami (8).jpg" />`),
+      $(`<br/>`),
+      $(`<span>戴安娜</span>`),
+      $(`<br />`),
+      $(`<img height="400px" src="image/nami (9).jpg" />`)
+    );
+    $("div").prepend(
+      $(`<span>穗乃果</span>`),
+      $(`<br />`),
+      $(`<img height="400px" src="image/nami (8).jpg" />`),
+      $(`<br/>`),
+      $(`<span>戴安娜</span>`),
+      $(`<br />`),
+      $(`<img height="400px" src="image/nami (9).jpg" />`),
+      $(`<br/>`)
+    );
+  </script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="CSS示例/link文本样式.css" rel="stylesheet" />
+  </head>
+  <style>
+    @import url(CSS示例/import文本样式.css);
+
+    .cssExample {
+      color: greenyellow;
+      font-size: 2em;
+      font-weight: bold;
+    }
+  </style>
+  <body>
+    <!-- 行内引入css -->
+    <p style="color: blueviolet; font-size: 3em; font-weight: bold">
+      我是要成为海贼王的男人
+    </p>
+    <!-- 内部引入css -->
+    <p class="cssExample">我是要成为海贼王的男人</p>
+    <!-- 外部引入css, 以link方式 -->
+    <p class="linkExample">link</p>
+    <!-- 外部引入css, 以@import方式 -->
+    <p class="importExample">import</p>
+  </body>
+</html>

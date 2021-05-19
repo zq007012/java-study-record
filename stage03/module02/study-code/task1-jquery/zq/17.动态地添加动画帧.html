@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .hh {
+      width: 100px;
+    }
+    .ii {
+      height: 300px;
+    }
+  </style>
+  <body></body>
+  <script>
+    var styleEle = document.createElement("style");
+    document.body.appendChild(styleEle);
+    var styleList = document.styleSheets;
+    console.log(styleList.length);
+    console.log(styleList);
+    ss = styleList[1];
+    ss.insertRule("@keyframes zoomIng{}", 0);
+    ss.insertRule("@keyframes zoomOut{}", 0);
+    ss.removeRule(0);
+    console.log(styleList);
+    console.log(document);
+  </script>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img style="height: 350px" src="image/burin (3).gif" /><br />
+    <button onclick="openNewWindow()">在新窗口打开网页</button><br />
+  </body>
+  <script>
+    console.log(window.innerHeight);
+    console.log(window.outerHeight);
+    console.log(window.document);
+    function openNewWindow() {
+      window.open("https://www.baidu.com", "", "width=600,height=300");
+    }
+    console.log(navigator.cookieEnabled);
+  </script>
+</html>

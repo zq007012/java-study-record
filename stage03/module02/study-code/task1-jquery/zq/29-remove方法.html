@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    th,
+    td,
+    table {
+      border-style: solid;
+    }
+  </style>
+  <body>
+    <button id="removeBtn">remove()</button><br />
+    <button id="childrenBtn">children()</button><br />
+    <button id="findBtn">find()</button>
+
+    <table>
+      <thead>
+        <th>守望先锋</th>
+        <th>最终幻想7</th>
+        <th>死或生</th>
+        <th>火影忍者</th>
+        <th>死神</th>
+        <th>海贼王</th>
+      </thead>
+      <tbody style="border-style: solid">
+        <tr>
+          <td class="active">Mercy</td>
+          <td class="success">蒂法</td>
+          <td class="info">罗丝玛丽</td>
+          <td class="warning">千手纲手</td>
+          <td class="danger">四枫院夜一</td>
+          <td>白星</td>
+        </tr>
+        <tr>
+          <td>WidowMaker</td>
+          <td>艾丽丝</td>
+          <td>米拉</td>
+          <td>日向雏田</td>
+          <td>碎蜂</td>
+          <td>汉库克</td>
+        </tr>
+        <tr>
+          <td>小美</td>
+          <td>杰西</td>
+          <td>海莲娜</td>
+          <td>手鞠</td>
+          <td>更木八千流</td>
+          <td>罗宾</td>
+        </tr>
+        <tr>
+          <td>法老之鹰</td>
+          <td>玛姆</td>
+          <td>穗乃果</td>
+          <td>天天</td>
+          <td>松本乱菊</td>
+          <td>艾米</td>
+        </tr>
+        <tr>
+          <td>猎空</td>
+          <td>碎蜂</td>
+          <td>霞</td>
+          <td>夕日红</td>
+          <td>虎彻勇音</td>
+          <td>小紫</td>
+        </tr>
+        <tr>
+          <td>D·Va</td>
+          <td>涅音梦</td>
+          <td>红叶</td>
+          <td>照美冥</td>
+          <td>赫利贝尔</td>
+          <td>黑玛丽亚</td>
+        </tr>
+      </tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(`#removeBtn`).click(function () {
+        $(`tbody`).children().remove();
+      });
+      $(`#childrenBtn`).click(function () {
+        $(`tbody`)
+          .children()
+          .each(function (index, element) {
+            console.log("-----------");
+            console.log(element);
+          });
+      });
+      $(`#findBtn`).click(function () {
+        $(`tbody`)
+          .find(`div`)
+          .each(function (index, element) {
+            console.log(element);
+          });
+      });
+    </script>
+  </body>
+</html>

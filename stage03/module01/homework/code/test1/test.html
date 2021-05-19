@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户注册页面</title>
+  </head>
+  <style>
+    #title {
+      font-size: 4em;
+      font-weight: bold;
+      color: rgba(0, 102, 255, 0.712);
+      text-align: center;
+    }
+    hr {
+      margin-top: 20px;
+      margin-bottom: 45px;
+    }
+    table {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.25em;
+    }
+    td {
+      padding: 0.5em 0px;
+    }
+    textarea {
+      font-size: 1em;
+      text-indent: 2em;
+    }
+    input {
+      font-size: 0.85em;
+      padding: 3px 0px;
+    }
+    .column01 {
+      text-align: right;
+    }
+  </style>
+  <script>
+    function check() {
+      var userName = document.getElementById("userName").value;
+      console.log(userName);
+      if (userName == "" || userName == null) {
+        alert("用户名为空");
+        return false;
+      }
+      if (userName == "admin") {
+        var intro = document.getElementById("introduction").value;
+        if (intro.length < 1) {
+          alert("自我介绍为空");
+        } else {
+          alert(intro);
+        }
+
+        return false;
+      } else {
+        alert("用户名不合法");
+        return false;
+      }
+    }
+  </script>
+  <body>
+    <div id="title">用户注册界面</div>
+    <hr />
+
+    <form action="https://www.lagou.com" method="post">
+      <table>
+        <tr>
+          <td class="column01">用户名</td>
+          <td>:&nbsp;</td>
+          <td>
+            <input id="userName" type="text" placeholder="请输入用户名" />
+          </td>
+        </tr>
+        <tr>
+          <td class="column01">密码</td>
+          <td>:&nbsp;</td>
+          <td><input type="password" placeholder="请输入密码" /></td>
+        </tr>
+        <tr>
+          <td class="column01">性别</td>
+          <td>:&nbsp;</td>
+          <td>
+            <input name="gender" type="radio" value="man" />男&nbsp;&nbsp;
+            <input name="gender" type="radio" value="woman" />女
+          </td>
+        </tr>
+        <tr>
+          <td class="column01">学历</td>
+          <td>:&nbsp;</td>
+          <td>
+            <input
+              name="education"
+              type="radio"
+              value="university"
+            />本科&nbsp;&nbsp;
+            <input name="education" type="radio" value="college" />专科
+          </td>
+        </tr>
+        <tr>
+          <td class="column01" style="vertical-align: top">自我介绍</td>
+          <td style="vertical-align: top">:&nbsp;</td>
+          <td>
+            <textarea
+              id="introduction"
+              rows="6"
+              cols="50"
+              placeholder="请输入自我介绍, 最多300字"
+            ></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" style="text-align: center">
+            <input
+              id="submit"
+              type="submit"
+              value="提交"
+              onclick="return check()"
+              style="font-size: 1.25em; padding: 5px 20px"
+            />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

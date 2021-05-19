@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="task03_demo03:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/task03_demo03_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="task03_demo03" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="mysql-connector-java-5.1.37-bin1" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="task03_demo03/web/Web" />
+      <element id="javaee-facet-resources" facet="task03_demo03/web/Web2" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      font-size: 3em;
+    }
+  </style>
+  <body>
+    <div id="demo">
+      蒂法<br />
+      <img src="image/nami (5).jpg" />
+    </div>
+  </body>
+  <script>
+    console.log(document.getElementById("demo").innerHTML);
+    document.getElementById("demo").innerHTML =
+      "穗乃果<br/> <img src='image/nami (6).jpg'/><br/>Mercy";
+    console.log(document.getElementById("demo").innerText);
+    document.getElementById("demo").innerText =
+      "穗乃果<br/> <img src='image/nami (6).jpg'/>";
+    var element = document.createElement("img");
+    element.setAttribute("src", "image/nami (8).jpg");
+    document.getElementById("demo").appendChild(element);
+    console.log(element.parentNode.innerHTML);
+    element.style.fontSize = "2em";
+    console.log(element.style.fontSize);
+  </script>
+</html>

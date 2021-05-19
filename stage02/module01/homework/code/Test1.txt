@@ -1,0 +1,119 @@
+/*
+SQL题1
+*/
+/*
+数据准备
+
+1. 创建部门表(id,name)
+# 创建部门表
+create table dept(
+id int primary key auto_increment,
+name varchar(20)
+)
+
+insert into dept (name) values ('开发部'),('市场部'),('财务部');
+*/
+-- 创建test01数据库, 并使用
+CREATE DATABASE test01 CHARACTER SET utf8mb4;
+USE test01;
+# 创建部门表
+CREATE TABLE dept(
+	dept_id INT PRIMARY KEY AUTO_INCREMENT,
+	dname VARCHAR(20)
+);
+-- 完善部门表的数据
+INSERT INTO dept(dname) VALUES('开发部');
+INSERT INTO dept(dname) VALUES('市场部');
+INSERT INTO dept(dname) VALUES('财务部');
+
+/*2. 员工表，员工表(id, 姓名，性别，工资，入职日期，部门ID)
+# 创建员工表
+create table employee (
+id int primary key auto_increment,
+name varchar(10),
+gender char(1),   -- 性别
+salary double,   -- 工资
+join_date date,  -- 入职日期
+dept_id int,
+foreign key (dept_id) references dept(id) -- 外键，关联部门表(部门表的主键)
+)
+
+insert into employee(name,gender,salary,join_date,dept_id) values('孙悟空','男',7200,'2013-02-24',1);
+insert into employee(name,gender,salary,join_date,dept_id) values('猪八戒','男',3600,'2010-12-02',2);
+insert into employee(name,gender,salary,join_date,dept_id) values('唐僧','男',9000,'2008-08-08',2);
+insert into employee(name,gender,salary,join_date,dept_id) values('白骨精','女',5000,'2015-10-07',3);
+insert into employee(name,gender,salary,join_date,dept_id) values('蜘蛛精','女',4500,'2011-03-14',1);
+SQL实现
+*/
+# 创建员工表
+CREATE TABLE employee (
+	emp_id INT PRIMARY KEY AUTO_INCREMENT,
+	ename VARCHAR(10),
+	gender CHAR(1),   -- 性别
+	salary DOUBLE,   -- 工资
+	join_date DATE,  -- 入职日期
+	dept_id INT,
+	FOREIGN KEY (dept_id) REFERENCES dept(dept_id) -- 外键，关联部门表(部门表的主键)
+);
+-- 完善员工表的数据
+INSERT INTO employee(ename,gender,salary,join_date,dept_id) VALUES('孙悟空','男',7200,'2013-02-24',1);
+INSERT INTO employee(ename,gender,salary,join_date,dept_id) VALUES('猪八戒','男',3600,'2010-12-02',2);
+INSERT INTO employee(ename,gender,salary,join_date,dept_id) VALUES('唐僧','男',9000,'2008-08-08',2);
+INSERT INTO employee(ename,gender,salary,join_date,dept_id) VALUES('白骨精','女',5000,'2015-10-07',3);
+INSERT INTO employee(ename,gender,salary,join_date,dept_id) VALUES('蜘蛛精','女',4500,'2011-03-14',1);
+
+/*
+按要求实现下面的查询功能 
+
+1) 查询工资最高的员工是谁？
+
+2) 查询工资小于平均工资的员工有哪些？
+
+3) 查询大于5000的员工，来至于哪些部门，输出部门的名字
+
+4) 查询开发部与财务部所有的员工信息
+
+5) 查询2011年以后入职的员工信息和部门信息
+*/
+
+
+-- 1. 查询工资最高的员工是谁？
+-- 先查出最高的薪水值
+-- select max(salary) from employee;
+-- 将该语句作为子查询语句
+SELECT ename 
+FROM employee 
+WHERE salary = (SELECT MAX(salary) FROM employee)
+;
+
+-- 2. 查询工资小于平均工资的员工有哪些？
+-- 先查出平均工资
+-- select avg(salary) from employee;
+-- 上述语句作为子查询语句
+SELECT ename 
+FROM employee 
+WHERE salary < (SELECT AVG(salary) FROM employee)
+;
+
+
+-- 3) 查询薪水大于5000的员工，来自于哪些部门，输出部门的名字
+SELECT d.`dname`
+FROM employee e LEFT JOIN dept d
+ON e.`dept_id` = d.`dept_id`
+WHERE e.`salary` > 5000
+;
+
+-- 4. 查询开发部与财务部所有的员工信息
+SELECT d.`dname`, e.*
+FROM employee e RIGHT JOIN dept d
+ON e.`dept_id` = d.`dept_id`
+WHERE d.`dname` IN('开发部','财务部')
+;
+
+-- 5. 查询2011年以后入职的员工信息和部门信息
+SELECT e.* ,d.`dname`
+FROM employee e LEFT JOIN dept d
+ON e.`dept_id` = d.`dept_id`
+WHERE e.`join_date` > '2011-12-31'
+;
+

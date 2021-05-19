@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    span {
+      font-weight: bold;
+      font-size: 2em;
+      position: absolute;
+      left: 100px;
+      top: 50px;
+      display: inline-block;
+      width: 500px;
+      height: 100px;
+    }
+    #luffy {
+      color: rgba(0, 0, 139, 0.651);
+      background-color: rgba(211, 50, 184);
+      z-index: 11; /*路飞在上面*、
+      /* z-index: 1; /*路飞在下面*/
+    }
+    #hancock {
+      color: rgba(90, 15, 128, 0.897);
+      background-color: rgba(128, 255, 0);
+      z-index: 10;
+    }
+  </style>
+  <body style="background-color: burlywood">
+    <span id="luffy">我是要成为海贼王的男人--蒙奇·D·路飞</span>
+    <span id="hancock">我要成为海贼王----------波雅·汉库克</span>
+  </body>
+</html>

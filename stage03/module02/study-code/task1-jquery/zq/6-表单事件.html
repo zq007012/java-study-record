@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    form {
+      font-size: 1.5em;
+    }
+    input {
+      font-size: 0.8em;
+      margin-bottom: 10px;
+    }
+    span {
+      background-color: rgba(230, 225, 221, 0.904);
+      font-size: 0.8em;
+      padding: 3px;
+      color: red;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <form>
+      姓名: <input id="name" value="请输入姓名..." />
+      <span id="checkNameRes"></span>
+    </form>
+  </body>
+  <script>
+    var nameList = ["黑百合", "小美", "穗乃果"];
+    $("#name")
+      .focus(function () {
+        $("#checkNameRes").text("");
+        var str = $(this).val();
+        if (str == "请输入姓名...") {
+          $(this).val("");
+        }
+      })
+      .blur(function () {
+        var str = $(this).val();
+        if (str.match(/^ *$/) || str == null) {
+          $(this).val("请输入姓名...");
+        } else {
+          str = str.trim();
+          console.log(str);
+          if (nameList.indexOf(str) == -1) {
+            $("#checkNameRes").text("'" + str + "'不在名单中");
+          } else {
+            $("#checkNameRes").text("'" + str + "'处于名单中");
+          }
+        }
+      });
+  </script>
+</html>

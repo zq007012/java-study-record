@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    //变量声明时可以加 var , 也可以不加
+    var aGlobal = "全局变量a"; //函数外声明的变量都是全局变量
+    bGlobal = "全局变量b"; //函数外声明的变量都是全局变量
+    function demo() {
+      cGlobal = "全局变量c"; //函数内声明时不加 var 的变量是全局变量
+      var dArea = "局部变量d"; //函数内声明时加 var的变量是局部变量
+    }
+
+    function test() {
+      console.log(aGlobal);
+      console.log(bGlobal);
+      console.log(cGlobal);
+      console.log(dArea);
+    }
+    //调用test方法
+    test();
+  </script>
+  <body></body>
+</html>

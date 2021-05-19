@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE students SYSTEM
+        "D:\GitWorkSpaces\java_studynote\stage02\module02\src\com\zq\task3\xml02\dtd\student.dtd">
+<students>
+    <student number="s1">
+        <name>路飞</name>
+        <age>20</age>
+        <sex>男</sex>
+    </student>
+    <student number="s2">
+        <name>汉库克</name>
+        <age>30</age>
+        <sex>女</sex>
+    </student>
+</students>

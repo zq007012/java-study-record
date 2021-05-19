@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pirates>
+    <pirate id="p008">
+        <pid>8</pid>
+        <pname>弗兰奇</pname>
+        <age>36</age>
+        <gender>男</gender>
+        <birthday>1984.03.09</birthday>
+        <reward>0.94</reward>
+        <team_id>1</team_id>
+    </pirate>
+    <pirate id="p012">
+        <pid>12</pid>
+        <pname>小八</pname>
+        <age>38</age>
+        <gender>男</gender>
+        <birthday>1982.08.08</birthday>
+        <reward>0.2</reward>
+        <team_id>2</team_id>
+    </pirate>
+    <pirate id="p013">
+        <pid>13</pid>
+        <pname>汉库克</pname>
+        <age>31</age>
+        <gender>女</gender>
+        <birthday>1989.09.02</birthday>
+        <reward>0.8</reward>
+        <team_id>3</team_id>
+    </pirate>
+</pirates>

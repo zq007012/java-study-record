@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      height: 300px;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <img src="image/nami (8).jpg" />
+    <div>
+      <button id="fadeIn">显示</button>
+      <button id="fadeOut">隐藏</button>
+      <button id="fadeToggle">切换</button>
+      <button id="fadeTo">fadeTo</button>
+    </div>
+  </body>
+  <script>
+    $("#fadeIn").click(function () {
+      $("img").fadeIn("slow");
+    });
+    $("#fadeOut").on("click", function () {
+      $("img").fadeOut("fast");
+    });
+    $("#fadeToggle").on("click", function () {
+      $("img").fadeToggle(3000);
+    });
+    $("#fadeTo").on("click", function () {
+      $("img").fadeTo(2000, 0.3);
+    });
+  </script>
+</html>

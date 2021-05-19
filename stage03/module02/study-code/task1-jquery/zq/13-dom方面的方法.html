@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      border-style: solid;
+      border-width: 20px;
+      padding: 40px;
+      height: 400px;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <img id="burin" src="https://x6img.com/i/2021/04/17/116k53c.gif" />
+    <div>
+      <iframe src="http://t66y.com/htm_data/2104/7/4451348.html"></iframe>
+    </div>
+  </body>
+  <script>
+    $(document).ready(function () {
+      console.log($("#burin").height());
+      console.log($("#burin").innerHeight());
+      console.log($("#burin").outerHeight());
+      console.log($($("iframe").prop("contentWindow").document).height());
+      console.log($($("iframe").prop("contentWindow").document).innerHeight());
+      console.log($($("iframe").prop("contentWindow").document).outerHeight());
+      console.log($("iframe").prop("contentWindow").document.body.scrollHeight);
+      $("iframe").get(0).onload = function () {
+        console.log("--------");
+        console.log(this);
+        console.log(this.contentDocument);
+      };
+    });
+  </script>
+</html>

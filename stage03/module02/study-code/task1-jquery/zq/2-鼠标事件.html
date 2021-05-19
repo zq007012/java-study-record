@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>鼠标事件</title>
+  </head>
+  <style>
+    img {
+      height: 300px;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <img src="image/nami (10).jpg" />
+  </body>
+  <script>
+    //handler是个个无参且无返回值的匿名函数
+    $("img").click(function () {
+      console.log("鼠标点击了本图片");
+      console.log(this);
+      console.log(event.type);
+    });
+    //handler是个无参且无返回值的构造函数, 调用该构造函数时不能写小括号
+    $("img").mouseover(test);
+    function test() {
+      console.log("鼠标移动到了本图片上");
+      console.log(this);
+      console.log(event.type);
+      return false;
+    }
+
+    //handler是个无参且无返回值的箭头函数
+    $("img").mouseout(() => {
+      console.log("鼠标从本图片上移走了");
+      console.log(this);
+      console.log(event.type);
+      return false;
+    });
+  </script>
+</html>

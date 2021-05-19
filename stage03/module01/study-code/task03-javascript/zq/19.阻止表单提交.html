@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action="https://www.baidu.com"
+      method="POST"
+      onsubmit="return check()"
+    >
+      账号:&nbsp;<input
+        id="account"
+        type="text"
+        placeholder="请输入账号"
+        onchange="getInput(this)"
+      /><br />
+      <input type="submit" />
+    </form>
+  </body>
+  <script>
+    function check() {
+      var account = document.getElementById("account").value;
+      if (account != undefined && account != null && account != "") {
+        return true;
+      } else {
+        alert("账号不能为空!!!");
+        return false;
+      }
+    }
+    function getInput(element) {
+      console.log(element.value);
+    }
+  </script>
+</html>

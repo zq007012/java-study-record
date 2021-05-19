@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/task01_demo01/task01_demo01.iml" filepath="$PROJECT_DIR$/task01_demo01/task01_demo01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task01_demo02/task01_demo02.iml" filepath="$PROJECT_DIR$/task01_demo02/task01_demo02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02_demo01/task02_demo01.iml" filepath="$PROJECT_DIR$/task02_demo01/task02_demo01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02_demo02/task02_demo02.iml" filepath="$PROJECT_DIR$/task02_demo02/task02_demo02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02_demo03/task02_demo03.iml" filepath="$PROJECT_DIR$/task02_demo03/task02_demo03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task03_demo01/task03_demo01.iml" filepath="$PROJECT_DIR$/task03_demo01/task03_demo01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task03_demo02/task03_demo02.iml" filepath="$PROJECT_DIR$/task03_demo02/task03_demo02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task03_demo03/task03_demo03.iml" filepath="$PROJECT_DIR$/task03_demo03/task03_demo03.iml" />
+    </modules>
+  </component>
+</project>

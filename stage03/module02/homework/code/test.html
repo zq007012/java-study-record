@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户列表</title>
+    <link rel="stylesheet" href="Libraries/css/bootstrap.min.css" />
+  </head>
+  <style>
+    th,
+    td {
+      text-align: center;
+    }
+  </style>
+  <script src="Libraries/js/jquery-3.6.0.min.js"></script>
+  <script src="Libraries/js/bootstrap.min.js"></script>
+  <body style="max-width: 1200px; padding: 5px" class="center-block">
+    <!--新增用户的模态框-->
+    <div id="addOrModifyModal" class="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+            <h3 class="modal-title">新增用户</h3>
+          </div>
+          <div class="modal-body form">
+            <div class="form-group">
+              <label class="control-label" for="jobNumber"
+                >工号:&nbsp;&nbsp;<span id="jobNumberWarning"></span
+              ></label>
+              <input id="jobNumber" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="name">姓名:</label>
+              <input id="name" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>性别:</label><br />
+              <span class="col-xs-1"></span>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-info">
+                  <input name="gender" type="radio" value="男" />
+                  男
+                </label>
+                <label class="btn btn-info">
+                  <input name="gender" type="radio" value="女" /> 女
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">密码:</label>
+              <input id="password" type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="birthday">出生日期:</label>
+              <input
+                id="birthday"
+                type="date"
+                class="form-control"
+                value="1996-01-01"
+                max="2003-01-01"
+                min="1961-01-01"
+              />
+            </div>
+            <div class="form-group">
+              <label for="age">年龄:</label>
+              <input
+                id="age"
+                type="number"
+                min="18"
+                max="60"
+                step="1"
+                class="form-control"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="addOrModifyModalConfirmBtn" class="btn btn-primary">
+              确定
+            </button>
+            <button class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--提示信息的模态框-->
+    <div id="warningModal" class="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+            <h3 class="modal-title">提示信息</h3>
+          </div>
+          <div id="warningInfo" class="modal-body text-center">提示信息</div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal">确认</button>
+            <button class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--显示用户信息的模态框-->
+    <div id="showUserInfoModal" class="modal" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+            <h3 class="modal-title">确认删除以下用户?</h3>
+          </div>
+          <div class="modal-body">
+            <table
+              class="table table-bordered table-responsive table-hover table-striped table-condensed"
+            >
+              <thead>
+                <th>工号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>密码</th>
+                <th>年龄</th>
+                <th>出生日期</th>
+              </thead>
+              <tbody id="showUserInfoTbody"></tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button id="showUserInfoModalConfirmBtn" class="btn btn-primary">
+              确认
+            </button>
+            <button class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--编辑用户信息的模态框-->
+
+    <h3>习题</h3>
+    <hr />
+    <div class="form-inline">
+      <div class="form-group">
+        <label class="sr-only">buttons </label>
+        <button id="addBtn" class="btn btn-info">新增</button>
+        <button id="removeBtn" class="btn btn-info">删除</button>
+        <button id="modifyBtn" class="btn btn-info">编辑</button>
+        <button id="searchBtn" class="btn btn-info">查询</button>
+      </div>
+
+      <div class="form-group">
+        <label for="jobNumberSearch" class="sr-only">jobNumberSearch</label>
+        <input
+          id="jobNumberSearch"
+          type="search"
+          placeholder="请输入工号查询"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="nameSearch" class="sr-only">nameSearch</label>
+        <input
+          id="nameSearch"
+          type="search"
+          placeholder="请输入姓名查询"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <table
+      id="userList"
+      class="table table-striped table-hover table-responsive"
+    >
+      <thead>
+        <th>序号</th>
+        <th>工号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>密码</th>
+        <th>年龄</th>
+        <th>出生日期</th>
+      </thead>
+      <tbody id="userInfoTbody">
+        <tr>
+          <td class="form-group">
+            <input type="checkbox" />
+          </td>
+          <td>1001</td>
+          <td>张三</td>
+          <td>女</td>
+          <td>1234</td>
+          <td>29</td>
+          <td>1991-01-01</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>1002</td>
+          <td>李四</td>
+          <td>男</td>
+          <td>1234</td>
+          <td>28</td>
+          <td>1992-02-02</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>1003</td>
+          <td>王五</td>
+          <td>女</td>
+          <td>1234</td>
+          <td>27</td>
+          <td>1993-03-03</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>1004</td>
+          <td>赵六</td>
+          <td>女</td>
+          <td>1234</td>
+          <td>26</td>
+          <td>1994-04-04</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+  <script>
+    $(function () {
+      var userInfoTbody = $("#userInfoTbody");
+      userInfoTbody.children("tr:even").addClass("info");
+      userInfoTbody.children("tr:odd").addClass("warning");
+      var showUserInfoModal = $("#showUserInfoModal");
+      var showUserInfoTbody = $("#showUserInfoTbody");
+      //获取今年的日期, 测算年龄时使用
+      var date = new Date();
+      var thisYear = date.getFullYear();
+
+      //初始化姓名数组和工号数组, 查询操作需要使用
+      var nameArr = [];
+      var jobNumberArr = [];
+      userInfoTbody.children().each(function (index) {
+        jobNumberArr.push($(this).children().eq(1).text());
+        nameArr.push($(this).children().eq(2).text());
+      });
+      var warningModal = $(`#warningModal`);
+      var addOrModifyModal = $("#addOrModifyModal");
+
+      //给查询按钮添加一个点击事件
+      $(`#searchBtn`).click(function () {
+        let jobNumberSearched = $(`#jobNumberSearch`).val().trim();
+        let nameSearched = $(`#nameSearch`).val().trim();
+        if (jobNumberSearched == "" && nameSearched == "") {
+          showWarningModal("请输入工号或姓名进行查询");
+          return;
+        }
+
+        if (jobNumberSearched != "" && jobNumberSearched != null) {
+          showJobNumberSearchResult(jobNumberSearched);
+          return;
+        }
+        if (nameSearched != "" && nameSearched != null) {
+          showNameSearchResult(nameSearched);
+          return;
+        }
+      });
+      //显示姓名查询的结果
+      function showNameSearchResult(nameSearched) {
+        let indexArrOfName = getIndexArrOf(nameSearched);
+        if (indexArrOfName.length > 0) {
+          showUserInfoModal
+            .find(".modal-title")
+            .text(`姓名为"${nameSearched}"的员工信息`);
+          completeShowUserInfoTbody(indexArrOfName);
+          showUserInfoModal.data("activedByBtn", "searchBtn");
+          showUserInfoModal.modal(`show`);
+        } else {
+          showWarningModal(`没有姓名为"${nameSearched}"的员工`);
+        }
+      }
+      //获取某个名字在nameArr数组中的所有索引
+      function getIndexArrOf(nameSearched) {
+        let arr = [];
+        let index = -1;
+        while (index < nameArr.length) {
+          index = nameArr.indexOf(nameSearched, index + 1);
+          if (index == -1) {
+            break;
+          } else {
+            arr.push(index);
+          }
+        }
+
+        return arr;
+      }
+      //显示工号查询的结果
+      function showJobNumberSearchResult(jobNumberSearched) {
+        let index = jobNumberArr.indexOf(jobNumberSearched);
+        if (index != -1) {
+          showUserInfoModal
+            .find(".modal-title")
+            .text(`工号为"${jobNumberSearched}"的员工信息`);
+          completeShowUserInfoTbody([index]);
+          showUserInfoModal.data("activedByBtn", "searchBtn");
+          showUserInfoModal.modal(`show`);
+        } else {
+          showWarningModal(`没有工号为"${jobNumberSearched}"的员工`);
+        }
+      }
+      //给工号查询的输入框添加一个值改变的事件
+      $(`#jobNumberSearch`).change(function () {
+        let jobNumberSearched = $(this).val().trim();
+        if (jobNumberSearched != null || jobNumberSearched != "") {
+          $(`#nameSearch`).val("");
+        }
+      });
+
+      //给姓名查询的输入框添加一个值改变的事件
+      $(`#nameSearch`).change(function () {
+        let nameSearched = $(this).val().trim();
+        if (nameSearched != null || nameSearched != "") {
+          $(`#jobNumberSearch`).val("");
+        }
+      });
+
+      //给输入生日的输入框添加一个值改变的事件, 在这个事件里会根据生日算出年龄
+      $(`#birthday`).change(function () {
+        let birthday = $(this).val().trim();
+        let age = eval(`${thisYear}-${birthday.substr(0, 4)}`);
+        $(`#age`).val(age);
+      });
+
+      //给每一个复选框添加一个状态改变事件, 当勾选上时, 添加的颜色类".danger", 取消勾选时移除该颜色类
+      $(`input[type="checkbox"]`).change(function () {
+        if (this.checked) {
+          $(this).parent().parent().addClass("danger");
+        } else {
+          $(this).parent().parent().removeClass("danger");
+        }
+      });
+
+      //删除按钮的点击事件
+      $("#removeBtn").click(function () {
+        let indexArr = getSelectedIndex();
+        if (indexArr.length < 1) {
+          showWarningModal("请至少勾选一条要删除的信息!!!");
+        } else {
+          showUserInfoModal
+            .find(`.modal-title`)
+            .text("确认要删除以下几条信息吗?");
+          completeShowUserInfoTbody(indexArr);
+          showUserInfoModal.data({
+            activedByBtn: "removeBtn",
+            indexArr: indexArr,
+          });
+          showUserInfoModal.modal(`show`);
+        }
+      });
+
+      //给#showUserInfoTbody元素添加子元素
+      function completeShowUserInfoTbody(indexArr) {
+        showUserInfoTbody.empty();
+        for (let i = 0; i < indexArr.length; i++) {
+          let userInfoTr = userInfoTbody.children().eq(indexArr[i]);
+          let newUserInfoTr = userInfoTr.clone();
+          newUserInfoTr.children(`:eq(0)`).remove();
+          newUserInfoTr.removeClass("danger info warning");
+          showUserInfoTbody.append(newUserInfoTr);
+        }
+      }
+
+      //显示用户信息的模态框的确认按钮的点击事件
+      $("#showUserInfoModalConfirmBtn").click(function () {
+        switch (showUserInfoModal.data("activedByBtn")) {
+          case "removeBtn":
+            removeUserInfo(showUserInfoModal.data("indexArr"));
+            break;
+          case "searchBtn":
+            break;
+          default:
+            break;
+        }
+
+        showUserInfoModal.removeData("activedByBtn");
+        showUserInfoModal.removeData("indexArr");
+        showUserInfoTbody.empty();
+        showUserInfoModal.modal("hide");
+      });
+
+      //移除索引数组里的索引对应的用户信息
+      function removeUserInfo(indexArr) {
+        //先反转数组, 这样数组里保存的索引值就是有大到小地排列, 这样就会从表格的最后一个开始删除
+        indexArr.reverse();
+        for (let i = 0; i < indexArr.length; i++) {
+          let removedIndex = indexArr[i];
+          userInfoTbody.children(`:eq(${removedIndex})`).remove();
+          nameArr.splice(removedIndex, 1);
+          jobNumberArr.splice(removedIndex, 1);
+        }
+      }
+
+      //新增按钮的点击事件
+      $(`#addBtn`).click(function () {
+        addOrModifyModal.data("activedByBtn", "addBtn");
+        initAddModal(addOrModifyModal);
+        addOrModifyModal.modal("show");
+      });
+
+      //初始化添加用户时的模态框
+      function initAddModal(modalJQuery) {
+        addOrModifyModal.find(".modal-title").text("添加用户");
+        $(`#jobNumberWarning`).text("");
+        $(`#jobNumber`)
+          .val(null)
+          .removeData("jobNumber")
+          .parent()
+          .removeClass(`has-error`);
+        $(`#name`).val(null);
+        $(`input[type="radio"][name="gender"][value="男"]`)
+          .prop("checked", "true")
+          .parent()
+          .addClass("active");
+        $(`#password`).val(null);
+        $(`#age`).val(thisYear - 1996);
+        $(`#birthday`).val("1996-01-01");
+      }
+
+      //编辑按钮的点击事件
+      $(`#modifyBtn`).click(function () {
+        let indexArr = getSelectedIndex();
+        let selectedCount = indexArr.length;
+        if (selectedCount == 1) {
+          initModifyModal(addOrModifyModal, indexArr[0]);
+          addOrModifyModal
+            .data({ activedByBtn: "modifyBtn", index: indexArr[0] })
+            .modal("show");
+        } else if (selectedCount < 1) {
+          showWarningModal("请勾选一条要编辑的信息");
+        } else {
+          showWarningModal(
+            "您勾选了多条信息, 但本程序无法同时编辑多条信息, 请只勾选一条您要编辑的信息!!!"
+          );
+        }
+      });
+
+      //显示提示信息的模态框
+      function showWarningModal(warningInfo) {
+        warningModal.find(".modal-body").text(warningInfo);
+        warningModal.modal(`show`);
+      }
+
+      //获取用户选择的行的索引
+      function getSelectedIndex() {
+        let selectedIndexArr = [];
+        let selectedIndexNextTdList = userInfoTbody
+          .children()
+          .find(`input[type="checkbox"]:checked`)
+          .parent()
+          .next();
+        selectedIndexNextTdList.each(function (index) {
+          selectedIndexArr.push(jobNumberArr.indexOf($(this).text().trim()));
+        });
+        console.log(selectedIndexArr);
+        return selectedIndexArr;
+      }
+
+      //初始化编辑用户信息时的模态框
+      function initModifyModal(modalJQuery, index) {
+        addOrModifyModal.find(".modal-title").text("编辑用户信息");
+
+        let userInfoTdList = userInfoTbody.children().eq(index).children();
+        let jobNumber = userInfoTdList.eq(1).text();
+        $(`#jobNumberWarning`).text("");
+        $(`#jobNumber`)
+          .val(jobNumber)
+          .data("jobNumber", jobNumber)
+          .parent()
+          .removeClass("has-error");
+        $(`#name`).val(userInfoTdList.eq(2).text());
+
+        let gender = userInfoTdList.eq(3).text().trim();
+        $(`input[type="radio"][name="gender"][value=${gender}]`)
+          .prop("checked", "true")
+          .parent()
+          .addClass("active");
+
+        $(`#password`).val(userInfoTdList.eq(4).text());
+        $(`#age`).val(userInfoTdList.eq(5).text());
+        $(`#birthday`).val(userInfoTdList.eq(6).text());
+      }
+
+      //添加或编辑用户的模态框的确认按钮的点击事件
+      $(`#addOrModifyModalConfirmBtn`).click(function () {
+        var activedByBtn = addOrModifyModal.data("activedByBtn");
+        switch (activedByBtn) {
+          case "addBtn":
+            var addSuccess = addNewUserInfo();
+            if (!addSuccess) {
+              return;
+            }
+            break;
+          case "modifyBtn":
+            var index = addOrModifyModal.data("index");
+            var modifySuccess = modifyUserInfo(index);
+            if (!modifySuccess) {
+              return;
+            }
+            addOrModifyModal.removeData("index");
+            break;
+          default:
+            break;
+        }
+        addOrModifyModal.removeData("activedByBtn");
+        addOrModifyModal.modal("hide");
+      });
+
+      //修改用户表格上的指定行
+      function modifyUserInfo(index) {
+        let jobNumber = $(`#jobNumber`).val();
+        if (jobNumber == "" || jobNumber == null) {
+          return false;
+        }
+        var jobNumberIndex = jobNumberArr.indexOf(jobNumber);
+        if (jobNumberIndex != -1 && jobNumberIndex != index) {
+          return false;
+        }
+
+        let name = $(`#name`).val();
+        let gender = $(`input[type="radio"][name="gender"]:checked`).val();
+        let password = $(`#password`).val();
+        let age = $(`#age`).val();
+        let birthday = $(`#birthday`).val();
+
+        let userInfoTr = userInfoTbody.children().eq(index);
+        userInfoTr.children(`:eq(1)`).text(jobNumber.trim());
+        userInfoTr.children(`:eq(2)`).text(name.trim());
+        userInfoTr.children(`:eq(3)`).text(gender.trim());
+        userInfoTr.children(`:eq(4)`).text(password.trim());
+        userInfoTr.children(`:eq(5)`).text(age.trim());
+        userInfoTr.children(`:eq(6)`).text(birthday.trim());
+
+        jobNumberArr.splice(index, 1, jobNumber);
+        nameArr.splice(index, 1, name);
+        return true;
+      }
+
+      //工号输入框change事件
+      $("#jobNumber").change(function () {
+        let jobNumber = $(this).val().trim();
+        if (jobNumber == "" || jobNumber == null) {
+          $(`#jobNumberWarning`).text("工号不能为空");
+          $(this).parent().addClass("has-error");
+          return;
+        }
+
+        if (
+          jobNumberArr.indexOf(jobNumber) != -1 &&
+          jobNumber != $(this).data("jobNumber")
+        ) {
+          $(`#jobNumberWarning`).text("已存在有该工号, 请重新输入..");
+          $(this).parent().addClass("has-error");
+        } else {
+          $(`#jobNumberWarning`).text("");
+          $(this).parent().removeClass("has-error");
+        }
+      });
+
+      //给用户表格上添加一行
+      function addNewUserInfo() {
+        let jobNumberWarningStr = $(`#jobNumberWarning`).text().trim();
+        if (jobNumberWarningStr != "") {
+          return false;
+        }
+
+        let jobNumber = $(`#jobNumber`).val();
+        if (jobNumber == "" || jobNumber == null) {
+          $(`#jobNumberWarning`).text("工号不能为空");
+          $(`#jobNumber`).parent().addClass("has-error");
+          return false;
+        }
+        let name = $(`#name`).val();
+        let gender = $(`input[type="radio"][name="gender"]:checked`).val();
+        let password = $(`#password`).val();
+        let age = $(`#age`).val();
+        let birthday = $(`#birthday`).val();
+
+        var newUserInfoTr = userInfoTbody
+          .children()
+          .last()
+          .prev()
+          .clone(true, true);
+        newUserInfoTr.find(`input[type="checkbox"]`).prop("checked", false);
+        newUserInfoTr.children(":eq(1)").text(jobNumber);
+        newUserInfoTr.children(":eq(2)").text(name);
+        newUserInfoTr.children(":eq(3)").text(gender);
+        newUserInfoTr.children(":eq(4)").text(password);
+        newUserInfoTr.children(":eq(5)").text(age);
+        newUserInfoTr.children(":eq(6)").text(birthday);
+        userInfoTbody.append(newUserInfoTr);
+
+        jobNumberArr.push(jobNumber);
+        nameArr.push(name);
+        return true;
+      }
+    });
+  </script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      height: 450px;
+    }
+    button {
+      font-size: 2em;
+      padding: 5px 20px;
+      margin-bottom: 10px;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <button id="toggle">换图</button><br />
+    <img id="image" src="image/nami (1).jpg" />
+  </body>
+  <script>
+    function randomInt(start, end) {
+      var factor = end - start + 1;
+      return Math.floor(Math.random() * factor + start);
+    }
+
+    $("#toggle").click(function () {
+      $("#image")
+        .slideUp(2000, function () {
+          $(this).attr("src", `image/nami (${randomInt(1, 12)}).jpg`);
+        })
+        .slideDown(2000);
+    });
+  </script>
+</html>

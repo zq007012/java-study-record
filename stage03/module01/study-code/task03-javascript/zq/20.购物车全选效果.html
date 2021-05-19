@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    table {
+      border-style: solid;
+      border-collapse: collapse;
+    }
+    td {
+      border-style: solid;
+      padding: 5px 30px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  </style>
+  <script>
+    function selectAll(element) {
+      var allGoods = document.getElementsByName("goods");
+      var checked = element.checked;
+      allGoods.forEach((goods) => {
+        goods.checked = checked;
+        goods.addEventListener();
+      });
+    }
+  </script>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <input type="checkbox" onchange="selectAll(this)" />
+          全选
+        </td>
+        <td>名称</td>
+        <td>单价(元)</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" name="goods" /></td>
+        <td>方便面</td>
+        <td>3.00</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" name="goods" /></td>
+        <td>酸奶</td>
+        <td>5.00</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" name="goods" /></td>
+        <td>火腿肠</td>
+        <td>4.00</td>
+      </tr>
+    </table>
+    <script>
+      var trArray = document.getElementsByTagName("tr");
+      for (var i = 0; i < trArray.length; i++) {
+        if (i % 2 == 1) {
+          trArray[i].style.backgroundColor = "rgb(172, 151, 194)";
+        }
+      }
+    </script>
+  </body>
+</html>

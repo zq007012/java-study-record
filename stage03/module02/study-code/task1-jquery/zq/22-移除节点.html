@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      font-size: 3em;
+      font-weight: bold;
+      color: rgb(122, 18, 148);
+    }
+    #demo1 {
+      background-color: rgba(214, 130, 130, 0.582);
+    }
+    #demo2 {
+      background-color: rgba(21, 58, 223, 0.39);
+    }
+    #demo3 {
+      background-color: rgba(103, 187, 18, 0.39);
+    }
+    img {
+      height: 200px;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <button>remove()</button>
+    <button>remove("#demo2")</button>
+    <div id="demo1">
+      demo1<br />
+      <img src="image/burin (1).gif" />
+    </div>
+    <div id="demo2">
+      demo2<br />
+      <img src="image/burin (2).gif" />
+    </div>
+    <div id="demo3">
+      demo3<br />
+      <img src="image/burin (3).gif" />
+    </div>
+  </body>
+  <script>
+    $(`button`).click(function () {
+      var str = $(this).text().trim();
+      if (str == "remove()") {
+        $(`div`).remove();
+      } else {
+        console.log(str);
+        $(`div`).remove(`#demo2`);
+      }
+    });
+  </script>
+</html>

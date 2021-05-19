@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    iframe {
+      width: 100%;
+      background-color: rgb(150, 133, 64);
+      margin: 0px;
+      padding: 0px;
+    }
+  </style>
+  <body onload="demo()">
+    <iframe id="demo1" src="iframe/demo1.html" frameborder="no"></iframe><br />
+    <iframe id="demo2" src="iframe/demo2.html" frameborder="no"></iframe>
+  </body>
+  <script>
+    function demo() {
+      console.log(document.getElementById("demo1").contentDocument);
+      console.log(document.getElementById("demo2").contentDocument);
+      console.log(document.getElementById("demo1").contentWindow.document);
+      console.log(document.getElementById("demo2").contentWindow.document);
+      console.log(window.frames["demo1"].contentWindow.document);
+      console.log(window.frames["demo2"].contentWindow.document);
+      console.log(document.getElementById("demo2").id);
+    }
+  </script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    var a = null;
+    var b;
+    console.log("a = " + a);
+    console.log("b = " + b);
+
+    var c = 5;
+    var d = 5;
+    console.log("c = " + c++);
+    console.log("d = " + ++d);
+
+    var e = "1";
+    var f = "true";
+    var g = true;
+    var h = 1;
+    console.log("'e==f' = " + (e == f));
+    console.log("'e===f' = " + (e === f));
+    console.log(
+      "'e==g' = " + (e == g)
+    ); /*g先由布尔值转为数值, 再由数值转为字符串*/
+    console.log("'e===g' = " + (e === g));
+    console.log("'e==h' = " + (e == h));
+    console.log("'e===h' = " + (e === h));
+    console.log("'f==h' = " + (f == h));
+    console.log("'f===h' = " + (f === h));
+  </script>
+  <body></body>
+</html>

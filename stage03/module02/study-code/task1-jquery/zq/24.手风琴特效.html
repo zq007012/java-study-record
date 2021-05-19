@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    dd {
+      list-style-type: disc;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <ul>
+      <li>
+        <dl>
+          <dt>最终幻想7</dt>
+          <dd>蒂法</dd>
+          <dd>艾丽丝</dd>
+          <dd>杰西</dd>
+        </dl>
+      </li>
+      <li>
+        <dl>
+          <dt>守望先锋</dt>
+          <dd>Mercy</dd>
+          <dd>WidowMaker</dd>
+          <dd>D·Va</dd>
+        </dl>
+      </li>
+      <li>
+        <dl>
+          <dt>死或生</dt>
+          <dd>穗乃果</dd>
+          <dd>艾莲娜</dd>
+          <dd>红叶</dd>
+          <dd>不知火舞</dd>
+        </dl>
+      </li>
+    </ul>
+  </body>
+  <script>
+    $("dt").siblings().slideUp();
+    $(function () {
+      $("dt").click(function () {
+        $(this).siblings().slideToggle(500);
+        $("dd").not($(this).siblings()).slideUp(500);
+      });
+    });
+  </script>
+</html>

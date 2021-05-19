@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pirates xmlns="http://www.lagou.com/xml"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.lagou.com/xml pirate.xsd">
+    <pirate index="p-1">
+        <name>蒙奇·D·路飞</name>
+        <age>20</age>
+        <gender>男</gender>
+        <fruitPower>橡胶果实</fruitPower>
+        <tag>海贼王，我当定了</tag>
+    </pirate>
+    <pirate index="p-2">
+        <name>波雅·汉库克</name>
+        <age>30</age>
+        <gender>女</gender>
+        <fruitPower>甜甜果实</fruitPower>
+        <tag>本宫做什么都会被原谅的，因为本宫太美了</tag>
+    </pirate>
+</pirates>

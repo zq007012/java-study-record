@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="demo()">
+    <div
+      id="test"
+      style="
+        height: 1000px;
+        border-style: solid;
+        background-color: rgba(0, 128, 0, 0.377);
+      "
+    ></div>
+  </body>
+  <script>
+    function demo() {
+      console.log(document.body);
+      console.log(document.getRootNode());
+      console.log(document.getElementById("test"));
+    }
+  </script>
+</html>

@@ -1,0 +1,37 @@
+<c3p0-config>
+    <!-- 主要是看named-config标签里的设置 -->
+    <!--默认配置, 下面的自定义配置没设置到的就是用默认配置里的内容, -->
+    <default-config>
+        <!-- initialPoolSize：初始化时获取三个连接，
+              取值应在minPoolSize与maxPoolSize之间。 -->
+        <property name="initialPoolSize">3</property>
+
+        <!-- maxIdleTime：最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。-->
+        <property name="maxIdleTime">60</property>
+
+        <!-- maxPoolSize：连接池中可以开启的最大连接数 -->
+        <property name="maxPoolSize">100</property>
+        <!-- minPoolSize: 连接池中保留的最小连接数 -->
+        <property name="minPoolSize">10</property>
+
+    </default-config>
+
+    <!--配置连接池mysql, 一个named-config标签就是一个连接池-->
+
+    <named-config name="mysql">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/one_piece?characterEncoding=UTF-8</property>
+        <property name="user">zq</property>
+        <property name="password">111111</property>
+        <!-- 连接池创建好后就往里面放10个数据库连接-->
+        <property name="initialPoolSize">10</property>
+        <!-- 连接池里至少要有10个连接 -->
+        <property name="minPoolSize">10</property>
+        <!-- 连接池里至多有100个的连接 -->
+        <property name="maxPoolSize">100</property>
+        <!-- 连接池里得连接在30s内没有使用过的话自动销毁, 直到数量将为minPoolSize -->
+        <property name="maxIdleTime">30</property>
+    </named-config>
+    <!--可以配置多个named-config-->
+
+</c3p0-config>

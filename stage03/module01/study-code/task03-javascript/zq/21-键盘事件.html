@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input id="demo" type="text" />
+    </form>
+  </body>
+  <script>
+    /* document.getElementById("demo").addEventListener("keydown", (e) => {
+      console.log(e.keyCode);
+    }); */
+
+    document.getElementById("demo").onkeydown = "return false";
+    document.getElementById("demo").onkeypress = "return false";
+    document.getElementById("demo").onkeyup = "return false";
+  </script>
+</html>

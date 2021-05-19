@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: rgba(184, 109, 109, 0.692);
+      margin-top: 30px;
+    }
+    #demo1 {
+      transition-property: width height;
+      transition-duration: 800ms;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+    }
+    #demo2 {
+      transition-property: width height;
+      transition-duration: 800ms;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+    }
+
+    #demo1:hover {
+      width: 300px;
+    }
+    #demo2:hover {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+  <body>
+    <div id="demo1"></div>
+    <div id="demo2"></div>
+  </body>
+</html>

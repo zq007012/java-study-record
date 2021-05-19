@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="ZqLibraries">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../ZqLibraries" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../ZqLibrariesSRCs" />
+      <root url="jar://$PROJECT_DIR$/../../../ZqLibrariesSRCs/commons-dbcp2-2.8.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/mysql-connector-java-8.0.23-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/c3p0-0.9.5.5-sources.jar!/" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../ZqLibraries" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../ZqLibrariesSRCs" recursive="false" type="SOURCES" />
+  </library>
+</component>

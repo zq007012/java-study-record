@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      display: inline-block;
+      width: 500px;
+      height: 300px;
+      border-style: solid;
+      border-width: 50px;
+      border-color: rgba(192, 46, 185, 0.37);
+      margin-top: 30px;
+      padding: 50px 50px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    #demo {
+      background-image: url("image/burin\ \(2\).gif");
+    }
+    #demo1 {
+      background-image: url("image/burin\ \(2\).gif");
+      background-clip: border-box;
+    }
+    #demo2 {
+      background-image: url("image/burin\ \(2\).gif");
+      background-clip: padding-box;
+    }
+    #demo3 {
+      background-image: url("image/burin\ \(2\).gif");
+      background-clip: content-box;
+    }
+  </style>
+  <body style="background-color: rgb(139, 190, 139)">
+    <img src="image/burin (2).gif" />
+    <div id="demo"></div>
+    <div id="demo1"></div>
+    <div id="demo2"></div>
+    <div id="demo3"></div>
+  </body>
+</html>

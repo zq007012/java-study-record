@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      background-color: bisque;
+      width: 600px;
+      height: 600px;
+    }
+    img {
+      height: 400px;
+    }
+  </style>
+  <body>
+    <div id="outer" ondblclick="console.log('outer: 双击左键')">
+      <img
+        id="inner"
+        src="image/nami (10).jpg"
+        ondblclick="console.log('inner: 双击右键')"
+      />
+    </div>
+    <script>
+      var outer = document.getElementById("outer");
+      var inner = document.getElementById("inner");
+      outer.addEventListener("click", (ev) => {
+        console.log(ev.type);
+        console.log("点击了" + outer.id);
+      });
+      inner.addEventListener("click", (ev) => {
+        console.log(ev.type);
+        console.log("点击了" + inner.id);
+        //ev.stopPropagation();
+        ev.stopImmediatePropagation();
+      });
+    </script>
+  </body>
+</html>

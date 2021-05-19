@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    button {
+      font-size: 1.5em;
+    }
+  </style>
+  <body>
+    <p><button id="mercy">Mercy</button></p>
+    <p><button id="aerith">爱丽丝</button></p>
+    <p><button id="tifa">蒂法</button></p>
+  </body>
+  <script>
+    //1. 在参数中直接编写事件处理器
+    var btnMercy = document.getElementById("mercy");
+    btnMercy.onclick = function () {
+      console.log("-----------------");
+      console.log("点击了Mercy");
+      console.log(this);
+      console.log("-----------------");
+    };
+
+    //2. 事件处理器是个构造函数
+    var btnAerith = document.getElementById("aerith");
+    btnAerith.addEventListener("click", demo);
+    function demo() {
+      console.log("-----------------");
+      console.log("点击了" + this.innerText);
+      console.log(this);
+      console.log("-----------------");
+    }
+
+    //3. 以lambda表达式方式编写事件处理器
+    var btnTifa = document.getElementById("tifa");
+    btnTifa.onclick = () => {
+      console.log("-----------------");
+      console.log("点击了" + this.innerText);
+      console.log(this);
+      console.log(event.type);
+      console.log("-----------------");
+    };
+  </script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>33.上一个浏览器</title>
+  </head>
+  <body>
+    <button onclick="openNewWindow()">在新的浏览器中打开本网页</button>
+    <button onclick="setItem()">设置一个sessionItem</button>
+  </body>
+  <script>
+    console.log(sessionStorage.getItem("test"));
+    function openNewWindow() {
+      window.open("33.上一个浏览器.html", "", "width=300,height=300");
+    }
+
+    function setItem() {
+      sessionStorage.setItem("test", "666");
+      console.log(sessionStorage.getItem("test"));
+    }
+  </script>
+</html>

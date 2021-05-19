@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<style>
+
+    div{
+        width: 100px;
+        height: 50px;
+        border: 2px solid red;
+    }
+
+    .a{
+        transition: width 2s ease 1s;    /*1秒过后，div在2秒内匀速缓慢的变宽*/
+    }
+
+    div:hover{ width: 300px;}    /*触发div变宽*/
+
+</style>
+<body>
+    
+    <div class="a">Hello,拉勾</div>
+
+</body>
+</html>

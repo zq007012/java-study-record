@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      width: 400px;
+      height: 40px;
+      margin: 10px; /* div和div彼此之间产生10像素的距离*/
+    }
+    .a {
+      /* 设置四个边 */
+      border-width: 2px;
+      border-color: red;
+      border-style: solid;
+
+      border-right-color: green; /* 设置右边框的颜色 */
+      border-bottom-style: dashed; /* 设置下边框的样子 */
+    }
+
+    .b1 {
+      border: 10px solid red;
+    }
+    .b2 {
+      border: 10px dotted red;
+    }
+    .b3 {
+      border: 10px dashed red;
+    }
+    .b4 {
+      border: 10px double red;
+    }
+    .b5 {
+      border: 10px groove red;
+    }
+    .b6 {
+      border: 10px ridge red;
+    }
+    .b7 {
+      border: 10px inset red;
+    }
+    .b8 {
+      border: 10px outset red;
+    }
+  </style>
+  <body>
+    <div class="a"></div>
+    <div class="b1">实心线</div>
+    <div class="b2">点线</div>
+    <div class="b3">虚线</div>
+    <div class="b4">双线</div>
+    <div class="b5">3D效果的凹槽</div>
+    <div class="b6">3D脊边框</div>
+    <div class="b7">嵌入边框</div>
+    <div class="b8">突出边框</div>
+  </body>
+</html>

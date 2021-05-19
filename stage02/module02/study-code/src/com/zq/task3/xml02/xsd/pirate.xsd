@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns="http://www.lagou.com/xml"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.lagou.com/xml"
+            elementFormDefault="qualified">
+    <!-- 定义一个名为pirates的根元素, 这个根元素的type属性的值为pirateType-->
+    <xsd:element name="pirates" type="piratesType"/>
+    <!-- 对type属性的值为pirateType的元素进行规范-->
+    <xsd:complexType name="piratesType">
+        <!-- 这种type值的元素下依次有哪几种子元素 -->
+        <xsd:sequence>
+            <!-- minOccur: 最小出现次数, maxOccur: 最多出现次数, unbounded: 无穷大-->
+            <xsd:element name="pirate" type="pirateType" minOccurs="0"
+                         maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- 对type属性的值为pirateType的元素进行规范-->
+    <xsd:complexType name="pirateType">
+        <!-- 这种type值的元素下依次有哪几种子元素 -->
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="age" type="ageType"/>
+            <xsd:element name="gender" type="genderType"/>
+            <xsd:element name="fruitPower" type="xsd:string"/>
+            <xsd:element name="tag" type="tagType"/>
+        </xsd:sequence>
+        <!-- 这种type值的元素有哪些属性 -->
+        <!-- use属性的值为required时, 表示元素必须设置名为number的属性-->
+        <xsd:attribute name="index" type="indexType" use="required"/>
+    </xsd:complexType>
+    <xsd:simpleType name="genderType">
+        <!-- xsd:restriction 约束这种type值的元素可以保存的数据类型, 属性base的值表示可以保存的类型-->
+        <xsd:restriction base="xsd:string">
+            <!-- xsd:enumeration  这种type值的元素可以保存的数据的值 -->
+            <xsd:enumeration value="男"/>
+            <xsd:enumeration value="女"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ageType">
+        <!-- xsd:restriction 约束这种type值的元素可以保存的数据类型, 属性base的值表示可以保存的类型-->
+        <xsd:restriction base="xsd:integer">
+            <!-- xsd:minInclusive 最小值 -->
+            <xsd:minInclusive value="0"/>
+            <!-- xsd:maxInclusive 最大值 -->
+            <xsd:maxInclusive value="100"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="tagType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value=".{1,30}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="indexType">
+        <!-- xsd:restriction 约束这种type值的元素可以保存的数据类型, 属性base的值表示可以保存的类型 -->
+        <xsd:restriction base="xsd:string">
+            <!-- xsd:patternn 匹配正则表达式 -->
+            <xsd:pattern value="p-[1-9]\d{0,3}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

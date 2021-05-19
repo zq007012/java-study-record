@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    @keyframes zoomIn {
+      0% {
+      }
+      10% {
+      }
+    }
+    .a {
+      height: 400px;
+    }
+    .b {
+      border-style: solid;
+      border-width: 20px;
+      border-color: blueviolet;
+    }
+    .c {
+      padding: 20px;
+      background-color: burlywood;
+    }
+    .d {
+      transition-property: width height;
+      transition-duration: 500ms;
+      transition-timing-function: ease-in;
+    }
+  </style>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <button id="btn1">添加过渡动画类样式</button><br />
+    <button id="btn2">添加多个类样式</button><br />
+    <button id="btn3">移除类样式</button><br />
+    <button id="btn4">切换类样式</button><br />
+    <img src="image/nami (3).jpg" />
+  </body>
+  <script>
+    $(`#btn1`).click(function () {
+      $(`img`).addClass("d");
+    });
+    $(`#btn2`).click(function () {
+      $(`img`).addClass("a b c");
+    });
+    $(`#btn3`).click(function () {
+      $(`img`).removeClass("a b c");
+    });
+    $(`#btn4`).click(function () {
+      $(`img`).toggleClass("a b c");
+    });
+  </script>
+</html>

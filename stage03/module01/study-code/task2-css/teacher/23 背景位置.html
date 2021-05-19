@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    div {
+      background: url("img/1.jpg") no-repeat;
+      width: 200px;
+      height: 80px;
+      margin: 20px;
+      border: 10px dashed black;
+
+      padding: 20px;
+    }
+    .a {
+      background-origin: border-box;
+    }
+    .b {
+      background-origin: padding-box;
+    }
+    .c {
+      background-origin: content-box;
+    }
+  </style>
+
+  <body>
+    <div class="a"></div>
+    <div class="b"></div>
+    <div class="c"></div>
+  </body>
+</html>

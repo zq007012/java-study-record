@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <body>
+    <form>
+      <input type="checkbox" />汉库克<br />
+      <input type="checkbox" checked="true" />穗乃果<br />
+      <input type="checkbox" checked="undefined" disabled />不知火舞<br />
+    </form>
+    <script>
+      $(`input`).filter
+      console.log($(`input[type="checkbox"]:eq(0)`).attr("checked"));
+      console.log($(`input[type="checkbox"]:eq(1)`).attr("checked"));
+      console.log($(`input[type="checkbox"]:eq(2)`).attr("checked", false));
+      console.log($(`input[type="checkbox"]:eq(0)`).prop("checked"));
+      console.log($(`input[type="checkbox"]:eq(1)`).prop("checked"));
+      console.log($(`input[type="checkbox"]:eq(2)`).prop("checked"));
+      console.log($(`form`).prop("height"));
+      console.log($(`form`).attr("height"));
+    </script>
+  </body>
+</html>
