@@ -750,6 +750,30 @@ DROP USER 'jill'@'192.168.1.107';
 SELECT * FROM mysql.user;
 ```
 
+### 5.4 更新用户的密码和host地址
+
+#### 5.4.1 更新用户的密码
+
+##### 5.4.1.1 无需知道旧密码
+
+**必须以root用户登录, 无需知道旧密码**
+
+```sql
+ALTER USER '用户名'@'host值' IDENTIFIED BY '111111';
+```
+
+##### 5.4.1.2 必须知道旧密码
+
+```sql
+mysqladmin -u用户名 -p旧密码 password 新密码;
+```
+
+#### 5.4.2 更新用户的host地址
+
+```SQL
+UPDATE mysql.user set host='新的host地址' where user='用户名';
+```
+
 
 
 ## 六. 数据库备份和还原

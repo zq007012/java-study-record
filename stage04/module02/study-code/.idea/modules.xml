@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/task01-demo01-teacher/task01-demo01-teacher.iml" filepath="$PROJECT_DIR$/task01-demo01-teacher/task01-demo01-teacher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task01-demo01-zq/task01-demo01-zq.iml" filepath="$PROJECT_DIR$/task01-demo01-zq/task01-demo01-zq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02-demo01-teacher/task02-demo01-teacher.iml" filepath="$PROJECT_DIR$/task02-demo01-teacher/task02-demo01-teacher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02-demo01-zq/task02-demo01-zq.iml" filepath="$PROJECT_DIR$/task02-demo01-zq/task02-demo01-zq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02-demo02-teacher/task02-demo02-teacher.iml" filepath="$PROJECT_DIR$/task02-demo02-teacher/task02-demo02-teacher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02-demo02-zq/task02-demo02-zq.iml" filepath="$PROJECT_DIR$/task02-demo02-zq/task02-demo02-zq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02-demo03-teacher/task02-demo03-teacher.iml" filepath="$PROJECT_DIR$/task02-demo03-teacher/task02-demo03-teacher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02-demo03-zq/task02-demo03-zq.iml" filepath="$PROJECT_DIR$/task02-demo03-zq/task02-demo03-zq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02-demo04-teacher/task02-demo04-teacher.iml" filepath="$PROJECT_DIR$/task02-demo04-teacher/task02-demo04-teacher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task02-demo04-zq/task02-demo04-zq.iml" filepath="$PROJECT_DIR$/task02-demo04-zq/task02-demo04-zq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../zq-utils/zq-utils.iml" filepath="$PROJECT_DIR$/../../../../zq-utils/zq-utils.iml" />
+    </modules>
+  </component>
+</project>

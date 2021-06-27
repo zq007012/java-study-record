@@ -8,6 +8,7 @@
 
 - JSP是Java Server Page的简称, 跟Servlet一样可以动态生成HTML响应, JSP文件命名为xxx.jsp
 - 与Servlet不同, JSP文件以HTML元素为主, 然后内嵌java代码段, 用于处理动态内容.
+- ==JSP本质上是个Servlet类, 编译器会根据JSP的语法将JSP文件编译成对应的Servlet类==
 
 ### 1.2 JPS示例
 
@@ -134,7 +135,9 @@
 
 - 注意: 表达式不需要以`;`结束, 因为表达式区只有一行
 
-- 注意: ==所有的表达式区和程序代码区相当于写在service中的代码, 所以不同的表达式区和程序代码区间的局部变量是可以跨区调用的==
+- **表达式区里面代码的结果只能是八大基本数据类型或者字符串类型这样的可输出文本**
+
+- 注意: ==所有的表达式区和程序代码区相当于写在Servlet类的service方法中的代码, 所以不同的表达式区和程序代码区间的局部变量是可以跨区调用的==
 
 - ```jsp
   <% int count=0 %>
@@ -337,7 +340,7 @@
 ##### 3.2.2.0 `setAttribute`和`getAttribute`方法详解
 
 - scope有四个值可以取, 这个四个值分别封装成了PageContext类中的常量, 并且属性也不是被保存到了pageContext对象中, 而是被保存到了对应的scope对象中了
-  - PageContext.PAGE_SCOPE    属性被保存到了page内置对象中了
+  - PageContext.PAGE_SCOPE    属性被保存到了pageContext内置对象中了
   - PageContext.REQUEST_SCOPE  属性被保存到了request内置对象中了
   - PageContext.SESSION_SCOPE  属性被保存到了seesion内置对象中了
   - PageContext.APPLICATION_SCOPE  属性被保存到了application内置对象中了
@@ -390,7 +393,11 @@
 
 #### 3.2.7 config内置对象
 
+==对应的是servletConfig对象==
+
 #### 3.2.8 application内置对象
+
+==对应的是servletContext对象==
 
 | 常用方法                                     | 说明 |
 | -------------------------------------------- | ---- |

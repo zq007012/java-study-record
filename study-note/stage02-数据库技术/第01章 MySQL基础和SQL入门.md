@@ -109,30 +109,29 @@
    2. +8:00表示东八区, 是中国法定时区, 设置时区在IDEA中要用
 
 4. 修改默认编码
+   1. 在`[mysqld]`下面添加   
 
-   1. 在`[mysql]`下面添加
-
-      1. ```
-         default-character-set=utf8mb4
-         ```
-
-      2. 设置MySQL默认字符集为utf8mb4  ，若没有`[mysql]`这一行，则手动添加。
-
-   2. 在`[mysqld]`下面添加   
-
-      1. ```
+      1. ```shell
          character-set-server=utf8mb4
          ```
 
       2. 设置服务端默认编码, 若没有`[mysqld]`这一行，则手动添加。
 
-   3. 在`[client]`下面添加
+   2. 在`[mysql]`下面添加(==若没有`[mysql]`这一行，则在**文末**手动添加==)
 
-      1. ```
+      1. ```shell
          default-character-set=utf8mb4
          ```
 
-      2. 设置客户端默认编码 ，此处不加，查询出来的中文好像还是拉丁文。若没有`[client]`这一行，则手动添加。 
+      2. 设置MySQL默认字符集为utf8mb4 。
+
+   3. 在`[client]`下面添加(==若没有`[client]`这一行，则在**文末**手动添加==)
+
+      1. ```shell
+         default-character-set=utf8mb4
+         ```
+
+      2. 设置客户端默认编码 ，此处不加，查询出来的中文好像还是拉丁文
 
 5. 重启MySQL服务
 
@@ -158,11 +157,11 @@ MySQL软件在电脑上开辟了一块地盘用来存放和管理数据库, 外�
 
 #### 1. 命令行登录数据库
 
-| 命令                                          | 说明                                            |
-| --------------------------------------------- | ----------------------------------------------- |
-| mysql -u用户名 -p密码                         | 使用指定用户名和密码登录当前计算机的MySQL数据库 |
-| mysql -u用户名 -h服务器Ip地址 -u用户名 -p密码 | -h    远程登陆MYSQL服务端                       |
-| exit或者quit                                  | 退出数据库                                      |
+| 命令                                   | 说明                                            |
+| -------------------------------------- | ----------------------------------------------- |
+| mysql -u用户名 -p密码                  | 使用指定用户名和密码登录当前计算机的MySQL数据库 |
+| mysql -u用户名 -h服务器的IP地址 -p密码 | -h    远程登陆MYSQL服务端                       |
+| exit或者quit                           | 退出数据库                                      |
 
 ##### 演示
 
@@ -170,7 +169,7 @@ MySQL软件在电脑上开辟了一块地盘用来存放和管理数据库, 外�
 
 ![](%E7%AC%AC01%E7%AB%A0%20MySQL%E5%9F%BA%E7%A1%80%E5%92%8CSQL%E5%85%A5%E9%97%A8.assets/One_2021-01-26_183719.png)
 
-#### 2. 修改MySQL的登录密码
+#### 2. 修改MySQL指定用户的登录密码
 
 ```
 mysqladmin -u用户名 -p旧密码 password 新密码 
@@ -180,28 +179,24 @@ mysqladmin -u用户名 -p旧密码 password 新密码
 
 #### 3. 客户端登录--SQLYog
 
-1. 在创建新连接是可能出现问题, 这是因为创建连接时需要MySQL开启一个验证密码的插件,可通过以下步骤开启
-
-   1. 通过cmd进入mysql
-
-   2. 输入以下代码, 把用户 主机名 密码改成新连接所使用的用户 主机名 和密码
-
-      1. ```sql
-         #1. 修改加密规则 
-         ALTER USER '用户'@'主机名' IDENTIFIED BY '密码' PASSWORD EXPIRE NEVER; 
-         #2. 更新一下用户的密码
+- 在创建新连接输入用户名和密码登录MySQL服务器时可能出现问题, 这是因为创建连接时需要MySQL开启一个验证密码的插件,可通过以下步骤开启
+  - 在虚拟机上登录MySQL服务器的`root`用户
+  - 输入以下代码, 把用户 主机名 密码改成新连接所使用的**用户名** **主机名** 和**密码**
+  - ```sql
+   #1. 修改加密规则 
+  ALTER USER '用户'@'主机名' IDENTIFIED BY '密码' PASSWORD EXPIRE NEVER; 
+  #2. 更新一下用户的密码
 ALTER USER '用户'@'主机名' IDENTIFIED WITH mysql_native_password BY '密码';
-         #3. 刷新权限
-         FLUSH PRIVILEGES; 
-         #4. 重置密码
-         alter user '用户'@'主机名' identified by '密码';
-         ```
-   
-2. <https://github.com/webyog/sqlyog-community/wiki/Downloads>下载最新版SQLYog Community Edition, 但是建议使用旗舰版
+  #3. 刷新权限
+  FLUSH PRIVILEGES; 
+  #4. 重置密码
+  alter user '用户'@'主机名' identified by '密码'; 
+   ```
+- <https://github.com/webyog/sqlyog-community/wiki/Downloads>下载最新版SQLYog Community Edition, 但是建议使用旗舰版
 
-3. 打开工具--首选项--字体编辑器, 进行如下设置
+- 打开工具--首选项--字体编辑器, 进行如下设置
 
-   1. ![ ](%E7%AC%AC01%E7%AB%A0%20MySQL%E5%9F%BA%E7%A1%80%E5%92%8CSQL%E5%85%A5%E9%97%A8.assets/One_2021-01-26_190940.png)
+- ![ ](%E7%AC%AC01%E7%AB%A0%20MySQL%E5%9F%BA%E7%A1%80%E5%92%8CSQL%E5%85%A5%E9%97%A8.assets/One_2021-01-26_190940.png)
 
 ### 9. MySQL的目录结构
 
@@ -322,7 +317,7 @@ SHOW CREATE DATABASE db2;
 SHOW DATABASES;
 DROP DATABASE db2;
 SHOW DATABASES;
-```
+ ```
 
 常用的字符集：默认`latin1`，欧美`ASCII` `ISO-8859-1` , 中文`GBK` `BIG5` , 全球`UTF8`
 
@@ -411,8 +406,8 @@ SHOW DATABASES;
 
   - ```sql
     CREATE TABLE 表名(字段名称1 字段类型, 字段名称2 字段类型, 字段名称3 字段类型);
-    ```
-  
+ ```
+
 - 实例
 
   - ```sql
@@ -575,7 +570,6 @@ SHOW DATABASES;
   - ```sql
     ALTER TABLE student CHANGE sname student_name VARCHAR(50);
     ```
-
 
 ###### f. 删除列
 
@@ -833,6 +827,7 @@ SELECT sname, score_final / 6 FROM student;
 | is null                         | ==查询某一列中值为null的记录, 注意不能写 `= null`==    |
 | is not null                     | ==查询某一列中值不为null的记录, 注意不能写 `!= null`== |
 | like '%张%'                     | 模糊查询, 针对字符串                                   |
+| not like "%张%"                 |                                                        |
 
 ##### ②. 逻辑运算符
 

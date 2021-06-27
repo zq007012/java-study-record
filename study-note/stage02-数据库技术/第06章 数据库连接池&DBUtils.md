@@ -12,7 +12,8 @@
 
 #### 1.1.2 连接池的好处
 
-用连接池来管理Connection对象, 这样可以重复使用Connection对象, 当使用完Connection对象后, 调用Connection对象的close()方法并不会真的关闭Connection, 而是把Connection放到连接池里闲置起来
+- 用连接池来管理Connection对象, 这样可以重复使用Connection对象, ==当使用完Connection对象后, 调用Connection对象的close()方法并不会真的关闭Connection, 而是把Connection放到连接池里闲置起来==
+  - 注意: **这个Connection对象用完后必须调用`close()`方法, 否则该Connection对象不会被连接池回收闲置起来, 这样就违背了连接池的初衷**
 
 ### 1.2 普通JDBC方式与连接池方式
 
@@ -353,7 +354,7 @@ QueryRunner queryRunner = new QueryRunner(DRUIDUtils.getDataSource())
 
 ###### 2.4.3.1.2 DbUtils中
 
-- `void closeQuietly(Connection conn`
+- `void closeQuietly(Connection conn)`
 
 ##### 2.4.3.2 编码步骤
 

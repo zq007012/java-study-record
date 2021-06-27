@@ -93,7 +93,8 @@ Tooltip initial delay(ms): 工具提示信息多久后显示(选600)
 | Comment with block comment                         | Alt + /               |
 | Run                                                | Alt + A               |
 | Fix suggestions(修复代码的建议)                    | Alt + Enter           |
-| Optimize import(完善导入信息)                      | Alt + O               |
+| Optimize import(完善包的导入, 少的加入, 多的删除)  | Alt + O               |
+| 在子类中显示所有可以被重写父类方法                 | Ctrl + O              |
 | Export to text file(导出到文本文件)                | Ctrl + Alt + O        |
 | 显示文档注释                                       | Ctrl + Q              |
 | 上一个代码中的编译错误(previous highlighted error) | Alt + U(up)           |
@@ -106,6 +107,8 @@ Tooltip initial delay(ms): 工具提示信息多久后显示(选600)
 | forward  跳转到之后的位置                          | ctrl + alt + 向右箭头 |
 | back  跳转到之前的位置                             | ctrl + alt + 向左箭头 |
 | 阿里编码规约扫描                                   | Alt + S               |
+| 从父类方法跳转到子类重写的方法                     | Ctrl + Alt + 左键点击 |
+| 从子类方法跳转到父类方法                           | Ctrl + U              |
 
 ## 三. Editor
 
