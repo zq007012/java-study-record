@@ -206,6 +206,8 @@ ${empty pageScope.studentList}
 
 - 下载JSTL的jar包并添加为项目的依赖, 下载地址为: <https://tomcat.apache.org/download-taglibs.cgi>, 四个jar包都下载下来
 
+  - ![](%E7%AC%AC04%E7%AB%A0%20EL%E5%92%8CJSTL%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.assets/One_2021-06-29_171555.png)
+
 - 在JSP页面中使用`tablib`指令引入jstl标签库, 方式为
 
   - ```jsp

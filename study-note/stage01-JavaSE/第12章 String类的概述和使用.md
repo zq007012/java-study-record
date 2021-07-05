@@ -104,12 +104,12 @@ System.out.println("str2 == str5 :" + (str2 == str5));//false
 | 获取本字符串从下标beginIndex开始到结尾组成的新字符串         | String subString(int beginIndex)                      |
 |                                                              |                                                       |
 | **功能**                                                     | **方法**                                              |
-| 获取使用newChar字符换掉本字符串中所有为oldChar的字符形成的字符串 | String replace(char oldChar, char newChar)            |
+| 获取使用newChar字符换掉本字符串中所有为oldChar的字符形成的字符串, **本对象不会发生改变** | String replace(char oldChar, char newChar)            |
 | **功能**                                                     | **方法**                                              |
 | 判断本字符串是否匹配参数指定的正则表达式规则                 | boolean matches(String regex)                         |
 | 参数regex为正则表达式,以regex所表示的字符串为分隔符,将字符串拆分成字符串数组 | String[] split(String regex)                          |
-| 用replacement替换掉本字符串中第一个符合regex这个正则表达式规则的字符串, 获取形成的新的字符串 | String replaceFirst(String regex, String replacement) |
-| 用replacement替换掉本字符串中所有符合regex这个正则表达式规则的字符串, 获取形成的新的字符串 | String replaceAll(String regex, String replacement)   |
+| 用replacement替换掉本字符串中第一个符合regex这个正则表达式规则的字符串, 获取形成的新的字符串, **本对象不会发生改变** | String replaceFirst(String regex, String replacement) |
+| 用replacement替换掉本字符串中所有符合regex这个正则表达式规则的字符串, 获取形成的新的字符串, **本对象不会发生改变** | String replaceAll(String regex, String replacement)   |
 
 [^String2]: `String`		`StringBuffer`		`StringBuilder`都实现了这个接口,所以这个方法可以接收这些类型的对象
 [^String3]: 一般输入的参数是个字符, 编译器会根据编码表自动将字符转换为对应的int数值

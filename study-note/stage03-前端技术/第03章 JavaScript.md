@@ -508,6 +508,8 @@ console.log(getQuotient(5, 2));
 
 ##### 3.12.6.3 `encodeURI(str)`和`decodeURI(str)`
 
+- **js中的字符串只有被`encodeURI(str)`编码之后才可以拼接到url中**
+
 - `encodeURI(str)`和`decodeURI(str)`是成对来使用的，因为浏览器的地址栏有中文字符的话，可以会出现不可预期的错误，所以可以encodeURI把==非英文字符==**编码**为==英文编码==，decodeURI可以用来把字符**解码**回来。
 
 - `encodeURI(str)`方法不会对以下四个字符进行编码：`:`、`/`、`;`和 `?`

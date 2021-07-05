@@ -230,19 +230,30 @@ public class C3P0Utils {
 
 3. 在该文件夹下创建一个`druid.properties`文件, 文件的内容是
 
-   - ```txt
-     driverClassName=com.mysql.jdbc.Driver
-         url=jdbc:mysql://localhost:3306/one_piece?characterEncoding=utf-8
+   - ```properties
+     # driverClassName=com.mysql.jdbc.Driver
+     url=jdbc:mysql://localhost:3306/one_piece?characterEncoding=utf-8
      username=zq
-         password=111111
-         initialSize=5
-         maxActive=100
-         maxWait=3000
+     password=111111
+     initialSize=5
+     maxActive=100
+     minIdle=20
+     maxWait=3000
      ```
      
    - 第1行`driverClassName=com.mysql.jdbc.Driver`不需要写了, 因为新版本的MySql驱动Jar包中, 注册驱动的类由`com.mysql.jdbc.Driver`换成了`com.mysql.jdbc.cj.Driver`, `com.mysql.jdbc.Driver`被弃用了, 而且新的注册驱动的类会经由SPI自动注册驱动, 不需要手动注册数据库驱动了.
 
+###### 配置介绍
 
+| name            | 说明                                                         |
+| --------------- | ------------------------------------------------------------ |
+| **url**         | 数据库服务器地址                                             |
+| **userName**    | 登录MySql服务器的用户名                                      |
+| **password**    | 登录密码                                                     |
+| **initialSize** | 连接池创建好后就往里面放x个数据库连接                        |
+| **maxWait**     | 连接池里的某个连接在x秒内没有使用过的话就会自动销毁, 如果为0, 则这个连接永远不会销毁 |
+| **maxActive**   | 连接池最多开x个连接                                          |
+| **minIdle**     | 连接池中最少要有x个连接, 连接池中的连接减少到这个数时, 将不会销毁这里免得超时连接 |
 
 ##### 1.3.3.3 编辑DRUIDUtils
 

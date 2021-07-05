@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="optimize-md:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/optimize_md_jar</output-path>
+    <root id="archive" name="optimize-md.jar">
+      <element id="module-output" name="optimize-md" />
+    </root>
+  </artifact>
+</component>

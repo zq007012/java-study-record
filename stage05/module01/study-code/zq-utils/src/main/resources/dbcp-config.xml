@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dbcp-config>
+    <!-- 主要是看named-config标签里的设置 -->
+    <!--默认配置, 下面的自定义配置没设置到的就是用默认配置里的内容, -->
+    <default-config>
+        <!-- 连接池创建好后就往里面放10个数据库连接-->
+        <property name="InitialPoolSize">10</property>
+        <property name="MinIdlePoolSize">10</property>
+        <property name="MaxIdlePoolSize">30</property>
+        <property name="MaxTotalPoolSize">30</property>
+        <property name="MinEvictableIdleTimeMillis">30000</property>
+    </default-config>
+    <!--配置连接池mysql, 一个named-config标签就是一个连接池-->
+    <named-config name="mysql">
+        <!-- 数据库驱动-->
+        <property name="DriverClassName">com.mysql.cj.jdbc.Driver</property>
+        <!-- 数据库服务器的url-->
+        <!-- 开启数据库的批处理功能的url -->
+        <!-- jdbc:mysql://localhost:3306/db_demo?characterEncoding=utf-8&rewriteBatchedStatements=true -->
+        <property name="Url">jdbc:mysql://localhost:3306/student_management_system?characterEncoding=UTF-8</property>
+        <!-- 用户 -->
+        <property name="Username">root</property>
+        <!-- 密码 -->
+        <property name="Password">Zq12345!</property>
+    </named-config>
+    <!--可以配置多个named-config, 为不同的url或不同的user的创建连接池-->
+
+</dbcp-config>

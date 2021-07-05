@@ -223,27 +223,31 @@ SELECT
 -- 筛选出最高分数大于500小于600的组, 对这些组按照最高分数排序后,显示这些组的相关信息;
 ```
 
-### 1.4 限定范围查询
+### 1.4 limit--只返回查询结果中的一部分记录
 
 `limit offset, length`  
 
-- 数据库表中记录的行数是从0开始数的
-- offset  开始查询的行数, 最小值为0
+- 查询结果中的记录的行数是从0开始数的
+- offset  记录的行数的下标, 比如第一行的下标是0, 第二行的下标是1, 以此类推
 - length 记录的条数
-- 从offset行开始, length条记录的范围内查询
+- **返回查询结果中从下标为offset的记录开始的length条记录**
 
-> 只在表中限定范围内的记录里进行查询
+> 只返回查询结果中的limit限定范围内的记录
 
 ```sql
-select * from 表名 limit offset, length where 条件表达式;
+select * from 表名 where 条件表达式 limit offset, length;
 ```
 
 ```sql
 -- 不限定范围查询
 SELECT * FROM student;
 -- 限定范围查询
-SELECT * FROM student LIMIT 2,5;
+SELECT * FROM student where age > 15 LIMIT 2,5;
 ```
+
+**先查询到student表中所有age>15的记录,  返回这些查询结果中的从下标为2的记录开始的5条记录**
+
+
 
 ## 二. 约束(Constraint)
 

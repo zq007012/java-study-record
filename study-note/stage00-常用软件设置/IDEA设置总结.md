@@ -21,7 +21,7 @@ idea.plugins.path=${idea.config.path}/plugins
 
 ## 一. Appearance & Behavior
 
-### 1. Appearance
+### 1.1 Appearance
 
 字体和字体大小
 
@@ -42,11 +42,11 @@ Tooltip initial delay(ms): 工具提示信息多久后显示(选600)
 - [x] Show memory indicator    显示内存治时期
 - [x] Disable mnemonics in menu    在菜单上显示助忆键
 
-### 2. Menus and Toolbars
+### 1.2 Menus and Toolbars
 
 无
 
-### 3. System Settings
+### 1.3 System Settings
 
 **Startup/Shutdown**
 
@@ -68,15 +68,15 @@ Tooltip initial delay(ms): 工具提示信息多久后显示(选600)
 
 为...自动检查更新
 
-### 4. File Colors
+### 1.4 File Colors
 
-### 5. Scopes(范围)
+### 1.5 Scopes(范围)
 
-### 6. Notifications(通知)
+### 1.6 Notifications(通知)
 
-### 7. Quick Lists
+### 1.7 Quick Lists
 
-### 8. Path Variables(路径变量)
+### 1.8 Path Variables(路径变量)
 
 ## 二. KeyMap
 
@@ -156,11 +156,10 @@ Size: 20    编辑器默认字体大小
 
   - ```java
     /**
-      * @ClassName: ${NAME}
-      * @Description: TODO
-      * @Author: ${USER}
-      * @Date: ${DATE} ${TIME}
-      * @Version: V1.0
+      * TODO
+      * @author : ${USER}
+      * @date : ${DATE} ${TIME}
+      * @version : V1.0
     */
     ```
   
@@ -180,8 +179,6 @@ Size: 20    编辑器默认字体大小
 | string                | 字符串                                       |
 | other                 | 其他                                         |
 | smart type completion | 智能补全                                     |
-
-
 
 **iterations组里有很多有关遍历的有用模板**
 
@@ -302,10 +299,10 @@ Java  -  Serialization issues -  Serializable class without "serialVersionUID"  
 | 彩虹色的括号---可以以同一种颜色突出显示承兑的括号            | Rainbow Brackets              |
 | 阿里巴巴代码规范, 一定要关闭实时检测功能, 否则会与错误提示功能冲突, 导致错误提示缓慢, 通过点击Tools➡阿里编码规约➡关闭实时检测功能来设置 | Alibaba Java Coding Guideline |
 | 在对象名上点击`alt+enter`选择生成所有的setter                | GenerateAllSetter             |
-|                                                              |                               |
+| 使用注解生成全参构造器 无参构造器 所有成员变量的getter/setter equals hashcode toString方法 | Lombok                        |
 |                                                              |                               |
 
-## 五. `Custom VM Options`设置
+## 五. `Custom VM Options`相关设置
 
 - 这个设置的文件是`idea64.exe.vmoptions`, 会保存在`user/.IntelliJIdea版本号/config`, 这个位置**是不会**随着[零. 备份IDEA的设置](#零. 备份IDEA的设置)中`config`文件夹的更改而更改
 - 还有不要想着修改`IDEA安装目录/bin`下面的`idea64.exe.vmoptions`, 不会起作用的, 甚至可能导致IDEA无法启动
@@ -387,8 +384,8 @@ File➡Project Structure➡Project Setting➡Modules 选择要建立依赖的模
 - 接下来设置`Host`  `Port`  `User`  `Password`  `Database`
 - 点击`Test Connection`测试能否成功连接
 
-## 八. 导入项目或这导入模块
+## 八. 导入项目或者导入模块
 
 - 遇到下图所示的弹框, 一定要选`Reuse`, 否则会覆盖掉项目或者模块原来的`.iml`配置文件, 导致依赖和一些资源配置丢失
-  - ![](IDEA%E8%AE%BE%E7%BD%AE%E6%80%BB%E7%BB%93.assets/One_2021-05-05_105144.png)
+  - ![](IDEA%E8%AE%BE%E7%BD%AE%E6%80%BB%E7%BB%93.assets/One_2021-05-05_105144-1620263071110.png)
 
