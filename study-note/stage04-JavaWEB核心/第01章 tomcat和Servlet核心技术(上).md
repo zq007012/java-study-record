@@ -178,12 +178,17 @@
 
 ### 3.6 配置文件
 
+#### 3.6.1 配置服务器的端口号、域名或ip、默认加载的项目、协议类型、请求的编码
+
 - `conf`文件夹下的`server.xml`文件是Tomcat服务器的主配置文件, 可以**设置tomcat服务器的端口号**、设置域名或IP、默认加载的项目， 请求的编码等
 
   - ```xml
     <Connector port="8080" protocal="HTTP/1.1" connectionTimeout="20000" redirectPort="8843"/>
     
     ```
+
+
+#### 3.6.2 配置服务器的管理员信息
 
 - `conf`文件夹下的`tomcat-user.xml`文件**用来配置管理Tomcat服务器的用户与权限**
 
@@ -192,16 +197,31 @@
     <user username="zq" password="11111111" roles="manager-gui"/>
     ```
 
+
+
 ### 3.7 `webapps`文件夹
 
 - 当`Tomcat`开启后, 可以通过`http://服务器IP地址:端口号/`+**文件相对路径**访问`webapps`下的所有文件
-
 - `http://localhost:8080/`    访问的是 `webapps/ROOT`目录下的`index.html`文件
 - `http://localhost:8080/root`    访问的是 `webapps/ROOT`目录下的`index.html`文件
 - `http://localhost:8080/root/index.html`    访问的是 `webapps/ROOT`目录下的`index.html`文件
 - `http://localhost:8080/root/hello world.html`    访问的是 `webapps/ROOT`目录下的`hello word.html`文件
 - `http://localhost:8080/zq`    访问的是 `webapps/zq`目录下的`index.html`文件
 - `http://localhost:8080/zq/hello world.html`    访问的是 `webapps/zq`目录下的`hello word.html`**文件**
+
+#### 3.7.1 配置虚拟路径, 访问`webapps`之外的本地文件
+
+- 打开`Tomcat的安装目录/conf/server.xml`文件, 在`<Host>`节点下添加一下节点
+
+  - ```xml
+    <Context path="/data" docBase="d:/Local-Data" reloadable="true" debug="0"/>
+    ```
+
+  - path    在webapps文件夹下虚拟一个路径
+
+  - docBase    虚拟路径实际指向的本地文件或者本地目录
+
+  - reloadable     是否开启在`Tomcat`不重启的情况下实时同步本地目录。
 
 ## 四. Servlet(重点)
 

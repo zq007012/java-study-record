@@ -52,64 +52,66 @@ System.out.println("str2 == str5 :" + (str2 == str5));//false
 
 ## 五. 常用的实例方法
 
-| 功能                                                         | 方法                                                  |
-| ------------------------------------------------------------ | ----------------------------------------------------- |
-| 返回字符串本身, 返回的是其本身,没有创建新的对象              | String toString()                                     |
-| 获取本字符串在常量池中的对象                                 | String intern()                                       |
-|                                                              |                                                       |
-| **功能**                                                     | **方法**                                              |
-| 将当前字符串转换为byte数组                                   | byte[] getBytes()                                     |
-| **功能**                                                     | **方法**                                              |
-| 将当前字符串转换为char数组                                   | char[] getCharArray()                                 |
-| 字符串的长度(即有几个字符)                                   | int length()                                          |
-| 字符串第index位置上的字符,(从0开始数)                        | char charAt(int index)                                |
-| 判断字符串是否为空字符串                                     | boolean isEmpty()                                     |
-|                                                              |                                                       |
-| **功能**                                                     | **方法**                                              |
-| 比较调用对象和参数对象的大小关系(ASCII编码),返回值小于0则表示在前,大余0则表示在后 | int compareTo(String anotherString)                   |
-| 不考虑大小写,比较调用对象和参数对象的大小关系, 返回值小于0则表示在前,大余0则表示在后 | int compareToIgnoreCase(String anotherString)         |
-|                                                              |                                                       |
-| **功能**                                                     | **方法**                                              |
-| 两个字符串进行拼接, 获取拼接后形成的新的字符串               | String concat(String str)                             |
-| **功能**                                                     | **方法**                                              |
-| 字符串是否包含指定的内容                                     | boolean contains(CharSquence[^String2] s)             |
-| **功能**                                                     | **方法**                                              |
-| 返回字符串的小写形式,返回的是一个新的对象                    | String toLowerCase()                                  |
-| 返回字符串的大写形式,返回的是一个新的对象                    | String toUpperCasd()                                  |
-|                                                              |                                                       |
-| **功能**                                                     | **方法**                                              |
-| 判断字符串是否以参数字符串开头                               | boolean startsWith(String prefix)                     |
-| 判断从字符串的指定位置开始是否以参数字符串开头               | boolean startsWith(String prefix, int offset)         |
-| 判断字符串是否以参数字符串结尾                               | boolean endsWith(String suffix)                       |
-| 获得本字符串去掉开头和结尾的空白字符形成的新字符串           | String trim()                                         |
-|                                                              |                                                       |
-| **功能**                                                     | **方法**                                              |
-| 判断调用字符串与参数字符串的内容是否相同                     | boolean equals(Object obj)                            |
-| 获取字符串的哈希值                                           | int hashCode()                                        |
-| 判断忽略大小写后,调用字符串与参数字符串的内容是否相同        | boolean equalsIgnoreCase(String anotherString)        |
-| 获取字符串的哈希值                                           | int hashCode()                                        |
-|                                                              |                                                       |
-| **功能**                                                     | **方法**                                              |
-| 获取指定字符在字符串中第一次出现的位置,没有则返回`-1`        | int indexOf(int ch)[^String3]                         |
-| 获取指定字符从fromIndex位置开始在字符串中第一次出现的位置,没有则返回`-1` | int indexOf(int ch, int fromIndex)[^String3]          |
-| 从后往前找,指定字符第一次出现的位置,没有则返回`-1`           | int lastIndexOf(int ch)[^String3]                     |
-| 以fromeIndex位置为最后,从后往前找,指定字符第一次出现的位置, 没有则返回`-1` | int lastIndexOf(int ch, int fromIndex)[^String3]      |
-| 获取指定字符串在字符串中第一次出现的位置,没有则返回`-1`      | int indexOf(String str)                               |
-| 获取指定字符串从fromIndex位置开始在字符串中第一次出现的位置,没有则返回`-1` | int indexOf(String str, int fromIndex)                |
-| 从后往前找,指定字符串第一次出现的位置,没有则返回`-1`         | int lastIndexOf(String str)                           |
-| 以fromeIndex位置为最后,从后往前找,指定字符串第一次出现的位置, 没有则返回`-1` | int lastIndexOf(String str, int fromIndex)            |
-|                                                              |                                                       |
-| **功能**                                                     | **方法**                                              |
-| 获得本字符串从下标beginIdex开始到endIndex(不包括)结束组成的新字符串 | String subString(int beginIndex, int endIndex)        |
-| 获取本字符串从下标beginIndex开始到结尾组成的新字符串         | String subString(int beginIndex)                      |
-|                                                              |                                                       |
-| **功能**                                                     | **方法**                                              |
-| 获取使用newChar字符换掉本字符串中所有为oldChar的字符形成的字符串, **本对象不会发生改变** | String replace(char oldChar, char newChar)            |
-| **功能**                                                     | **方法**                                              |
-| 判断本字符串是否匹配参数指定的正则表达式规则                 | boolean matches(String regex)                         |
-| 参数regex为正则表达式,以regex所表示的字符串为分隔符,将字符串拆分成字符串数组 | String[] split(String regex)                          |
-| 用replacement替换掉本字符串中第一个符合regex这个正则表达式规则的字符串, 获取形成的新的字符串, **本对象不会发生改变** | String replaceFirst(String regex, String replacement) |
-| 用replacement替换掉本字符串中所有符合regex这个正则表达式规则的字符串, 获取形成的新的字符串, **本对象不会发生改变** | String replaceAll(String regex, String replacement)   |
+| 功能                                                         | 方法                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 返回字符串本身, 返回的是其本身,没有创建新的对象              | String toString()                                            |
+| 获取本字符串在常量池中的对象                                 | String intern()                                              |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 将当前字符串转换为byte数组                                   | byte[] getBytes()                                            |
+| **功能**                                                     | **方法**                                                     |
+| 将当前字符串转换为char数组                                   | char[] getCharArray()                                        |
+| 字符串的长度(即有几个字符)                                   | int length()                                                 |
+| 字符串第index位置上的字符,(从0开始数)                        | char charAt(int index)                                       |
+| 判断字符串是否为空字符串                                     | boolean isEmpty()                                            |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 比较调用对象和参数对象的大小关系(ASCII编码),返回值小于0则表示在前,大余0则表示在后 | int compareTo(String anotherString)                          |
+| 不考虑大小写,比较调用对象和参数对象的大小关系, 返回值小于0则表示在前,大余0则表示在后 | int compareToIgnoreCase(String anotherString)                |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 两个字符串进行拼接, 获取拼接后形成的新的字符串               | String concat(String str)                                    |
+| **功能**                                                     | **方法**                                                     |
+| 字符串是否包含指定的内容                                     | boolean contains(CharSquence[^String2] s)                    |
+| **功能**                                                     | **方法**                                                     |
+| 返回字符串的小写形式,返回的是一个新的对象                    | String toLowerCase()                                         |
+| 返回字符串的大写形式,返回的是一个新的对象                    | String toUpperCasd()                                         |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 判断字符串是否以参数字符串开头                               | boolean startsWith(String prefix)                            |
+| 判断从字符串的指定位置开始是否以参数字符串开头               | boolean startsWith(String prefix, int offset)                |
+| 判断字符串是否以参数字符串结尾                               | boolean endsWith(String suffix)                              |
+| 获得本字符串去掉开头和结尾的空白字符形成的新字符串           | String trim()                                                |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 判断调用字符串与参数字符串的内容是否相同                     | boolean equals(Object obj)                                   |
+| 获取字符串的哈希值                                           | int hashCode()                                               |
+| 判断忽略大小写后,调用字符串与参数字符串的内容是否相同        | boolean equalsIgnoreCase(String anotherString)               |
+| 获取字符串的哈希值                                           | int hashCode()                                               |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 获取指定字符在字符串中第一次出现的位置,没有则返回`-1`        | int indexOf(int ch)[^String3]                                |
+| 获取指定字符从fromIndex位置开始在字符串中第一次出现的位置,没有则返回`-1` | int indexOf(int ch, int fromIndex)[^String3]                 |
+| 从后往前找,指定字符第一次出现的位置,没有则返回`-1`           | int lastIndexOf(int ch)[^String3]                            |
+| 以fromeIndex位置为最后,从后往前找,指定字符第一次出现的位置, 没有则返回`-1` | int lastIndexOf(int ch, int fromIndex)[^String3]             |
+| 获取指定字符串在字符串中第一次出现的位置,没有则返回`-1`      | int indexOf(String str)                                      |
+| 获取指定字符串从fromIndex位置开始在字符串中第一次出现的位置,没有则返回`-1` | int indexOf(String str, int fromIndex)                       |
+| 从后往前找,指定字符串第一次出现的位置,没有则返回`-1`         | int lastIndexOf(String str)                                  |
+| 以fromeIndex位置为最后,从后往前找,指定字符串第一次出现的位置, 没有则返回`-1` | int lastIndexOf(String str, int fromIndex)                   |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 获得本字符串从下标beginIdex开始到endIndex(不包括)结束组成的新字符串 | String subString(int beginIndex, int endIndex)               |
+| 获取本字符串从下标beginIndex开始到结尾组成的新字符串         | String subString(int beginIndex)                             |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 生成一个新的字符串,使用newChar字符换掉这个新的字符串中所有为oldChar, 然后返回这个新的字符串, **本对象不会发生改变** | String replace(char oldChar, char newChar)                   |
+| 生成一个新的字符串,使用replacement字符串换掉这个新的字符串中所有的子串target, 然后返回这个新的字符串, **本对象不会发生改变**<br />`String`类实现了`CharSequence`接口 | String replace(CharSequence target, CharSequence replacement) |
+|                                                              |                                                              |
+| **功能**                                                     | **方法**                                                     |
+| 判断本字符串是否匹配参数指定的正则表达式规则                 | boolean matches(String regex)                                |
+| 参数regex为正则表达式,以regex所表示的字符串为分隔符,将字符串拆分成字符串数组 | String[] split(String regex)                                 |
+| 生成一个新的字符串,使用replacement替换掉这个新的字符串中第一个符合regex这个正则表达式规则的字符串, 返回新的字符串, **本对象不会发生改变** | String replaceFirst(String regex, String replacement)        |
+| 生成一个新的字符串,使用replacement替换掉这个新的字符串中所有符合regex这个正则表达式规则的字符串, 返回新的字符串, **本对象不会发生改变** | String replaceAll(String regex, String replacement)          |
 
 [^String2]: `String`		`StringBuffer`		`StringBuilder`都实现了这个接口,所以这个方法可以接收这些类型的对象
 [^String3]: 一般输入的参数是个字符, 编译器会根据编码表自动将字符转换为对应的int数值
