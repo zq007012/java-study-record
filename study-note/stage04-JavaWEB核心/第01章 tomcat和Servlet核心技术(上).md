@@ -211,6 +211,10 @@
 
 #### 3.7.1 配置虚拟路径, 访问`webapps`之外的本地文件
 
+##### 3.7.1.1 方式一: 修改tomcat的配置文件
+
+- **官方不建议使用此方式**, ==设置后需要重启tomcat服务器才能起作用==
+
 - 打开`Tomcat的安装目录/conf/server.xml`文件, 在`<Host>`节点下添加一下节点
 
   - ```xml
@@ -222,6 +226,22 @@
   - docBase    虚拟路径实际指向的本地文件或者本地目录
 
   - reloadable     是否开启在`Tomcat`不重启的情况下实时同步本地目录。
+
+##### 3.7.1.2 方式二: 添加一个虚拟路径的配置文件
+
+- **官方推荐使用该方式**，==不需要重启tomcat服务器==
+
+- 打开`Tomcat的安装目录/conf/Catalina/localhost`目录, 在该目录下创建虚拟路径的配置文件`fileName.xml`，在该xml文件中编写根节点
+
+  - ```xml
+    <Context docBase="F:\Java\JavaWebWorkspace\news"/>
+    ```
+
+    - docBase   虚拟路径实际指向的本地文件或者本地目录, 
+
+  - fileName 在webapps文件夹下虚拟一个名为`fileName`的路径
+
+    - 如果虚拟路径需要分层的话，可以将文件名改成a#b#c，访问分层虚拟站点时用`localhost:8080/a/b/c`
 
 ## 四. Servlet(重点)
 
@@ -333,9 +353,9 @@
 
 | 方法                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| void init(ServletConfig config)                              | 由Tomcat的servlet容器调用, 以向servlet指示该servlet正在被放入服务中 |
+| void init(ServletConfig config)                              | 由Tomcat的servlet容器调用, 以向servlet容器指示该servlet正在被放入服务中 |
 | void service(ServletRequest requset, ServletResponse response) | 由Tomcat的servlet容器调用, 以允许servlet响应请求             |
-| ServletConfig getServletConfig()                             | 返回ServletConfig对象, 该对啊ing包含此servlet的初始化和启动擦函数 |
+| ServletConfig getServletConfig()                             | 返回ServletConfig对象, 该对象包含此servlet的初始化和启动参数 |
 | String getServletInfo()                                      | 返回有关servlet的信息, 如作者  版本和版权                    |
 | void destroy()                                               | 由Tomcat的servlet调用, 以向servlet指示该servlet正在退出服务  |
 

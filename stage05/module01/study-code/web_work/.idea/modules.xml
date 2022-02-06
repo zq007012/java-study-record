@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hello_maven/hello_maven.iml" filepath="$PROJECT_DIR$/hello_maven/hello_maven.iml" />
       <module fileurl="file://$PROJECT_DIR$/lagou_edu_home/lagou_edu_home.iml" filepath="$PROJECT_DIR$/lagou_edu_home/lagou_edu_home.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../zq-utils/zq-utils.iml" filepath="$PROJECT_DIR$/../zq-utils/zq-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lagou_edu_home_zq/lagou_edu_home_zq.iml" filepath="$PROJECT_DIR$/lagou_edu_home_zq/lagou_edu_home_zq.iml" />
     </modules>
   </component>
 </project>

@@ -82,21 +82,21 @@ Tooltip initial delay(ms): 工具提示信息多久后显示(选600)
 
 | Map                                                | key                   |
 | -------------------------------------------------- | --------------------- |
-| Refactor                                           | Alt + R               |
+| Refactor(重构)                                     | Alt + R               |
 | New(创建新的...)                                   | Alt + N               |
-| Generate                                           | Alt + G               |
-| Surround With ...                                  | Alt + T               |
-| Hide Active Tool Window                            | Alt + double click    |
-| Reformat(code)                                     | Alt + L               |
+| Generate(生成)                                     | Alt + G               |
+| Surround With ...(用...包裹)                       | Alt + T               |
+| Hide Active Tool Window(隐藏打开的侧边栏)          | Alt + double click    |
+| Reformat code(格式化代码)                          | Alt + L               |
 | Completion-basic(代码补全提示)                     | Alt + Space           |
 | Completion-Cyclic expand word                      | Shift + Ctrl + /      |
-| Comment with block comment                         | Alt + /               |
-| Run                                                | Alt + A               |
+| Comment with block comment(使用多行注释)           | Alt + /               |
+| Run(运行)                                          | Alt + A               |
 | Fix suggestions(修复代码的建议)                    | Alt + Enter           |
 | Optimize import(完善包的导入, 少的加入, 多的删除)  | Alt + O               |
-| 在子类中显示所有可以被重写父类方法                 | Ctrl + O              |
+| 在子类中显示所有可以被==重写==的父类方法           | Ctrl + O              |
 | Export to text file(导出到文本文件)                | Ctrl + Alt + O        |
-| 显示文档注释                                       | Ctrl + Q              |
+| 显示该成员的文档注释                               | Ctrl + Q              |
 | 上一个代码中的编译错误(previous highlighted error) | Alt + U(up)           |
 | 下一个代码中的编译错误(next highlight error)       | Alt + D(down)         |
 | 向下复制一行                                       | Ctrl + D              |
@@ -300,7 +300,7 @@ Java  -  Serialization issues -  Serializable class without "serialVersionUID"  
 | 阿里巴巴代码规范, 一定要关闭实时检测功能, 否则会与错误提示功能冲突, 导致错误提示缓慢, 通过点击Tools➡阿里编码规约➡关闭实时检测功能来设置 | Alibaba Java Coding Guideline |
 | 在对象名上点击`alt+enter`选择生成所有的setter                | GenerateAllSetter             |
 | 使用注解生成全参构造器 无参构造器 所有成员变量的getter/setter equals hashcode toString方法 | Lombok                        |
-|                                                              |                               |
+| 对控制台的字体颜色进行个性化设置, 高亮显示某行或者特定的文字, 安装好该插件后, 在控制台上点击右键→点击`Open Grep Console settings`可以对`Grep Console`的显示进行设置 | Grep Console                  |
 
 ## 五. `Custom VM Options`相关设置
 

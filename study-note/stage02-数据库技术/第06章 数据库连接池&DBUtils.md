@@ -356,12 +356,12 @@ QueryRunner queryRunner = new QueryRunner(DRUIDUtils.getDataSource())
   - `int update(Connection conn, String sql, Object[] params)`
   - `int update(Connection conn, String sql, Object...params)`
 
-- | 参数            | 说明                                        |
-  | --------------- | ------------------------------------------- |
-  | Connection conn | 数据库连接对象                              |
-  | String sql      | 可以是普通sql, 也可以是占位符`?`形式的sql   |
-  | Object...params | Oject类型的可变参数, 用来设置占位符上的参数 |
-  | Object[] params | Object类型的数组, 用来设置占位符上的参数    |
+- | 参数            | 说明                                                         |
+  | --------------- | ------------------------------------------------------------ |
+  | Connection conn | 数据库连接对象                                               |
+  | String sql      | 可以是普通sql, 也可以是占位符`?`形式的sql                    |
+  | Object...params | Oject类型的可变参数, 用来设置Mysql语句中的占位符上的参数的值 |
+  | Object[] params | Object类型的数组, 用来设置Mysql语句中的占位符上的参数的值    |
 
 ###### 2.4.3.1.2 DbUtils中
 

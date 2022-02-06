@@ -3,17 +3,25 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/hello_maven" />
     <file type="web" url="file://$PROJECT_DIR$/lagou_edu_home" />
+    <file type="web" url="file://$PROJECT_DIR$/lagou_edu_home_zq" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/hello_maven/pom.xml" />
-        <option value="$PROJECT_DIR$/../zq-utils/pom.xml" />
         <option value="$PROJECT_DIR$/lagou_edu_home/pom.xml" />
+        <option value="$PROJECT_DIR$/lagou_edu_home_zq/pom.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="lagou_edu_home_zq" />
+      </set>
+    </option>
   </component>
 </project>

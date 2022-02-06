@@ -8,14 +8,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="lagou_edu_home" />
-        <module name="zq-utils" />
+        <module name="lagou_edu_home_zq" />
         <module name="hello_maven" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hello_maven" target="11" />
       <module name="lagou_edu_home" target="11" />
-      <module name="zq-utils" target="11" />
+      <module name="lagou_edu_home (1) (com.zq)" target="11" />
+      <module name="lagou_edu_home_zq" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -6,17 +6,17 @@
 
 ### 1.1 项目介绍
 
-拉钩教育后台管理系统,是提供给拉钩教育的相关业务人员使用的一个后台管理系统, 业务人员可以在这个后台管理系统中,对课程信息、讲师信息、 学员信息等数据进行维护.
+拉勾教育后台管理系统,是提供给拉勾教育的相关业务人员使用的一个后台管理系统, 业务人员可以在这个后台管理系统中,对课程信息、讲师信息、 学员信息等数据进行维护.
 
-为了巩固同学们对 web阶段的技术的理解,提高同学们综合运用技术的能力, 接下来会带领同学们去完成拉钩教育后台管理系统中的课程管理模块.
+为了巩固同学们对 web阶段的技术的理解,提高同学们综合运用技术的能力, 接下来会带领同学们去完成拉勾教育后台管理系统中的课程管理模块.
 
 ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/56.jpg)
 
 ### 1.2 模块介绍
 
-- 先给浏览器安装一个名为`Axure RP`的插件, 这个插件必须进行性如下设置
-  - ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/One_2021-06-27_200407.png)
-- 打开路径`./第01章 需求文档/实战项目-V1.0/index.html`所表示的网页, 这个就是产品的需求文档了
+- 先给Chrome内核的浏览器安装一个名为`Axure RP`的插件, 这个插件必须进行性如下设置
+  - ![](第01章 项目介绍、Maven项目管理工具、后台系统搭建、JSON.assets/网页捕获_21-1-2022_104557_extensions.jpeg)
+- 打开路径`.\第00章 学习资料\09_需求文档\实战项目-V1.0\index.html`所表示的网页, 这个就是产品的需求文档了
 - 课程管理模块中包含的内容
   - 课程信息页面展示
   - 课程营销信息配置
@@ -36,12 +36,12 @@
 
 ##### 1.3.2.1 什么是接口文档
 
-在我们的项目中使用的是前后端分离开发方式，需要有钱后端工程师共同定义接口、编写接口文档， 之后大家都根据这个接口文档进行开发，到项目结束前都要一直进行接口文档的维护。
+在我们的项目中使用的是前后端分离开发方式，需要前后端工程师共同定义接口、编写接口文档， 之后大家都根据这个接口文档进行开发，到项目结束前都要一直进行接口文档的维护。
 
 ##### 1.3.2.2 为什么要写接口文档
 
-- 项目开发过程中前后端工程师有一个统一的文件进行沟通交流，并行开发
-- 项目维护中或者项目人员更迭，方便后期人员查、维护
+- 项目开发过程中前后端工程师有一个统一的文件进行沟通交流，以此进行并行开发
+- 项目维护中或者项目人员更迭，方便后期人员查看、维护
 
 ##### 1.3.2.3 接口规范是什么
 
@@ -58,7 +58,7 @@
 - 请求参数
 
   - ```txt
-    methodName;"findCourseList";
+    methodName:"findCourseList";
     ```
 
 - 响应结果
@@ -108,11 +108,12 @@
 
 #### 1.4.2 后端技术选型
 
-| 后端技术      | 说明                                                         |
-| ------------- | ------------------------------------------------------------ |
-| **Web层**     | a) Servlet：前端控制器<br />b) Filter：过滤器 <br />c) BeanUtils：数据封装 |
-| **Service层** | a) 业务处理                                                  |
-| **dao层**     | a) Mysql：数据库<br />b) Druid：数据库连接池<br />c) DBUtils: 操作数据库 |
+| 后端技术      | 说明                                                         | 作用                                                         |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **web层**     | a) Servlet：前端控制器<br />b) Filter：过滤器 <br />c) Listener: 监听器 | 1. 接收客户端传送的数据<br />2. 使用Service层对客户传来数据进行相应的业务处理, 生成客户端需要的数据<br />3. 将Service层生成的处理数据传送给客户端 |
+| **service层** | a) 业务处理                                                  | 利用dao层来实现各种业务功能, 并生成对应的处理数据            |
+| **dao层**     | a) Mysql：数据库<br />b) Druid：数据库连接池<br />c) DBUtils: 操作数据库 | 用来实现服务端与数据库的交互, 一般是服务器上的Service层与数据库的交互 |
+| pojo          | plain old java object, 简单的持久化的java对象                | 可以作为传送的数据                                           |
 
 ### 1.5 项目开发环境
 
@@ -134,7 +135,7 @@
 
 #### 2.1.1 什么是Maven
 
-Maven是一个跨平台的项目管理工具。作为Apache组织的一个颇为成功的开源项目，其主要服务于**基于Java平台的项目**==的创建==，项目==的依赖管理==和项目==的信息管理==。maven是Apache的顶级项目，解释为“专家，内行”，它是一个**项目管理的**工具，maven自身是纯java开发的，可**以使用maven对java项目进行构建、依赖管理**。
+Maven是一个跨平台的项目管理工具。作为Apache组织的一个颇为成功的开源项目，其主要服务于**基于Java平台的项目**==的创建==，==依赖管理==和==信息管理==。maven是Apache的顶级项目，解释为“专家，内行”，它是一个**项目管理的**工具，maven自身是纯java开发的，可**以使用maven对java项目进行构建、依赖管理和信息管理**。
 
 #### 2.1.2 Maven的作用
 
@@ -263,7 +264,7 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
 - 之后让选择这个模块的`pom.xml`文件的保存位置, 选择红框标出来的那一个
 
   - ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/One_2021-06-28_143150.png)
-  - 点击`OK`, **等待该模块完全生成再进行下一步**
+  - 点击`OK`, **等待该模块完全 生成再进行下一步**
 
 ##### Maven工程的各个目录及其作用
 
@@ -275,35 +276,50 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
     | -------------------- | ------------------------------------------------ |
     | `src/main/java`      | 存放项目的`.java`文件(源代码文件)                |
     | `src/main/resources` | 存放项目资源文件, 如数据库的配置文件             |
-    | `src/text/java`      | 存放所有单元测试的`.java`文件, 如`Junit`         |
+    | `src/test/java`      | 存放所有单元测试的`.java`文件, 如`Junit`         |
     | target               | 项目输出的目录, 编译后的`.class`件会输出到此目录 |
     | pom.xml              | Maven项目的核心配置文件                          |
 
-#### 2.4.3 Maven工程改造
+#### 2.4.3 Maven工程改造改造成`Web项目`
 
 当前创建的maven项目是一个普通的Java项目, 我们需要将其改造成Web项目
 
 - 在`main`目录下创建一个`webapp`文件夹
+  - ![](第01章 项目介绍、Maven项目管理工具、后台系统搭建、JSON.assets/One_2021-08-09_115019.png)
 - 点击`File`→`Project Structure`→`Facets`→`+`→`Web`→选择当前模块
   - ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/58.jpg)
 - 修改路径信息
   - 将`Web Module Deployment Descriptor`的值改成`webapp的路径\WEB-INF\web.xml`
   - 将`Web Resource Directory`的值改成`webapp的路径`
   - ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/One_2021-06-28_203112.png)
-  - 点击`Create Artifact`, 生成一个`Web exploed`
+  - 点击`Create Artifact`, 生成一个`hello_manven:Web exploed`
     - ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/One_2021-06-28_203956.png)
+- 生成`hello_maven:war exploded`
+  - ![](第01章 项目介绍、Maven项目管理工具、后台系统搭建、JSON.assets/屏幕截图 2022-02-03 141030.png)
+  - ![](第01章 项目介绍、Maven项目管理工具、后台系统搭建、JSON.assets/屏幕截图 2022-02-03 141137.png)
+  - ![](第01章 项目介绍、Maven项目管理工具、后台系统搭建、JSON.assets/One_2022-02-03_141944.png)
 - 点击`OK`之后, 本模块就成了web模块, 在webapp目录下再创建一个index.jsp文件就齐活了
 
 #### 2.4.4 pom核心配置文件                                                                          
 
-**一个 maven 工程(模块)都有一个 pom.xml 文件，通过 pom.xml 文件定义项目的信息、项目依赖、引入插件等等。** 
+**一个 maven 工程(模块)都有一个 pom.xml 文件，通过 `pom.xml `文件定义本项目的坐标信息、本项目的Maven编译器信息、引入本项目的Maven编译插件、本项目的项目依赖等等。** 
 
 ##### 2.4.4.0 完善`pom.xml`文件, 在根节点下加入以下子节点
 
 ```xml
-	<packaging>jar</packaging>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	<!-- 本Maven工程的坐标信息 -->
+    <groupId>com.zq</groupId>
+    <artifactId>hello_maven</artifactId>
+    <version>1.0-SNAPSHOT</version>
+	<!-- 本Maven项目是编译成war包还是jar包 -->
+    <packaging>war</packaging>
 
-	<!-- properties 是全局设置,可以设置整个maven项目的编译器 JDK版本 -->
+    <!-- properties 是全局设置,可以设置整个maven项目的编译器使用的JDK版本 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 重点  -->
@@ -321,17 +337,20 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+                <!-- 本项目使用的JDK版本,最好跟Maven编译器使用的JDK版本一致 -->
                 <configuration>
                     <release>11</release>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    
-  	<!-- 项目依赖 -->
+
+    <!-- 项目依赖 -->
     <dependencies>
-        
+    
     </dependencies>
+
+</project>
 ```
 
 
@@ -341,10 +360,12 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
 **根节点的以下节点定义了项目信息**
 
 ```xml
+   	<!-- 本Maven工程的坐标信息 -->
     <groupId>com.zq</groupId>
     <artifactId>hello_maven</artifactId>
     <version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<!-- 本Maven项目是编译成war包还是jar包 -->
+    <packaging>war</packaging>
 ```
 
 | 标签名     | 含义                                                         |
@@ -352,7 +373,7 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
 | groupId    | 定义创建当前Maven工程的组织的名称, 通常是公司名              |
 | artifactId | 定义当前Maven工程的名字                                      |
 | version    | 定义当前Maven工程的版本                                      |
-| packaging  | 定义当前Maven工程的打包类型<br />内容为`jar` : 编译后本工程打包成一个jar包<br />呢容为`war` : 编译后本工程打包成一个war包 |
+| packaging  | 定义当前Maven工程的打包类型<br />内容为`jar` : 编译后本工程打包成一个jar包<br />内容为`war` : 编译后本工程打包成一个war包 |
 
 ###### Maven工程的坐标
 
@@ -366,45 +387,12 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
     - 确定一个jar包在本地仓库的位置
     - 确定一个jar包在远程仓库中的位置 
 
-##### 2.4.4.2 项目依赖
-
-往一个Maven项目中引入第三方依赖其实就是在`pom.xml`文件中引入第三方依赖jar包或者Maven插件的**Maven坐标**, 格式如下
-
-```xml
-	<dependencies>
-        <!-- servlet的依赖-->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-		
-    	<!-- druid数据库连接池的依赖-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.2.6</version>
-        </dependency>
-
-    </dependencies>
-```
-
-| 标签名         | 作用                                                         |
-| -------------- | ------------------------------------------------------------ |
-| `dependencies` | 用来统一管理项目所有的依赖<br />是所有依赖节点的父节点<br />该节点只有一个, 是根节点的子节点 |
-| `dependency`   | 用来声明一个依赖, 如果本地仓库没有这个依赖, Maven就会自动从远程仓库下载这个依赖<br />该节点可以有多个, 一个`<dependency>`节点表示一个依赖<br />父节点是`<dependencies>`<br />该节点有三个子节点, 分别是`<groupId>`  `<artifactId>`  `<version>`,  是这个依赖的Maven坐标 |
-
-###### 依赖的Maven坐标的来源方式
-
-- 到<https://mvnrepository.com>网站上查找, 这个方法可以找到所有所需的依赖包
-- 或者打开`pom.xml`文件, 点击鼠标右键→`Generate`→`Dependency`, 这种方式比较方便, 但有可能找不到所需的包
-
-##### 2.4.4.3 配置本Maven工程编译时的JDK版本
+##### 2.4.4.2 配置本Maven工程编译器的JDK版本
 
 在`pom.xml`的根节点下加入`<properties>`节点, 配置如下:
 
 ```xml
-	<!-- properties 是全局设置,可以设置整个maven项目的编译器 JDK版本 -->
+    <!-- properties 是全局设置,可以设置整个maven项目的编译器使用的JDK版本 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 重点  -->
@@ -413,23 +401,24 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
     </properties>
 ```
 
+##### 2.4.4.3 引入插件
 
-
-##### 2.4.4.4 引入插件
-
-###### 2.4.4.4.1 引入Maven编译插件
+###### 2.4.4.3.1 引入Maven编译插件
 
 引入本Maven工程的**Maven编译**插件, 并设置这个**Maven编译**插件所使用的JDK版本(JDK版本默认是1.5), 在`pom.xml`的**根节点下**加入如下配置:
 
 ```xml
-	<!-- 在build中 我们需要指定一下项目的JDK编译版本,maven默认使用1.5版本进行编译
+    <!-- 在build中 我们需要指定一下项目的JDK编译版本,maven默认使用1.5版本进行编译
     注意 build 与 dependencies是平级关系,标签不要写错位置  -->
     <build>
+        <!-- 插件 -->
         <plugins>
+            <!-- Maven编译插件, 必须设置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+                <!-- 本项目使用的JDK版本,最好跟Maven编译器使用的JDK版本一致 -->
                 <configuration>
                     <release>11</release>
                 </configuration>
@@ -437,6 +426,78 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
         </plugins>
     </build>
 ```
+
+##### 2.4.4.4 项目依赖
+
+往一个Maven项目中引入第三方依赖其实就是在`pom.xml`文件中引入第三方依赖jar包或者Maven插件的**Maven坐标**, 格式如下
+
+```xml
+<dependencies>
+    <!-- jstl依赖, 依赖范围是默认值, 即compile -->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+    </dependency>
+    <!--EL表达式依赖, 依赖范围是默认值, 即compile -->
+    <dependency>
+        <groupId>javax.el</groupId>
+        <artifactId>javax.el-api</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+    <!-- servlet依赖, 依赖范围是provided -->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- juit依赖, 依赖范围是test -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.3</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.colobu</groupId>
+        <artifactId>fastjson-jaxrs-json-provider</artifactId>
+        <version>0.3.1</version>
+    </dependency>
+
+</dependencies>
+```
+
+| 标签名         | 作用                                                         |
+| -------------- | ------------------------------------------------------------ |
+| `dependencies` | 用来统一管理项目所有的依赖<br />是所有依赖节点的父节点<br />该节点只有一个, 是根节点的子节点 |
+| `dependency`   | 用来声明一个依赖, 如果本地仓库没有这个依赖, Maven就会自动从远程仓库下载这个依赖<br />该节点可以有多个, 一个`<dependency>`节点表示一个依赖<br />父节点是`<dependencies>`<br />该节点有三个子节点, 分别是`<groupId>`  `<artifactId>`  `<version>`,  是这个依赖的Maven坐标 |
+
+###### 2.4.4.4.1 依赖的Maven坐标的来源方式
+
+- 到<https://mvnrepository.com>网站上查找, 这个方法可以找到所有所需的依赖包
+- 或者打开`pom.xml`文件, 点击鼠标右键→`Generate`→`Dependency`, 这种方式比较方便, 但有可能找不到所需的包
+
+###### 2.4.4.4.2 依赖范围--依赖的项目会在该范围内进入本Maven工程
+
+> 一个Maven工程有编译、测试、运行三个阶段， 依赖范围决定了当Maven工程处于某个阶段时，这个依赖是否存在于该Maven工程中。
+
+Maven有以下几种依赖范围：**`compile`**、**`test`**、**runtime**、**`provider`**、**system**
+
+- `compile`    **编译**依赖范围，**使用此依赖范围的依赖存在于Maven工程的编译、测试、运行三个阶段中**
+- `test`            **测试依**赖范围，只对测试有效，表明只在测试的时候需要**，在Maven工程进行编译和运行时，是没有这个依赖的， 所以在Maven工程进行编译和运行时将无法使用该类依赖**，如 junit；
+- `provided`  **已提供**依赖范围。编译和测试有效，运行是无效。**在Maven工程进行编译和测试时，该Maven工程中是有这个依赖的，但该Maven工程运行时，该Maven工程中是不存在这个依赖的， 因为运行这个Maven工程的容器具有这个依赖**， 如servlet-api，在项目运行时，tomcat等容器已经提供，无需Maven重复引入；
+- **runtime**     **运行时**依赖范围。测试和运行有效，编译无效。如 jdbc 驱动实现，编译时只需接口，测试或运行时才需要具体的 jdbc 驱动实现；
+- **system **      **系统**依赖范围，使用system范围的依赖时必须通过systemPath元素显示地指定依赖文件的路径，不依赖Maven仓库解析，所以可能会造成建构的不可移植，谨慎使用。
+
+![](第01章 项目介绍、Maven项目管理工具、后台系统搭建、JSON.assets/20170306164759694.png)
 
 #### 2.4.5 运行Maven项目
 
@@ -447,9 +508,10 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
 **在根节点下添加一下节点**
 
 ```xml
-	<packaging>jar</packaging>
+	<!-- 本Maven项目是编译成war包还是jar包 -->
+    <packaging>war</packaging>
 
-	<!-- properties 是全局设置,可以设置整个maven项目的编译器 JDK版本 -->
+    <!-- properties 是全局设置,可以设置整个maven项目的编译器使用的JDK版本 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 重点  -->
@@ -467,17 +529,56 @@ Maven下载好后, 将文件解压到一个没有中文没有空格的路径下,
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+                <!-- 本项目使用的JDK版本,最好跟Maven编译器使用的JDK版本一致 -->
                 <configuration>
                     <release>11</release>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    
-  	<!-- 项目依赖 -->
+
+    <!-- 项目依赖 -->
     <dependencies>
-        
-    </dependencies>
+        <!-- jstl依赖, 依赖范围是默认值, 即compile -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!--EL表达式依赖, 依赖范围是默认值, 即compile -->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <!-- servlet依赖, 依赖范围是provided -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- juit依赖, 依赖范围是test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.colobu</groupId>
+            <artifactId>fastjson-jaxrs-json-provider</artifactId>
+            <version>0.3.1</version>
+        </dependency>
+
+	</dependencies>
 ```
 
 ###### 2.4.5.1.2 创建`Demo01Servlet.java`文件
@@ -520,20 +621,33 @@ public class Demo01Servlet extends HttpServlet {
 
 ##### 2.4.6.1 Maven项目的生命周期
 
-使用maven完成项目的构建, 项目构建包括: **清理**、**编译**、**测试**、**报告**、**打包**、**部署**等过程， **maven将这些过程规范为一个生命周期**， 如下所示是生命周期的各个阶段：
+Maven 的内部有三个构建生命周期，分别是 `clean`(项目清理的处理), `default`(项目部署的处理), site(项目站点文档创建的处理)
 
-![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/38.jpg)
+其中 `default` 生命周期有以下几个核心阶段：
+
+开始→**validate**→**compile**→**test**→**package**→**verify**→**install**→**deploy**
+
+| 阶段          | 处理     | 描述                                                     |
+| :------------ | :------- | :------------------------------------------------------- |
+| 验证 validate | 验证项目 | 验证项目是否正确且所有必须信息是可用的                   |
+| 编译 compile  | 执行编译 | 源代码编译在此阶段完成                                   |
+| 测试 Test     | 测试     | 使用适当的单元测试框架（例如JUnit）运行测试。            |
+| 包装 package  | 打包     | 创建JAR/WAR包如在 pom.xml 中定义提及的包                 |
+| 检查 verify   | 检查     | 对集成测试的结果进行检查，以保证质量达标                 |
+| 安装 install  | 安装     | 安装打包的项目到本地仓库，以供其他项目使用               |
+| 部署 deploy   | 部署     | 拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程 |
 
 ##### 2.4.6.2 Maven的常用命令
 
-| 生命周期 | 命令          | 说明                                                         |
-| -------- | ------------- | ------------------------------------------------------------ |
-| 清理     | `mvn clean`   | 执行完毕后会将target目录删除                                 |
-| 编译     | `mvn compile` | 完成编译操作, 执行完毕后,会生成target目录, 该目录中存放了编译后的字节码(`.class`)文件 |
-| 测试     | `mvn test`    | 完成测试操作, 执行完毕后, 会在target目录中生成3个文件夹<br />`surefire`  `surefire-reports`(存放测试报告)  `test-classes`(存放测试的字节码文件) |
-| 打包     | `mvn package` | 完成打包工作, 执行完毕后, 会在target目录中生成一个文件, 该文件可能是`jar`或者`war`, 就看`pom.xml`文件中的`<packaging>`节点的值是什么 |
-| 报告     |               |                                                              |
-| 部署     | `mvn install` | 将打包好的jar包安装到本地仓库<br />执行完毕后, 本地仓库会出现本Maven工程的jar包, 方便本地的其他工程引用 |
+- `mvn clean`    执行此命令后会删除所有上次编译形成的
+- `mvn validate`
+- `mvn compile`
+- `mvn test`
+- `mvn package`
+- `mvn verify`
+- `mvn install`    执行 `mvn install `命令，将完成 validate, compile, test, package, verify, install 阶段，并将 package 生成的包发布到本地仓库中
+- `mvn deploy`
+- `mvn site`
 
 #### 2.4.7 IDEA的`Maven`侧边栏
 
@@ -547,14 +661,14 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
 | 工具序号 | 作用                                                         |
 | -------- | ------------------------------------------------------------ |
-| 1        | 根据pom.xml文件重新导入所有Maven项目和依赖,刷新              |
+| 1        | 根据pom.xml文件重新导入所有Maven项目和依赖,并刷新            |
 | 2        | 创建源码（重新编译）并更新目录                               |
 | 3        | 下载源码或文档                                               |
 | 4        | 添加Maven项目                                                |
 | 5        | 执行生命周期中的阶段，选中lifecycle选项中生命周期中的一个阶段（phase），才能点击执行。 |
 | 6        | 运行Maven生命周期或插件                                      |
 | 7        | 切换离线模式，就是关闭本地跟远程仓库的链接，从本地仓库中获取，也不能将jar包提交到远程仓库 |
-| 8        | 否跳过测试，点击选中就可以跳过测试，在点击选择取消跳过测试   |
+| 8        | 是否跳过测试，点击选中就可以跳过测试，再次点击就能取消跳过测试 |
 | 9        | 展示当前选中的maven项目jar包的依赖，并且可以直接在图形化依赖图上进行排除依赖操作 |
 | 10       | 收起下面展开的视图                                           |
 | 11       | 跳转到maven的Setting页面                                     |
@@ -563,13 +677,13 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
 **A 依赖 B，需要在 A 的 `pom.xml `文件中添加 B 的坐标，添加B的坐标时需要指定B这个依赖在A上的作用范围**，依赖的作用范围包括
 
-| 依赖范围 | 说明                                                         |
-| -------- | ------------------------------------------------------------ |
-| compile  | 编译范围，指 A在编译时依赖 B，**此范围为默认的依赖范围**。编译范围的依赖会用在Maven项目的编译、测试、运行阶段，由于运行时需要, 所以编译范围的依赖会在A项目的打包阶段被打包到A项目中 |
-| provided | `provided`这个依赖范围只有在当该依赖是由 JDK 或者一个容器已提供时才使用， provided范围的依赖在编译和测试时由本地仓库提供，在运行时由运行本项目的容器提供，比如：servlet api 被 tomcat 容器提供, 所以`provided`范围的依赖不会被打包进项目 |
-| runtime  | runtime依赖范围的依赖在运行和测试A项目的时候会用到，但在编译的时候不需要。比如：jdbc 的驱动包。由于运行时需要所以 runtime依赖范围的依赖会被打包进项目。 |
-| test     | est依赖范围的依赖在编译和运行时都不会被用到，它们只有在测试编译和测试运行阶段可用， 比如：junit。由于运行时不需要, 所以test范围的依赖不会被打包进项目。 |
-| system   | **system 范围依赖与 provided 类似**，但是你必须显式的提供一个对于本地系统中 JAR 文件的路径，需要指定 systemPath 磁盘路径，**system依赖范围不推荐使用** |
+| 依赖范围     | 说明                                                         |
+| ------------ | ------------------------------------------------------------ |
+| **compile**  | 编译范围，指 A在编译时依赖 B，**此范围为默认的依赖范围**。编译范围的依赖会用在Maven项目的编译、测试、运行阶段，由于运行时需要, 所以编译范围的依赖会在A项目的打包阶段被打包到A项目中 |
+| **provided** | `provided`这个依赖范围只有在当该依赖是由 JDK 或者一个容器已提供时才使用， provided范围的依赖在编译和测试时由本地仓库提供，在运行时由运行本项目的容器提供，比如：servlet api 被 tomcat 容器提供, 所以`provided`范围的依赖不会被打包进项目 |
+| runtime      | runtime依赖范围的依赖在运行和测试A项目的时候会用到，但在编译的时候不需要。比如：jdbc 的驱动包。由于运行时需要所以 runtime依赖范围的依赖会被打包进项目。 |
+| **test**     | test依赖范围的依赖在编译和运行时都不会被用到，它们只有在测试编译和测试运行阶段可用， 比如：junit。由于运行时不需要, 所以test范围的依赖不会被打包进项目。 |
+| system       | **system 范围依赖与 provided 类似**，但是你必须显式的提供一个对于本地系统中 JAR 文件的路径，需要指定 systemPath 磁盘路径，**system依赖范围不推荐使用** |
 
 ##### 示例代码
 
@@ -606,9 +720,9 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
 ### 3.1 课程管理模块功能分析
 
-- 在本文件的父目录下找到路径**.\第01章 学习资料\09_需求文档\实战项目-V1.0\index.html**所表示的文件,  双击打开该文件(注意: 浏览器一定要安装==Axure rp==插件), 如图所示找到**课程管理模块**
+- 在本文件的父目录下找到路径**.\第00章 学习资料\09_需求文档\实战项目-V1.0\index.html**所表示的文件,  双击打开该文件(注意: 浏览器一定要安装==Axure rp==插件), 如图所示找到**课程管理模块**
   - ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/%E8%AF%BE%E7%A8%8B%E7%AE%A1%E7%90%86.png)
-- 在本次的项目中,主要完成拉钩教育后台管理系统的**课程管理模块**, 课程管理模块包含了**添加课程**,**配置课程相关信息,** 以及**管理课程章节**等功能,我们来一起看一下产品的原型图
+- 在本次的项目中,主要完成拉勾教育后台管理系统的**课程管理模块**, 课程管理模块包含了**添加课程**,**配置课程相关信息,** 以及**管理课程章节**等功能,我们来一起看一下产品的原型图
 
 #### 3.1.1 课程管理模块
 
@@ -640,7 +754,7 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
 #### 3.2.1 创建数据库及表
 
-在本文件的父目录下找到路径**.\第01章 学习资料\09_需求文档\实\03_数据库脚本\lagou_edu.sql**所表示的文件
+在本文件的父目录下找到路径**`.\第00章 学习资料\03_数据库脚本\lagou_edu.sql`**所表示的文件
 
 - 使用SQLYog导入数据库`lagou_edu`: 
   - 先创建一个名为`lagou_edu`的空数据库, 在这个数据库上点击右键→**导入**→**执行SQL脚本...**
@@ -653,10 +767,10 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
 #### 3.3.1 创建项目`lagou_edu_home`
 
-- 创建一个名为`lagou_edu_home`的Maven项目
-- 将`lagou_edu_home`改造成一个web项目
+- 创建一个名为`lagou_edu_home_zq`的Maven项目
+- 将`lagou_edu_home_zq`改造成一个web项目
 - 初步完善java目录下的包结构
-  - ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/One_2021-06-30_144529.png)
+  - ![](第01章 项目介绍、Maven项目管理工具、后台系统搭建、JSON.assets/One_2022-01-24_092351.png)
 
 #### 3.3.2 完善`pom.xml`文件
 
@@ -668,7 +782,7 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zq</groupId>
-    <artifactId>lagou_edu_home</artifactId>
+    <artifactId>lagou_edu_home_zq</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -681,39 +795,49 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
     <dependencies>
         <!-- Servlet -->
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.2</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
+
         <!--    Beanutils    -->
+        <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.8.3</version>
+            <version>1.9.4</version>
         </dependency>
 
+
         <!--   DBUtils    -->
+        <!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
         <dependency>
             <groupId>commons-dbutils</groupId>
             <artifactId>commons-dbutils</artifactId>
-            <version>1.6</version>
+            <version>1.7</version>
         </dependency>
+
 
         <dependency>
             <groupId>commons-logging</groupId>
@@ -723,51 +847,63 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
 
         <!-- 数据库相关 -->
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.37</version>
+            <version>8.0.28</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.0.9</version>
+            <version>1.2.8</version>
         </dependency>
 
+
         <!--fastjson工具包 -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.79</version>
         </dependency>
+
 
         <dependency>
             <groupId>com.colobu</groupId>
             <artifactId>fastjson-jaxrs-json-provider</artifactId>
-            <version>0.3.1</version>
+            <version>0.3.2</version>
         </dependency>
 
         <!--  文件上传 -->
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.4</version>
+            <version>2.11.0</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-            <version>1.2.1</version>
+            <version>1.4</version>
         </dependency>
 
+
         <!--   Lombok  -->
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.0</version>
+            <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
+
 
     </dependencies>
 
@@ -776,7 +912,7 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
             <!--  maven编译插件 -->
             <plugin>
-                <groupId>org![One_2021-06-30_151425](C:/Users/zq007/Desktop/One_2021-06-30_151425.png).apache.maven.plugins</groupId>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
@@ -828,8 +964,8 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 
 | 注解                | 功能                                                         |
 | ------------------- | ------------------------------------------------------------ |
-| @Getter             | 作用在类上或者成员变量上<br />生成所有成员变量的getter方法   |
-| @Setter             | 作用在类上或者成员变量上或者为指定的成员变量生成setter方法<br />生成所有成员变量的setter方法或者为指定的成员变量生成setter方法 |
+| @Getter             | 作用在类上或者成员变量上<br />生成所有成员变量的getter方法或者为指定的成员变量生成setter方法 |
+| @Setter             | 作用在类上或者成员变量上<br />生成所有成员变量的setter方法或者为指定的成员变量生成setter方法 |
 | @ToString           | 作用在类上<br />覆盖默认的toString()方法 ,可以通过of属性限定显示某些字段，通过exclude属性排除某些字段 |
 | @AllArgsConstructor | 作用在类上<br />生成一个包含全部成员变量的构造器             |
 | @NoArgsConstructor  | 作用在类上<br />生成一个不包含任何成员变量的构造器           |
@@ -848,6 +984,10 @@ IDEA中创建好`Maven`项目后, 在界面左侧有一个maven视图, 里面有
 在本文件的父目录下找到路径**.\第01章 学习资料\09_需求文档\实\04_实体类**所表示的目录, 把该目录下的文件导入到`pojo`包中
 
 ![](%E7%AC%AC01%E7%AB%A0%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.assets/50.jpg)
+
+#### 3.3.5 将Maven工程改造为web项目
+
+根据[2.4.3 Maven工程改造改造成`Web项目`](#2.4.3 Maven工程改造改造成`Web项目`)的步骤将本Maven工程改造成Web项目
 
 ### 3.4 通用Servlet
 
@@ -1035,7 +1175,7 @@ public class BaseServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
 
         String methodName = request.getParameter("methodName");
-        if (EmptyUtils.isEmpty(methodName)) {
+        if (!EmptyUtils.isEmpty(methodName)) {
             Class<? extends BaseServlet> clazz = this.getClass();
             try {
                 Method method = clazz.getMethod(methodName,
@@ -1173,16 +1313,19 @@ JSON(javaScript Object Notation)---JavaScript对象表示法. 在`stage03-前端
 在项目的`pom.xml`文件中添加以下依赖
 
 ```xml
-<dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>fastjson</artifactId>
-    <version>1.2.3</version>
-</dependency>
+		<!--fastjson工具包 -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.79</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.colobu</groupId>
             <artifactId>fastjson-jaxrs-json-provider</artifactId>
-            <version>0.3.1</version>
+            <version>0.3.2</version>
         </dependency>
 ```
 
@@ -1193,14 +1336,13 @@ JSON(javaScript Object Notation)---JavaScript对象表示法. 在`stage03-前端
 - 工具类JSON的静态方法`static String toJSONString(Object obj)`
 - JavaBean对象、数组、集合转换为Json格式的字符串都是用这个方法
 
-###### 4.4.2.2.2 只转换Java对象的部分属性到JSON格式的字符串中
-
-- 构造器`SimplePropertyPreFileter(Class<?> clazz, String... properties)`
-
-  - clazz是要转成JSON的对象的类对象
-  - properties用来指定需要转换到Json格式的字符串中的clazz的字段(属性)
+######  4.4.2.2.2 只转换Java对象的部分属性到JSON格式的字符串中
 
 - 工具类JSON的静态方法`static String toJSONString(Object object, SerializeFilter filter)`
+
+  - `SimplePropertyPreFilter`类是`SerializeFilter`类的子类, 常用的构造器是`SimplePropertyPreFileter(Class<?> clazz, String... properties)`
+    - clazz是要转成JSON的对象的**类的对象**
+    - properties用来指定需要转换到Json格式的字符串中的clazz的字段(属性)
 
 - 示例代码
 
@@ -1230,9 +1372,7 @@ JSON(javaScript Object Notation)---JavaScript对象表示法. 在`stage03-前端
 
 - 作用在JavaBean类的**字段(成员变量)**上
 - 通过注解`@JSONField`, 我们可以自定义字段的名称进行输出，并控制字段的排序，还可以进行序列化标记。 
-  - 使用name属性, 值是字符串类型, 指定该字段的**名称**(**该JavaBean对象转换为JSON字符串后, 该字段在Json字符串中的名称**)
+  - 使用name属性, 值是String类型, 指定该字段的**名称**(**该JavaBean对象转换为JSON字符串后, 该字段在Json字符串中的名称**)
   - 使用 ordinal属性,值是int类型, 指定该字段的**顺序**(**该JavaBean对象转换为JSON字符串后, 该字段在Json字符串中的顺序**)
-  - 使用 serialize属性, 值是布尔类型, 指定该字段**不序列化**, (**该JavaBean对象转换为JSON字符串时, ==该字段是否出现==在转换后Json字符串中**)
-
-
+  - 使用 serialize属性, 值是boolean类型, 指定该字段是否**序列化**, 默认值是**true**. (作用是决定**该JavaBean对象转换为JSON字符串时, ==该字段是否出现==在转换后Json字符串中**), 可以简化[4.4.2.2.2 只转换Java对象的部分属性到JSON格式的字符串中](#4.4.2.2.2 只转换Java对象的部分属性到JSON格式的字符串中)的过程, 从而直接使用[4.4.2.2.1 Java对象转换为Json格式的字符串的方法](#4.4.2.2.1 Java对象转换为Json格式的字符串的方法)
 

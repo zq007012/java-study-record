@@ -9,16 +9,15 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <!-- properties 是全局设置,可以设置整个maven项目的编译器 JDK版本 -->
+    <!-- properties 是全局设置,可以设置整个maven项目的编译器使用的JDK版本 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 重点  -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
-
     <!-- 在build中 我们需要指定一下项目的JDK编译版本,maven默认使用1.5版本进行编译
-    注意 build 与 dependencies是平级关系,标签不要写错位置  -->
+  注意 build 与 dependencies是平级关系,标签不要写错位置  -->
     <build>
         <!-- 插件 -->
         <plugins>
@@ -27,14 +26,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+                <!-- 本项目使用的JDK版本,最好跟Maven编译器使用的JDK版本一致 -->
                 <configuration>
                     <release>11</release>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <!-- 项目依赖 -->
     <dependencies>
         <!-- jstl依赖, 依赖范围是默认值, 即compile -->
         <dependency>
@@ -74,7 +72,6 @@
             <artifactId>fastjson-jaxrs-json-provider</artifactId>
             <version>0.3.1</version>
         </dependency>
-
 
     </dependencies>
 </project>

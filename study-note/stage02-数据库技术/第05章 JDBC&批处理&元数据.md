@@ -506,6 +506,17 @@ SELECT * FROM user;
 
 ![](%E7%AC%AC05%E7%AB%A0%20JDBC.assets/One_2021-03-05_214904.png)
 
+##### 4.4.6.1 预处理语句中占位符`?`与其他字符串进行拼接
+
+```java
+String sql01 = "select * from user where uname = concat('?','%')";
+String sql02 = "select * from user where uname = concat('?','_')";
+String sql03 = "select * from user where uname = concat('%',?,'%')";
+String sql04 = "select * from user where uname = concat('?','飞')";
+```
+
+
+
 #### 4.4.7 Statement与PreparedStatement的区别
 
 - Statement用于执行静态SQL语句,在执行时, 必须指定一个事先准备好的SQL语句

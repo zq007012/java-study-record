@@ -68,9 +68,9 @@
     DNS2="8.8.8.8"
     ```
 
-- 退出`vim`由`root`
+- 退出`vim`
 
-- 输入以下命令重启网络, 使刚才编辑的网络配置生效
+- 由`root`用户输入以下命令重启网络, 使刚才编辑的网络配置生效
 
   - ```shell
     service network restart
@@ -81,6 +81,8 @@
     - ```shell
       systemctl restart network
       ```
+  
+- ==重启虚拟机, 才能使设置生效==
 
 #### 1.2.3 通过访问宿主机来访问到虚拟机的配置
 
@@ -127,7 +129,7 @@
 - 在终端输入以下命令来重启sshd服务, 以便sshd配置生效
 
   - ```shell
-    systemctl sshd restart
+    systemctl restart sshd
     ```
 
 - 根据[1.4.2 开放本机指定端口的命令](#1.4.2 开放本机指定端口的命令)配置远程主机的防火墙开放2202这个端口
@@ -210,7 +212,7 @@
 
 - 在Xshell上使用Xftp将`jdk-11.0.11_linux-x64_bin.tar.gz`推送到远程主机的`/home/zq/Downloads`文件夹下
 - **由==普通用户==解压这个压缩文件**, 这样做的目的是让这个普通用户拥有这些解压出来的文件的`rwx`权限
-- 解压出来的文件夹重命名为`java/jdk-11.0.11`, 
+- 解压出来的文件夹重命名为`java/jdk/jdk-11.0.11`, 
 - 由==root用户==把`java`文件夹移动到`/usr`目录下
 
 ##### 1.5.2.2 将java配置到环境变量中
@@ -225,7 +227,7 @@
 
   - ```properties
     # 配置JAVA_HOME
-    export JAVA_HOME=/usr/java/jdk-11.0.11
+    export JAVA_HOME=/usr/java/jdk/jdk-11.0.11
     # 把JAVA_HOME添加到PATH中
     export PATH=$JAVA_HOME/bin:$PATH
     ```
@@ -258,21 +260,21 @@
 
 - 退出`root`用户
 
-- 由普通用户依次输入以下命令, (这样做谁为了让普通用户称为`jre`目录的属主)
+- 由普通用户依次输入以下命令, (这样做谁为了让普通用户成为`jre`目录的属主)
 
   - ```shell
     source /etc/profile
     ```
 
   - ```shell
-    cd /usr/java/jdk-11.0.11
+    cd /usr/java/jdk/jdk-11.0.11
     ```
 
   - ```shell
     jlink --module-path jmods --add-modules java.desktop --output jre
     ```
 
-- 输入`ls /usr/java/jdk-11.0.11`查看该文件夹下是否有`jre`这个文件夹来确认`jre`模块是否安装成功
+- 输入`ls /usr/java/jdk/jdk-11.0.11`查看该文件夹下是否有`jre`这个文件夹来确认`jre`模块是否安装成功
 
 ### 1.6 Tomcat的下载和安装
 
@@ -293,11 +295,11 @@
     tar -zxvf apache-tomcat-8.5.68.tar.gz
     ```
 
-- 解压出来的文件夹重命名为`apache/tomcat-8.5.68`
+- 解压出来的文件夹重命名为`apache/tomcat/tomcat-8.5.68`
 
   - ```shell
     mkdir apache
-    mv apache-tomcat-8.5.68 apache/tomcat-8.5.68
+    mv apache-tomcat-8.5.68 apache/tomcat/tomcat-8.5.68
     ```
 
     
@@ -308,10 +310,10 @@
     mv apache /usr
     ```
 
-- 为`/usr/apache/tomcat-8.5.68/webapps`在当前用户的根目录下创建一个快捷方式
+- 退出root用户, 为`/usr/apache/tomcat-8.5.68/webapps`在普通用户的根目录下创建一个快捷方式
 
   - ```shell
-    ln -s /usr/apache/tomcat-8.5.68/webapps ~/webapps
+    ln -s /usr/apache/tomcat/tomcat-8.5.68/webapps ~/webapps
     ```
 
 ##### 1.6.2.2 将tomcat配置到环境变量中
@@ -326,7 +328,7 @@
 
   - ```properties
     # 配置CATALINA_HOME
-    export CATALINA_HOME=/usr/apache/tomcat-8.5.68
+    export CATALINA_HOME=/usr/apache/tomcat/tomcat-8.5.68
     # 把CATALINA_HOME添加到PATH中
     export PATH=$CATALINA_HOME/bin:$PATH
     ```
@@ -425,6 +427,8 @@ rpm -ivh mysql80-community-release-el7-3.noarch.rpm
 yum repolist enabled | grep "mysql.*-community.*"
 ```
 
+![](第07章 开发环境搭建和shell编程.assets/One_2022-01-20_195001.png)
+
 #### 1.8.3 安装MySQL服务器
 
 **需要在root用户下执行**
@@ -439,7 +443,7 @@ yum install mysql-server
 systemctl start mysqld
 ```
 
-##### 1.8.4.1 或者
+或者
 
 ```shell
 service mysqld start
@@ -513,57 +517,52 @@ systemctl status mysqld
   #4. 重置密码
   alter user '用户'@'主机名' identified by '密码';
    ```
-   ```
   
-   ```
+  
 
 #### 1.8.7 配置MySQL服务器的默认时区和默认编码
 
 **使用虚拟机的root用户进行以下操作**
 
-1. ```shell
-   vim /etc/my.cnf
-   ```
+```shell
+vim /etc/my.cnf
+```
 
-2. 修改默认时区
+##### 1.8.7.1 修改默认时区
 
-   1. 查找`[mysqld]`, 在`[mysqld]`下输入以下文本
+1. 查找`[mysqld]`, 在`[mysqld]`下输入以下文本
 
-      1. ```shell
-         default-time_zone='+8:00'
-         ```
+   1. ```shell
+      default-time_zone='+8:00'
+      ```
 
-      2. 若没有`[mysqld]`这一行，则手动添加。
+   2. 若没有`[mysqld]`这一行，则手动添加。
 
-   2. +8:00表示东八区, 是中国法定时区, 设置时区在IDEA中要用
+2. +8:00表示东八区, 是中国法定时区, 设置时区在IDEA中要用
 
-3. 修改默认编码
+##### 1.8.7.2 配置mysql服务端默认编码
 
-   1. 在`[mysqld]`下面添加   
+在`[mysqld]`下面添加(==若没有`[mysqld]`这一行，则在文末手动添加。==)
 
-      1. ```shell
-         character-set-server=utf8mb4
-         ```
+```shell
+character-set-server=utf8mb4
+```
 
-      2. 设置服务端默认编码, 若没有`[mysqld]`这一行，则手动添加。
+##### 1.8.7.3 配置mysql客户端默认编码
 
-   2. 在`[mysql]`下面添加(==若没有`[mysql]`这一行，则在**文末**手动添加==)
+   1. 在`[client]`下面添加(==若没有`[client]`这一行，则在**文末**手动添加==)
 
-      1. ```shell
-         default-character-set=utf8mb4
-         ```
+   1. ```shell
+      default-character-set=utf8mb4
+      ```
 
-      2. 设置MySQL默认字符集为utf8mb4 。
+##### 1.8.7.4 重启MySQL服务
 
-   3. 在`[client]`下面添加(==若没有`[client]`这一行，则在**文末**手动添加==)
+```shell
+systemctl restart mysqld
+```
 
-      1. ```shell
-         default-character-set=utf8mb4
-         ```
 
-      2. 设置客户端默认编码 ，此处不加，查询出来的中文好像还是拉丁文
-
-4. 重启MySQL服务
 
 ##### 查看mysql服务器的默认时区和默认编码
 
@@ -656,6 +655,8 @@ set global validate_password.length=8;
     ```
 
 #### 1.8.12 升级yum安装的所有软件
+
+==只有root用户才能使用该命令升级所有软件==
 
 ```shell
 yum update

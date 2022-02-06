@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lagou_edu_home_zq:war">
+    <output-path>$PROJECT_DIR$/lagou_edu_home_zq/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>lagou_edu_home_zq</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="lagou_edu_home_zq-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="lagou_edu_home_zq:war exploded" />
+    </root>
+  </artifact>
+</component>

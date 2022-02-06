@@ -63,7 +63,7 @@
 - Config Type设置为`Development Computer`耗费电脑资源较少
 - [x] Tcp/IP                                      port:<u>3306</u>
 - [x] Open Windows Firewall port for network access
-- 设置MySQL Root Password
+- ==设置MySQL Root Password==(**一定要记住这个root用户的密码**)
 - 记住**MySQL服务的名字**--==Windows Service Name==(Community5.7.28版本默认的名字是MySQL57, 8.0版本的名字是MySQL80)
 
 ### 4. MySQL环境变量配置
@@ -98,42 +98,32 @@
 
 3. 修改默认时区
 
-   1. 查找`[mysqld]`, 在`[mysqld]`下输入以下文本
+   1. 查找`[mysqld]`, 在`[mysqld]`下输入以下文本(==若没有`[mysqld]`这一行，则在文末手动添加==)
 
       1. ```
          default-time_zone='+8:00'
          ```
 
-      2. 若没有`[mysqld]`这一行，则手动添加。
-
    2. +8:00表示东八区, 是中国法定时区, 设置时区在IDEA中要用
 
-4. 修改默认编码
-   1. 在`[mysqld]`下面添加   
+4. 修改mysql的服务端默认编码
+   1. 在`[mysqld]`下面添加(==若没有`[mysqld]`这一行，则在文末手动添加==)
 
       1. ```shell
          character-set-server=utf8mb4
          ```
 
-      2. 设置服务端默认编码, 若没有`[mysqld]`这一行，则手动添加。
+5. 设置mysql客户端的默认编码,
 
-   2. 在`[mysql]`下面添加(==若没有`[mysql]`这一行，则在**文末**手动添加==)
-
-      1. ```shell
-         default-character-set=utf8mb4
-         ```
-
-      2. 设置MySQL默认字符集为utf8mb4 。
-
-   3. 在`[client]`下面添加(==若没有`[client]`这一行，则在**文末**手动添加==)
+   1. 在`[client]`下面添加(==若没有`[client]`这一行，则在**文末**手动添加==)
 
       1. ```shell
          default-character-set=utf8mb4
          ```
 
-      2. 设置客户端默认编码 ，此处不加，查询出来的中文好像还是拉丁文
+   2. 设置客户端默认编码 ，此处不加，客户端查询出来的中文好像还是拉丁文
 
-5. 重启MySQL服务
+6. 重启MySQL服务
 
 ### 7. 卸载
 
@@ -191,6 +181,53 @@ ALTER USER '用户'@'主机名' IDENTIFIED WITH mysql_native_password BY '密码
   FLUSH PRIVILEGES; 
   #4. 重置密码
   alter user '用户'@'主机名' identified by '密码'; 
+   ```
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
+   ```
+  
    ```
 - <https://github.com/webyog/sqlyog-community/wiki/Downloads>下载最新版SQLYog Community Edition, 但是建议使用旗舰版
 
@@ -317,7 +354,7 @@ SHOW CREATE DATABASE db2;
 SHOW DATABASES;
 DROP DATABASE db2;
 SHOW DATABASES;
- ```
+```
 
 常用的字符集：默认`latin1`，欧美`ASCII` `ISO-8859-1` , 中文`GBK` `BIG5` , 全球`UTF8`
 
@@ -406,7 +443,8 @@ SHOW DATABASES;
 
   - ```sql
     CREATE TABLE 表名(字段名称1 字段类型, 字段名称2 字段类型, 字段名称3 字段类型);
- ```
+    ```
+
 
 - 实例
 
@@ -414,9 +452,13 @@ SHOW DATABASES;
     -- 创建表之前一定要确认现在正使用某个数据库
     CREATE TABLE student(name varchar(20), age INT, birthday DATE, final_score DOUBLE(3, 2) );
     ```
-    
+
 
 ##### ④. 查看表结构
+
+###### 3.3.2.4.1 简化用法
+
+==不包含字段的注释以及外键==
 
 - 语法格式
 
@@ -430,6 +472,20 @@ SHOW DATABASES;
     DESC student;
     ```
 
+
+###### 3.3.2.4.2 查询`information_schema.columns`表
+
+MySQL把所有数据库的字段信息都保存到了数据库`information_schema`的`columns`表中了, 该表的一条记录就包含了MySQL数据库中的对应表的所有字段的信息
+
+```sql
+-- 查询字段的的所有信息
+SELECT * FROM information_schema.columns WHERE table_schema = 'db1' AND table_name = 'student';
+-- 查询字段的部分信息
+SELECT column_name, column_type, is_nullable, column_key, column_default, extra, column_comment FROM information_schema.columns WHERE table_schema = 'db1' AND table_name = 'student';
+```
+
+
+
 ##### ⑤. 复制表(只会复制表结构)
 
 ###### a. 创建新表时复制另一个表的表结构
@@ -440,6 +496,7 @@ SHOW DATABASES;
     -- 复制同一个数据库内的表结构
     CREATE TABLE 新表名 LIKE 旧表名;
     ```
+
 
 - 示例
 
@@ -460,12 +517,13 @@ SHOW DATABASES;
   - ```sql
     -- 可以同名
     CREATE TABLE db2.student LIKE db1.student;
-    ```
     
-  - ```sql
     -- 也可以不同名
-        CREATE TABLE db2.new_student LIKE db1.student;
+    CREATE TABLE db2.new_student LIKE db1.student;
     ```
+
+
+
 ##### ⑥. 删除表
 
 - 语法结构
@@ -717,6 +775,8 @@ TRUNCATE TABLE student
 
 ##### b. 删除符合指定条件的记录
 
+**需要使用条件表达式, 参考[(2). 条件查询](# (2). 条件查询)**
+
 ```sql
 DELETE FROM student where pass_final = false;
 ```
@@ -819,15 +879,15 @@ SELECT sname, score_final / 6 FROM student;
 
 ##### ①. 比较运算符
 
-| 比较运算符                      | 说明                                                   |
-| ------------------------------- | ------------------------------------------------------ |
-| `=`  `!=`  `>`  `<`  `>=`  `<=` | 等于  不等于  大于  小于  大于等于  小于等于           |
-| between 值1 and 值2             | 值在值1和值2的范围内, 包括值1和值2                     |
-| in(值1, 值2, 值3, ... , 值n )   | 值是包含在(值1, 值2, 值3, ... , 值n )之中              |
-| is null                         | ==查询某一列中值为null的记录, 注意不能写 `= null`==    |
-| is not null                     | ==查询某一列中值不为null的记录, 注意不能写 `!= null`== |
-| like '%张%'                     | 模糊查询, 针对字符串                                   |
-| not like "%张%"                 |                                                        |
+| 比较运算符                      | 说明                                                         |
+| ------------------------------- | ------------------------------------------------------------ |
+| `=`  `!=`  `>`  `<`  `>=`  `<=` | 等于  不等于  大于  小于  大于等于  小于等于                 |
+| between 值1 and 值2             | 值在值1和值2的范围内, 包括值1和值2                           |
+| in(值1, 值2, 值3, ... , 值n )   | 值是包含在(值1, 值2, 值3, ... , 值n )之中                    |
+| is null                         | ==查询某一列中值为null的记录, 注意不能写 `= null`==, 必须是`is null` |
+| is not null                     | ==查询某一列中值不为null的记录, 注意不能写 `!= null`==, 必须是`is not null` |
+| like '%张%'                     | 模糊查询, 针对字符串                                         |
+| not like "%张%"                 |                                                              |
 
 ##### ②. 逻辑运算符
 
