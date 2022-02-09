@@ -32,4 +32,25 @@ public interface CourseDao {
      * @return
      */
     int saveCourseSaleInfo(Course course);
+
+    /**
+     * 根据id查找课程的营销信息
+     * @param id
+     * @return
+     */
+    Course findCourseById(int id);
+
+    /**
+     * 更新某个课程的营销信息
+     * @param course
+     * @return
+     */
+    int updateCourseSaleInfo(Course course);
+
+    /**
+     * 修改某个课程的状态
+     * @param course
+     * @return
+     */
+    int updateCourseStatus(Course course);
 }

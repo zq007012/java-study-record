@@ -104,8 +104,8 @@ Tooltip initial delay(ms): 工具提示信息多久后显示(选600)
 | 删除本行                                           | Ctrl + Y              |
 | undo   取消操作                                    | Ctrl + Z              |
 | redo   恢复被取消的操作                            | Ctrl + Shift + Z      |
-| forward  跳转到之后的位置                          | ctrl + alt + 向右箭头 |
-| back  跳转到之前的位置                             | ctrl + alt + 向左箭头 |
+| forward  跳转到光标下一步所在的位置                | ctrl + alt + 向右箭头 |
+| back  跳转到光标上一步所在的位置                   | ctrl + alt + 向左箭头 |
 | 阿里编码规约扫描                                   | Alt + S               |
 | 从父类方法跳转到子类重写的方法                     | Ctrl + Alt + 左键点击 |
 | 从子类方法跳转到父类方法                           | Ctrl + U              |

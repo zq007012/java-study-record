@@ -3,10 +3,12 @@ package com.zq.dao.impl;
 import com.zq.base.BaseDao;
 import com.zq.dao.CourseDao;
 import com.zq.pojo.Course;
+import com.zq.utils.DateTimeUtils;
 import com.zq.utils.EmptyUtils;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import javax.sql.DataSource;
@@ -59,6 +61,7 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
             query = queryRunner.query(sql, beanListHandler);
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
         return query;
     }
@@ -107,6 +110,8 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
             );
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
+
         }
         return query;
     }
@@ -115,7 +120,7 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
      * 保存课程营销信息
      *
      * @param course
-     * @return 返回值为-1时表示保存失败
+     * @return 返回值为0时表示保存失败
      */
     @Override
     public int saveCourseSaleInfo(Course course) {
@@ -156,6 +161,86 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
                     course.getStatus(), course.getCreate_time(), course.getUpdate_time());
         } catch (SQLException e) {
             e.printStackTrace();
+            return 0;
+        }
+        return result;
+
+    }
+
+    @Override
+    public Course findCourseById(int id) {
+        // 1. 编写SQL语句
+        // language=MySQL
+        String sql = "SELECT id, course_name, brief, teacher_name, teacher_info, preview_first_field, preview_second_field, discounts, price, price_tag, course_img_url, share_title, share_image_title, share_description, course_description, STATUS FROM course WHERE id = ?;";
+        // 2. 创建QueryRunner对象
+        QueryRunner queryRunner = getQueryRunner();
+        // 3. 创建一个可以对下划线和驼峰命名进行转换的BeanHandler对象
+        GenerousBeanProcessor gbp = new GenerousBeanProcessor();
+        BasicRowProcessor brp = new BasicRowProcessor(gbp);
+        BeanHandler<Course> beanHandler = new BeanHandler<>(Course.class, brp);
+        //4. 执行查找并以JavaBean的形式获得结果
+        Course query = null;
+        try {
+            query = queryRunner.query(sql, beanHandler,
+                    id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return query;
+
+    }
+
+    /**
+     * 更新某个课程的营销信息
+     *
+     * @param course
+     * @return
+     */
+    @Override
+    public int updateCourseSaleInfo(Course course) {
+        //1. 编写SQL语句
+        // language=MySQL
+        String sql = "update course set course_name = ?, brief = ?, teacher_name = ?, teacher_info = ?, preview_first_field = ?, preview_second_field = ?, discounts = ?, price = ?, price_tag = ?, course_img_url = ?, share_title = ?, share_image_title = ?, share_description = ?, course_description = ?, STATUS = ?, update_time = ? where id = ?;";
+        // 2. 创建QueryRunner
+        QueryRunner queryRunner = getQueryRunner();
+        // 3. 执行增删改操作
+        int result = 0;
+        try {
+            result = queryRunner.update(sql,
+                    course.getCourse_name(), course.getBrief(), course.getTeacher_name(), course.getTeacher_info(), course.getPreview_first_field(), course.getPreview_second_field(), course.getDiscounts(), course.getPrice(), course.getPrice_tag(), course.getCourse_img_url(), course.getShare_title(), course.getShare_image_title(), course.getShare_description(), course.getCourse_description(), course.getStatus(), course.getUpdate_time(), course.getId())
+            ;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return result;
+
+    }
+
+    /**
+     * 修改某个课程的状态
+     *
+     * @param course
+     * @return
+     */
+    @Override
+    public int updateCourseStatus(Course course) {
+        //1. 编写SQL语句
+        // language=MySQL
+        String sql = "update course set status = ?, update_time = ? where id = ?;";
+        // 2. 创建QueryRunner
+        QueryRunner queryRunner = getQueryRunner();
+        // 3. 执行增删改操作
+        int result = 0;
+        try {
+            result = queryRunner.update(sql,
+                    course.getStatus(),
+                    course.getUpdate_time(),
+                    course.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
         return result;
 

@@ -11,6 +11,15 @@ import java.io.Serializable;
 @Data
 public class Course_Lesson  implements Serializable {
 
+  private static final long serialVersionUID = -355766644498156472L;
+
+  /**
+   * ∞对1的数据库表关系中, 在 ∞ 的一方的实体类里, 会封装一个 1 的对象
+   * ∞的类型是{@link Course_Lesson},
+   * 1的类型是{@link Course_Section}
+   */
+  private Course_Section courseSection;
+
   //课时id
   @JSONField(ordinal = 1)
   private int id;

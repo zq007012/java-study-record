@@ -6,11 +6,9 @@ import com.zq.dao.impl.CourseDaoImpl;
 import com.zq.pojo.Course;
 import com.zq.service.CourseService;
 import com.zq.service.impl.CourseServiceImpl;
-import com.zq.utils.CloseUtils;
-import com.zq.utils.DateTimeUtils;
-import com.zq.utils.DruidPool;
-import com.zq.utils.UUIDUtils;
+import com.zq.utils.*;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.list.NodeCachingLinkedList;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -31,7 +29,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 接收课程营销信息表单的Servlet
+ * 接收课程营销信息表单的Servlet, 可以保存课程营销信息或者更新课程营销信息, 通过判断
+ * 请求中是否携带`id`这个参数来决定是保存课程营销信息,还是更新课程营销信息
  *
  * @author zq007
  * @version V1.0
@@ -92,14 +91,26 @@ public class CourseSaleInfoServlet extends HttpServlet{
             // 二. 业务处理
             Course course = new Course();
             BeanUtils.populate(course,map);
-            // 完善course的数据
-            course.setStatus(1);
-            String nowDateTime = DateTimeUtils.getDateTime();
-            course.setCreate_time(nowDateTime);
-            course.setUpdate_time(nowDateTime);
             CourseDao courseDao = new CourseDaoImpl(DruidPool.getInstance().getDataSource());
             CourseService courseService = new CourseServiceImpl(courseDao);
-            String result = courseService.saveCourseSaleInfo(course);
+            String result = null;
+            String nowDateTime = DateTimeUtils.getDateTime();
+
+            // 通过判断请求中是否携带`id`这个参数来决定是保存课程营销信息,还是更新课程营销信息
+            if(EmptyUtils.isEmpty(map.get("id"))){
+                //request的参数中没有携带`id`, 保存课程营销信息
+                // 完善course的数据
+                course.setStatus(1);
+                course.setCreate_time(nowDateTime);
+                course.setUpdate_time(nowDateTime);
+                result = courseService.saveCourseSaleInfo(course);
+            }else{
+                //request的参数中有携带`id`, 更新课程营销信息
+                course.setUpdate_time(nowDateTime);
+                result = courseService.updateCourseSaleInfo(course);
+            }
+
+
 
             // 三. 响应结果
             resp.getWriter().println(result);

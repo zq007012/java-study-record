@@ -2,14 +2,32 @@ package com.zq.pojo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *  课程章节
  * */
 @Data
 public class Course_Section  implements Serializable {
+
+  private static final long serialVersionUID = -1309693914474912713L;
+  /**
+   * ∞对1的数据库表关系中, 在 ∞ 的一方的实体类里, 会封装一个 1 的对象
+   * ∞的类型是{@link Course_Section},
+   * 1的类型是{@link Course}
+   */
+  private Course course;
+
+  /**
+   * 1对∞的数据库表关系中, 在 1 的一方的实体类里, 会封装一个 ∞ 的对象的集合
+   * 1的类型是{@link Course_Section},
+   * ∞的类型是{@link Course_Lesson}
+   */
+  private List<Course_Lesson> courseLessonList;
 
   //课程章节id
   @JSONField(ordinal = 1)

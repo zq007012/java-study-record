@@ -3,6 +3,7 @@ package com.zq.service;
 import com.zq.pojo.Course;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 课程管理模块的service层接口
@@ -32,4 +33,25 @@ public interface CourseService {
      * @return  以{"msg":"success","status":0}的格式返回保存结果
      */
     String saveCourseSaleInfo(Course course);
+
+    /**
+     * 根据id获取课程的营销信息
+     * @param id
+     * @return
+     */
+    Course findCourseById(int id);
+
+    /**
+     * 修改某个课程的营销信息
+     * @param course
+     * @return
+     */
+    String updateCourseSaleInfo(Course course);
+
+    /**
+     * 修改课程的状态
+     * @param course
+     * @return
+     */
+    Map<String,Integer> updateCourseStatus(Course course);
 }

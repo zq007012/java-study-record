@@ -4,11 +4,12 @@ import com.zq.base.StatusCode;
 import com.zq.dao.CourseDao;
 import com.zq.pojo.Course;
 import com.zq.service.CourseService;
+import com.zq.utils.DateTimeUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * 课程管理模块的service层的实现类
@@ -54,5 +55,45 @@ public class CourseServiceImpl implements CourseService {
         int result = courseDao.saveCourseSaleInfo(course);
         return result > 0 ? StatusCode.SUCCESS.toString() :
                 StatusCode.FAIL.toString();
+    }
+
+    /**
+     * 根据id获取课程的营销信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Course findCourseById(int id) {
+        return courseDao.findCourseById(id);
+    }
+
+    /**
+     * 修改某个课程的营销信息
+     *
+     * @param course
+     * @return
+     */
+    @Override
+    public String updateCourseSaleInfo(Course course) {
+        int result = courseDao.updateCourseSaleInfo(course);
+        return result > 0 ? StatusCode.SUCCESS.toString() : StatusCode.FAIL.toString();
+    }
+
+    /**
+     * 修改课程的状态
+     *
+     * @param course
+     * @return 返回值为null, 说明修改课程状态失败
+     */
+    @Override
+    public Map<String, Integer> updateCourseStatus(Course course) {
+        int result = courseDao.updateCourseStatus(course);
+        Map<String,Integer> map = null;
+        if (result > 0){
+            map = new HashMap<>();
+            map.put("status",course.getStatus());
+        }
+        return map;
     }
 }

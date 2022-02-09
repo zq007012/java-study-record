@@ -1156,7 +1156,7 @@ public class TestServlet extends HttpServlet {
 }
 ```
 
-#### 3.4.4 抽取通用的BaseServlet
+#### 3.4.4 抽取通用的BaseServlet基类
 
 - 当前代码依然存在问题: 
   - 每个Servlet模块都需要写一份相同的反射代码
@@ -1166,36 +1166,57 @@ public class TestServlet extends HttpServlet {
 ##### 3.4.4.1 BaseServlet.java
 
 ```java
-public class BaseServlet extends HttpServlet {
+/**
+ * 创建一个Servlet的基类, 这个基类是抽象类, 在这个类的doGet方法中, 获取请求中的methodName
+ * 参数, 使用反射机制和这个methodName参数来调用本模块的相应功能
+ *
+ * @author zq007
+ * @version V1.0
+ * @date 2022/2/3 17:33
+ */
+public abstract class BaseServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 7088995230048133435L;
+
+    /**
+     * 数据库连接池对象, 方便子类的各种功能去使用
+     */
+    @Getter
+    @Setter
+    private DataSource dataSource;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            dataSource = DruidPool.getInstance().getDataSource();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
-
-        String methodName = request.getParameter("methodName");
+        //已经在EncodingFilter中对req的编码进行了设置, 这里就不必再设置了
+        //req.setCharacterEncoding("utf-8");
+        String methodName = req.getParameter("methodName");
         if (!EmptyUtils.isEmpty(methodName)) {
             Class<? extends BaseServlet> clazz = this.getClass();
             try {
-                Method method = clazz.getMethod(methodName,
-                        HttpServletRequest.class,
-                        HttpServletResponse.class);
-                method.invoke(this,request,response);
-            } catch (NoSuchMethodException e) {
-                System.out.println("不存在'" + methodName + "'这个功能");
-                e.printStackTrace();
-            } catch (IllegalAccessException | InvocationTargetException e) {
+                Method method = clazz.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
+                method.invoke(this, req, resp);
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                System.out.println("[" + methodName + "]这个功能不存在, 或者这个功能里出现错误");
                 e.printStackTrace();
             }
         } else {
             System.out.println("request请求没有携带methodName参数");
         }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req,resp);
+        doGet(req, resp);
     }
 }
 ```
