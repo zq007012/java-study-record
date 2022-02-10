@@ -31,6 +31,34 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
     }
 
     /**
+     * 更新<code>course_lesson</code>表中课时信息
+     * <p>需要更新的字段是: <code>course_id, section_id, theme, duration, is_free, order_num, update_time</code></p>
+     * <p>需要满足的条件: <code>id=?</code></p>
+     *
+     * @param lesson
+     * @return
+     */
+    @Override
+    public int updateCourseLesson(Course_Lesson lesson) {
+        //1. 编写SQL语句
+        // language=MySQL
+        String sql = "update course_lesson set course_id=?, section_id=?, theme=?, duration=?, is_free=?, order_num=?, update_time=? where id=?";
+        // 2. 创建QueryRunner
+        QueryRunner queryRunner = getQueryRunner();
+        // 3. 执行增删改操作
+        int result = 0;
+        try {
+            result = queryRunner.update(sql,
+                    lesson.getCourse_id(),lesson.getSection_id(),lesson.getTheme(),lesson.getDuration(),lesson.getIs_free(),lesson.getOrderNum(),lesson.getUpdate_time(),lesson.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return result;
+
+    }
+
+    /**
      * 根据章节id查询该章节下的所有课时
      *
      * @param sectionId 章节id
@@ -204,7 +232,35 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
         int result = 0;
         try {
             result = queryRunner.update(sql,
-                    section.getStatus(),section.getUpdate_time(),section.getId());
+                    section.getStatus(), section.getUpdate_time(), section.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return result;
+
+    }
+
+    /**
+     * 保存新课时
+     * <p>保存的字段有<code>course_id, section_id, theme, duration, is_free, order_num,  create_time, update_time, status</code></p>
+     * <p>status : 课时状态,0-隐藏，1-未发布，2-已发布</p>
+     * <p>is_free : 是否免费, 0-否, 1-是</p>
+     * @param lesson
+     * @return
+     */
+    @Override
+    public int saveCourseLesson(Course_Lesson lesson) {
+        //1. 编写SQL语句
+        // language=MySQL
+        String sql = "insert into course_lesson(course_id, section_id, theme, duration, is_free, order_num,  create_time, update_time, status) values(?,?,?,?,?,?,?,?,?)";
+        // 2. 创建QueryRunner
+        QueryRunner queryRunner = getQueryRunner();
+        // 3. 执行增删改操作
+        int result = 0;
+        try {
+            result = queryRunner.update(sql,
+                    lesson.getCourse_id(), lesson.getSection_id(), lesson.getTheme(), lesson.getDuration(), lesson.getIs_free(), lesson.getOrderNum(), lesson.getCreate_time(), lesson.getUpdate_time(), lesson.getStatus());
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;

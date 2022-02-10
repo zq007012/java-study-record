@@ -120,4 +120,45 @@ public class CourseContentDaoTest {
         int row = courseContentDao.updateCourseSectionStatus(section);
         System.out.println("修改" + (row > 0 ? "成功" : "失败"));
     }
+
+    /**
+     * 测试{@link CourseContentDao#saveCourseLesson(Course_Lesson)}方法的功能
+     */
+    @Test
+    public void testSaveCourseLesson(){
+        Course_Lesson lesson = new Course_Lesson();
+        lesson.setCourse_id(1);
+        lesson.setSection_id(1);
+        lesson.setTheme("微服务架构第0讲");
+        lesson.setDuration(15);
+        lesson.setIs_free(1);
+        lesson.setOrderNum(0);
+        String now = DateTimeUtils.getDateTime();
+        lesson.setCreate_time(now);
+        lesson.setUpdate_time(now);
+        lesson.setStatus(2);
+
+        int row = courseContentDao.saveCourseLesson(lesson);
+        System.out.println("新增课时" + (row > 0 ? "成功" : "失败"));
+
+    }
+
+    /**
+     * 测试{@link CourseContentDao#updateCourseLesson(Course_Lesson)}方法的功能
+     */
+    @Test
+    public void testUpdateCourseLesson(){
+        Course_Lesson lesson = new Course_Lesson();
+        lesson.setId(53);
+        lesson.setCourse_id(2);
+        lesson.setSection_id(2);
+        lesson.setTheme("微服务架构第102讲");
+        lesson.setDuration(150);
+        lesson.setIs_free(0);
+        lesson.setOrderNum(102);
+        String now = DateTimeUtils.getDateTime();
+        lesson.setUpdate_time(now);
+        int row = courseContentDao.updateCourseLesson(lesson);
+        System.out.println("更新课时" + (row > 0 ? "成功" : "失败"));
+    }
 }

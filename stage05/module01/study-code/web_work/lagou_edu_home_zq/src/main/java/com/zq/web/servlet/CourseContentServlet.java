@@ -6,9 +6,11 @@ import com.zq.base.BaseServlet;
 import com.zq.dao.CourseContentDao;
 import com.zq.dao.impl.CourseContentDaoImpl;
 import com.zq.pojo.Course;
+import com.zq.pojo.Course_Lesson;
 import com.zq.pojo.Course_Section;
 import com.zq.service.CourseContentService;
 import com.zq.service.impl.CourseContentServiceImpl;
+import com.zq.utils.DruidPool;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +32,39 @@ import java.util.Map;
 public class CourseContentServlet extends BaseServlet {
 
     private static final long serialVersionUID = -2030989247169628487L;
+
+    /**
+     * 保存或更新课时信息, 请求参数中携带'id'参数则保存, 请求参数中未携带'id'参数则更新
+     *
+     * @param req  是个post请求, req在{@link BaseServlet#doGet(HttpServletRequest, HttpServletResponse)}方法
+     *             里面封装了一个名为<code>postJsonMap</code>的attribute
+     * @param resp
+     */
+    public void saveOrUpdateLesson(HttpServletRequest req, HttpServletResponse resp) {
+        // 1. 解析请求
+        Map<String, Object> map = (Map<String, Object>) req.getAttribute("postJsonMap");
+        // 2. 处理业务
+        Course_Lesson lesson = new Course_Lesson();
+        String respData = null;
+        try {
+            CourseContentDao courseContentDao = new CourseContentDaoImpl(DruidPool.getInstance().getDataSource());
+            CourseContentService courseContentService = new CourseContentServiceImpl(courseContentDao);
+
+            BeanUtils.populate(lesson, map);
+            // 判断map里是否包含'id'键, 包含则跟新课时信息, 不包含则保存课时信息
+            if (map.containsKey("id")) {
+                //更新课时信息
+                respData = courseContentService.updateCourseLesson(lesson);
+            } else {
+                respData = courseContentService.saveCourseLesson(lesson);
+            }
+            // 3. 进行响应
+            resp.getWriter().println(respData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     /**
      * 根据课程id获取该课程下的章节和章节下的课时信息

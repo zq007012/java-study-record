@@ -3,7 +3,6 @@ package com.zq.dao;
 import com.zq.pojo.Course;
 import com.zq.pojo.Course_Lesson;
 import com.zq.pojo.Course_Section;
-import com.zq.service.CourseService;
 
 import java.util.List;
 
@@ -15,6 +14,15 @@ import java.util.List;
  * @date 2022/2/6 21:37
  */
 public interface CourseContentDao {
+
+    /**
+     * 更新<code>course_lesson</code>表中课时信息
+     * <p>需要更新的字段是: <code>course_id, section_id, theme, duration, is_free, order_num, update_time</code></p>
+     * <p>需要满足的条件: <code>id=?</code></p>
+     * @param lesson
+     * @return
+     */
+    int updateCourseLesson(Course_Lesson lesson);
 
     /**
      * 根据章节id查询该章节下的所有课时
@@ -67,4 +75,14 @@ public interface CourseContentDao {
      * @return
      */
     int updateCourseSectionStatus(Course_Section section);
+
+    /**
+     * 保存新课时
+     * <p>保存的字段有<code>course_id, section_id, theme, duration, is_free, order_num,  create_time, update_time, status</code></p>
+     * <p>status : 课时状态,0-隐藏，1-未发布，2-已发布</p>
+     * <p>is_free : 是否免费, 0-否, 1-是</p>
+     * @param lesson
+     * @return
+     */
+    int saveCourseLesson(Course_Lesson lesson);
 }

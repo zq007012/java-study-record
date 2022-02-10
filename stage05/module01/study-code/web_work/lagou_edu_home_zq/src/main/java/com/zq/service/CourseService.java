@@ -1,6 +1,7 @@
 package com.zq.service;
 
 import com.zq.pojo.Course;
+import com.zq.pojo.Course_Lesson;
 
 import java.util.List;
 import java.util.Map;
@@ -54,4 +55,5 @@ public interface CourseService {
      * @return
      */
     Map<String,Integer> updateCourseStatus(Course course);
+
 }
