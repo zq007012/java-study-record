@@ -14,7 +14,7 @@
 - 访问和操作DOM元素
 - 控制DOM元素的css样式
 - 对页面事件进行处理
-- 扩展新的jQuery对象
+- 扩展新的JQuery元素对象
 - 与Ajax技术完美结合
 
 ### 1.2 jQuery的优势
@@ -27,9 +27,9 @@
 
 ### 1.3 jQuery下载
 
-- jQuery的官网: <https://jquery.com/>
+- jQuery的官网: <https://JQuery元素对象.com/>
 - 进入jQuery官网, 点击`Download jQuery`
-  - ![](%E7%AC%AC04%E7%AB%A0%20jQuery.assets/One_2021-04-16_135601.png)
+  - ![](第04章 jQuery.assets/One_2021-04-16_135601.png)
 - 点击`Download the compressed, production jQuery 3.6.0`下载压缩后的发布版本, 下载下来后是一个js文件
 
 ## 二. jQuery的使用
@@ -46,10 +46,36 @@
   	//在这里使用jQuery里的对象
   </script>
   ```
+  
+- JQuery使用官方引用地址, 可在<https://releases.JQuery元素对象.com/>找到最新版本
+
+  - ```html
+    <script src="https://code.JQuery元素对象.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+    	//在这里使用jQuery里的对象
+    </script>
+    ```
+
+- 所有js脚本最好写在`$(function(){//写在这里});`里面, 这样可以确保js脚本可以当文档载入完成的时候被执行
+
+  - ```html
+    <script src="https://code.JQuery元素对象.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+    	$(function(){
+            //都写在这里
+        });
+    </script>
+    ```
+
+  - 
+
+
 
 ### 2.1 基本的语法介绍
 
-- jQuery中的工厂函数`$( str ) `可以用来获取指定的元素的jQuery对象, 也可以创建一个节点
+- JQuery中有一个`JQuery`对象, 可以用`JQuery`或者`$`表示, 注意与`JQuery元素对象`进行区分
+
+- jQuery中的工厂函数`$( str ) `可以用来获取指定的元素的JQuery元素对象, 也可以创建一个节点
 
 - **注意: jQuery元素对象和JavaScript元素对象是不同种类的对象, 这两类对象有着各自的一套方法, 注意不要用串了, 否则会导致error**
 
@@ -125,21 +151,22 @@
 
 - 鼠标事件适当用户的在文档上移动或单击鼠标时而产生的事件, 常用的鼠标事件有:
 
-- | 方法                   | 描述                          | 执行时机   |
-  | ---------------------- | ----------------------------- | ---------- |
-  | `click( handler)`      | 事件发生时就会执行handler函数 | 单击鼠标时 |
-  | `mouseover( handler)`  | 事件发生时就会执行handler函数 | 鼠标移过时 |
-  | `mouserout( handler )` | 事件发生时就会执行handler函数 | 鼠标移出时 |
-
+- | 方法                   | 描述                          | 执行时机     |
+  | ---------------------- | ----------------------------- | ------------ |
+  | `click( handler)`      | 事件发生时就会执行handler函数 | 单击鼠标时   |
+  | `mouseover( handler)`  | 事件发生时就会执行handler函数 | 鼠标移过时   |
+  | `mouserout( handler )` | 事件发生时就会执行handler函数 | 鼠标移出时   |
+| `blur( handler )`      | 事件发生时就会执行handler函数 | 元素失去焦点 |
+  
 - handler有三种形式
 
-  - handler是个无参的匿名函数, 
+  - handler是个无参的匿名函数时, 
     - 可以有返回值, 也可以没有返回值
     - 在这个函数的函数体中, `this`表示该元素的**js元素对象**, `event`表示的是事件对象
-  - handler是个无参的构造函数, 调用该构造函数时不能写小括号`()`
+  - handler是个无参的构造函数时, 调用该构造函数时不能写小括号`()`
     - 可以有返回值, 也可以没有返回值
     - 在这个函数的函数体中, `this`表示该元素的**js元素对象**, `event`表示的是事件对象
-  - handler是个无参的箭头函数
+  - handler是个无参的箭头函数时
     - 可以有返回值, 也可以没有返回值
     - 在这个函数的函数体中, `this`表示该元素的BOM中的window对象,  `event`表示的是事件对象
 
@@ -314,7 +341,7 @@
 ##### 2.3.1.5 事件的动态绑定
 
 - 相当于js元素对象的addEventListener方法
-- `JQuery.on( events:string , handler : Function):JQuery` 
+- `JQuery元素对象.on( events:string , handler : Function): JQuery元素对象.` 
   - events是个表示事件的字符串, 可以表示一种事件, 也可以表示多种事件
     - 一种事件    示例: `"click"`
     - 多种事件    示例: `"click mouseover"`
@@ -359,8 +386,8 @@
 
 `.off()`    该方法可以解除``2.3.1.1~2.3.1.5`中学习的方法 绑定的事件监听器
 
-- `JQuery.off() : JQuery`    解除该元素绑定的所有事件监听器
-- `JQuery.off(Event.type:string)`    解除该元素的Event.type绑定的所有监听器
+- `JQuery元素对象.off() : JQuery`    解除该元素绑定的所有事件监听器
+- `JQuery元素对象.off(Event.type:string)`    解除该元素的Event.type绑定的所有监听器
 
 ##### 2.3.1.7 文档加载完毕的事件
 
@@ -368,7 +395,7 @@
 - `ready( handler ) : jQuery  `  当 DOM（document object model 文档对象模型）加载完毕且页面完全加载（包括图像）时发生 ready 事件。
   - **由于该事件在文档就绪后发生，因此把所有其他的 jQuery 事件和函数置于该事件中是非常好的做法。**
 - **注意：ready() 方法不应该与` <body onload=""> `一起使用。**
-- ==ready()方法只能由当前文档的jQuery对象调用==, 所以有两种书写方式
+- ==ready()方法只能由当前文档的JQuery元素对象调用==, 所以有两种书写方式
   - `$(document).ready( handler )`    全写
   - `$( handler )`    简写
 
@@ -390,19 +417,19 @@
 - 注意这些函数是异步函数, 也就是说这些函数都是在主线程之外的其他线程里执行的
 - 具有动画效果， 沿着元素的左斜边缩放，同时透明度也发生变化, 直至元素完全显示或者完全隐藏, 元素完全隐藏时会让出元素的位置
 
-- `JQuery.show(duration?: string | number, complete?: Function): JQuery`   沿着元素的左斜边显示元素
+- `JQuery元素对象.show(duration?: string | number, complete?: Function): JQuery`   沿着元素的左斜边显示元素
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时没有动画效果，可以取值以下三种
     - "slow"
     - "fast"
     - 数字, 数字表示是多少毫秒
   - complete方法是指显示完元素后要执行的操作, **可选参数,** 默认什么也不做
-- `JQuery.hide(duration?: string | number, complete?: Function)`    沿着元素的左斜边隐藏元素, **元素完全隐藏时会让出元素的位置**
+- `JQuery元素对象.hide(duration?: string | number, complete?: Function)`    沿着元素的左斜边隐藏元素, **元素完全隐藏时会让出元素的位置**
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时没有动画效果，可以取值以下三种
     - "slow"
     - "fast"
     - 数字, 数字表示是多少毫秒
   - complete方法是指隐藏完元素后要执行的操作, **可选参数,** 默认什么也不做
-- `JQuery.toggle(duration?: string | number, complete?: Function`    沿着元素的左斜边切换元素的隐藏状态和显示状态, **元素切换为完全隐藏状态后会让出元素的位置**
+- `JQuery元素对象.toggle(duration?: string | number, complete?: Function`    沿着元素的左斜边切换元素的隐藏状态和显示状态, **元素切换为完全隐藏状态后会让出元素的位置**
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时没有动画效果，可以取值以下三种
     - "slow"
     - "fast"
@@ -442,19 +469,19 @@
 - 注意这些函数是异步函数, 也就是说这些函数都是在主线程之外的其他线程里执行的
 - 具有动画效果， 沿着元素的左斜边缩放，透明度不发生变化, 直至元素完全显示或者完全隐藏, 元素完全隐藏时会让出元素的位置
 
-- `JQuery.slideDown(duration?: string | number, complete?: Function): JQuery`   沿着元素的左斜边显示元素
+- `JQuery元素对象.slideDown(duration?: string | number, complete?: Function): JQuery`   沿着元素的左斜边显示元素
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时仍具有动画效果，可以取值以下三种
     - "slow"
     - "fast"
     - 数字, 数字表示是多少毫秒
   - complete方法是指显示完元素后要执行的操作, **可选参数,** 默认什么也不做
-- `JQuery.slideUp(duration?: string | number, complete?: Function)`    沿着元素的左斜边隐藏元素, **元素完全隐藏时会让出元素的位置**
+- `JQuery元素对象.slideUp(duration?: string | number, complete?: Function)`    沿着元素的左斜边隐藏元素, **元素完全隐藏时会让出元素的位置**
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时仍具有动画效果，可以取值以下三种
     - "slow"
     - "fast"
     - 数字, 数字表示是多少毫秒
   - complete方法是指隐藏完元素后要执行的操作, **可选参数,** 默认什么也不做
-- `JQuery.slideToggle(duration?: string | number, complete?: Function`    沿着元素的左斜边切换元素的隐藏状态和显示状态, **元素切换为完全隐藏状态后会让出元素的位置**
+- `JQuery元素对象.slideToggle(duration?: string | number, complete?: Function`    沿着元素的左斜边切换元素的隐藏状态和显示状态, **元素切换为完全隐藏状态后会让出元素的位置**
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时仍具有动画效果，可以取值以下三种
     - "slow"
     - "fast"
@@ -493,19 +520,19 @@
 
 - 注意这些函数是异步函数, 也就是说这些函数都是在主线程之外的其他线程里执行的
 - 具有动画效果, 改变元素的透明度, 直至元素完全显示或者完全隐藏, 元素完全透明时会让出元素的位置
-- `JQuery.fadeIn(duration?: string | number, complete?: Function): JQuery`   元素的透明度由小到大逐渐显示
+- `JQuery元素对象.fadeIn(duration?: string | number, complete?: Function): JQuery`   元素的透明度由小到大逐渐显示
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时仍具有动画效果，可以取值以下三种
     - "slow"
     - "fast"
     - 数字, 数字表示是多少毫秒
   - complete方法是指显示完元素后要执行的操作, **可选参数,** 默认什么也不做
-- `JQuery.fadeOut(duration?: string | number, complete?: Function)`    元素的透明度由大到小直至完全隐藏, **元素完全隐藏时会让出元素的位置**
+- `JQuery元素对象.fadeOut(duration?: string | number, complete?: Function)`    元素的透明度由大到小直至完全隐藏, **元素完全隐藏时会让出元素的位置**
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时仍具有动画效果，可以取值以下三种
     - "slow"
     - "fast"
     - 数字, 数字表示是多少毫秒
   - complete方法是指隐藏完元素后要执行的操作, **可选参数,** 默认什么也不做
-- `JQuery.fadeToggle(duration?: string | number, complete?: Function`    沿着元素的左斜边切换元素的隐藏状态和显示状态, **元素切换为完全隐藏状态后会让出元素的位置**
+- `JQuery元素对象.fadeToggle(duration?: string | number, complete?: Function`    沿着元素的左斜边切换元素的隐藏状态和显示状态, **元素切换为完全隐藏状态后会让出元素的位置**
   - duration    显示元素的速度, **可选参数**, 默认值是0, 此时仍具有动画效果，可以取值以下三种
     - "slow"
     - "fast"
@@ -543,7 +570,7 @@
 #### 2.3.3 改变元素透明度的方法
 
 - 改变元素的透明度到某个值, 并且在改变的过程中会有动画效果
-- `JQuery.fadeTo(duration: string | number, opacity: number, complete?: Function): JQuery`
+- `JQuery元素对象.fadeTo(duration: string | number, opacity: number, complete?: Function): JQuery`
   - 动画的持续时间, 可以取值以下三种
     - "slow"
     - "fast"
@@ -625,43 +652,44 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 ##### 2.3.5.1 获取元素宽高方法
 
-| 方法                           | 说明                             |
-| ------------------------------ | -------------------------------- |
-| `JQuery.height(): number`      | contentHeight                    |
-| `JQuery.innerHeight(): number` | padding + contentHeight          |
-| `JQuery.outerHeight(): number` | border + padding + contentHeight |
-| `JQuery.width(): number`       | contentWidthJQuery.              |
-| `JQuery.innerWidth(): number`  | padding + contentWidth           |
-| `JQuery.outerWidth(): number`  | border + padding + contentWidth  |
+| 方法                                   | 说明                             |
+| -------------------------------------- | -------------------------------- |
+| `JQuery元素对象.height(): number`      | contentHeight                    |
+| `JQuery元素对象.innerHeight(): number` | padding + contentHeight          |
+| `JQuery元素对象.outerHeight(): number` | border + padding + contentHeight |
+| `JQuery元素对象.width(): number`       | contentWidthJQuery元素对象.      |
+| `JQuery元素对象.innerWidth(): number`  | padding + contentWidth           |
+| `JQuery元素对象.outerWidth(): number`  | border + padding + contentWidth  |
 
 ##### 2.3.5.2 获取和修改元素内容的方法
 
-| 方法                                                   | 说明                                                         |
-| ------------------------------------------------------ | ------------------------------------------------------------ |
-| `JQuery.text(): string`                                | 获取元素内的所有文本内容,包括子元素的文本内容                |
-| `JQuery.html(text: string | number | boolean): JQuery` | 将元素内的所有内容( 包括所有内文本内容和所有子元素) , 都替换成文本, 文本内容是text |
-| `JQuery.html(): string`                                | 获取元素内的所有代码                                         |
-| `JQuery.html(htmlString: string): JQuery`              | 将元素内的所有代码替换为代码text                             |
+| 方法                                                         | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `JQuery元素对象.text(text: string | number | boolean): JQuery` | 将元素内的所有文本内容替换为text                             |
+| `JQuery元素对象.text(): string`                              | 获取元素内的所有文本内容,包括子元素的文本内容                |
+| `JQuery元素对象.html(text: string | number | boolean): JQuery` | 将元素内的所有内容( 包括所有文本内容和所有子元素) , 替换成text所表示的内容 |
+| `JQuery元素对象.html(): string`                              | 获取元素内的所有代码                                         |
+| `JQuery元素对象.html(htmlString: string): JQuery`            | 将元素内的所有代码替换为代码text                             |
 
 ##### 2.3.5.3 获取和修改表单元素的value值的方法
 
 - 注意: ==value属性只有表单元素有==
 
-| 方法                                                    | 说明                  |
-| ------------------------------------------------------- | --------------------- |
-| `JQuery.val(): any`                                     | 获取表单元素的value值 |
-| `JQuery.val(value: string | number | string[]): JQuery` | 修改表单元素的value值 |
+| 方法                                                         | 说明                  |
+| ------------------------------------------------------------ | --------------------- |
+| `JQuery元素对象.val(): any`                                  | 获取表单元素的value值 |
+| `JQuery元素对象.val(value: string | number | string[]): JQuery` | 修改表单元素的value值 |
 
 ##### 2.3.5.4 获取和修改元素的指定属性的值
 
 - 表单元素中的属性`checked`  `disabled`可以赋值 `true`  `false`
 
-| 方法                                         | 说明                                                         |
-| -------------------------------------------- | ------------------------------------------------------------ |
-| `JQuery.attr(attributeName: string): string` | 获取元素的`attributeName`属性的值<br />无法获取未曾进行显式初始化的  属性的  默认初始化值, 比如属性`checked`和`disable`, 都是由默认初始化值的, 但无法获取 |
-| `JQuery.attr(attributes: Object): JQuery`    | [设置指定属性的值](#设置指定属性的值), 可以给任何属性赋值    |
-| `JQuery.prop(attributeName: string): string` | 获取元素的`attributeName`属性的值, <br />可以获取未曾进行显式初始化的  属性的  默认初始化值, 比如属性`checked`和`disable`的默认初始化值就可以被获取到 |
-| `JQuery.prop(attributes: Object): JQuery`    | 设置指定属性的值, 可以给任何属性赋值                         |
+| 方法                                                 | 说明                                                         |
+| ---------------------------------------------------- | ------------------------------------------------------------ |
+| `JQuery元素对象.attr(attributeName: string): string` | 获取元素的`attributeName`属性的值<br />无法获取未曾进行显式初始化的  属性的  默认初始化值, 比如属性`checked`和`disable`, 都是由默认初始化值的, 但无法获取 |
+| `JQuery元素对象.attr(attributes: Object): JQuery`    | [设置指定属性的值](#设置指定属性的值), 可以给任何属性赋值    |
+| `JQuery元素对象.prop(attributeName: string): string` | 获取元素的`attributeName`属性的值, <br />可以获取未曾进行显式初始化的  属性的  默认初始化值, 比如属性`checked`和`disable`的默认初始化值就可以被获取到 |
+| `JQuery元素对象.prop(attributes: Object): JQuery`    | 设置指定属性的值, 可以给任何属性赋值                         |
 
 ###### 设置指定属性的值
 
@@ -683,9 +711,9 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 | 方法                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `JQuery.css(propertyName: string): string`                   | 获得该元素的CSS中的属性propertyName的值                      |
-| `JQuery.css(propertyName: string, value: string | number): JQuery` | 将该元素的CSS中的属性propertyName的值设置为value             |
-| `JQuery.css(properties: Object): JQuery`                     | 设置该元素的CSS中的属性<br />这里面的属性名由多个单词组成时,以驼峰命名法则写出 |
+| `JQuery元素对象.css(propertyName: string): string`           | 获得该元素的CSS中的属性propertyName的值                      |
+| `JQuery元素对象.css(propertyName: string, value: string | number): JQuery` | 将该元素的CSS中的属性propertyName的值设置为value             |
+| `JQuery元素对象.css(properties: Object): JQuery`             | 设置该元素的CSS中的属性<br />这里面的属性名由多个单词组成时,以驼峰命名法则写出 |
 
 需求: 打开一张图片, 要求可以放大, 可以缩小, 还可以回复原始尺寸
 
@@ -738,9 +766,9 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 | 方法                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `JQuery.addClass(className: string): JQuery`                 | 将本元素跟`<style>`元素内的名为className的类选择器j进行**绑定** |
-| `JQuery.removeClass(className?: string): JQuery`             | 将本元素跟`<style>`元素内的名为className的类选择器**解除绑定** |
-| `JQuery.toggleClass(className: string, switch?: boolean): JQuery` | 切换本元素跟`<style>`元素内的名为className的类选择器的绑定状态<br />switch是个可选参数, 不写时, 可以在绑定与不绑定两个状态见任意切换, 值为true时, 则只能切换为绑定状态, 值为false时, 则智能切换为不绑定状态 |
+| `JQuery元素对象.addClass(className: string): JQuery`         | 将本元素跟`<style>`元素内的名为className的类选择器j进行**绑定** |
+| `JQuery元素对象.removeClass(className?: string): JQuery`     | 将本元素跟`<style>`元素内的名为className的类选择器**解除绑定** |
+| `JQuery元素对象.toggleClass(className: string, switch?: boolean): JQuery` | 切换本元素跟`<style>`元素内的名为className的类选择器的绑定状态<br />switch是个可选参数, 不写时, 可以在绑定与不绑定两个状态见任意切换, 值为true时, 则只能切换为绑定状态, 值为false时, 则智能切换为不绑定状态 |
 
 - className可以表示一个类选择器, 也可以表示多个类选择器
   - 例如: `"book" `表示一个名为book的类选择器
@@ -822,10 +850,10 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 | 方法                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| JQuery.**append**(content1: string \| any[] \| Element \| JQuery \| DocumentFragment \| Text, ...content2: any[]): JQuery | 为本元素添加子节点(添加到最后面)<br />可以添加一个子节点, 也可以添加多个子节点<br />**添加多个节点时, 节点作为参数时的顺序就是结点的顺序**<br />==虽然content的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
-| JQuery.**prepend**(content1: string \| any[] \| Element \| JQuery \| DocumentFragment \| Text, ...content2: any[]): JQuery | 为本元素添加子节点(添加到最前面)<br />可以添加一个子节点, 也可以添加多个子节点<br />**添加多个节点时, 节点作为参数时的顺序就是结点的顺序**<br />==虽然content的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
-| JQuery.**appendTo**(target: string \| any[] \| Element \| JQuery): JQuery | 将本元素作为子节点添加到target元素内的最后面<br />==虽然target的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
-| JQuery.**prependTo**(target: string \| any[] \| Element \| JQuery): JQuery | 将本元素作为子节点添加到target元素内的最前面<br />==虽然target的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**append**(content1: string \| any[] \| Element \| JQuery \| DocumentFragment \| Text, ...content2: any[]): JQuery | 为本元素添加子节点(添加到最后面)<br />可以添加一个子节点, 也可以添加多个子节点<br />**添加多个节点时, 节点作为参数时的顺序就是结点的顺序**<br />==虽然content的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**prepend**(content1: string \| any[] \| Element \| JQuery \| DocumentFragment \| Text, ...content2: any[]): JQuery | 为本元素添加子节点(添加到最前面)<br />可以添加一个子节点, 也可以添加多个子节点<br />**添加多个节点时, 节点作为参数时的顺序就是结点的顺序**<br />==虽然content的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**appendTo**(target: string \| any[] \| Element \| JQuery): JQuery | 将本元素作为子节点添加到target元素内的最后面<br />==虽然target的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**prependTo**(target: string \| any[] \| Element \| JQuery): JQuery | 将本元素作为子节点添加到target元素内的最前面<br />==虽然target的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
 
 ```html
   <script src="js/jquery-3.6.0.min.js"></script>
@@ -865,39 +893,39 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 | 方法                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| JQuery.**after**(content1: string \| any[] \| Element \| JQuery \| DocumentFragment \| Text, ...content2: any[]): JQuery | 在本元素之后添加节点<br />可以添加一个子节点, 也可以添加多个子节点<br />**添加多个节点时, 节点作为参数时的顺序就是结点的顺序**<br />==虽然content的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
-| JQuery.**before**(content1: string \| any[] \| Element \| JQuery \| DocumentFragment \| Text, ...content2: any[]): JQuery | 在本元素之前添加节点<br />可以添加一个子节点, 也可以添加多个子节点<br />**添加多个节点时, 节点作为参数时的顺序就是结点的顺序**<br />==虽然content的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
-| JQuery.**insertAfter**(target: string \| any[] \| JQuery \| Element \| Text): JQuery | 将本元素作为添加到target元素的后面<br />==虽然target的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
-| JQuery.**insertBefore**(target: string \| any[] \| JQuery \| Element \| Text): JQuery | 将本元素作为添加到target元素的前面<br />==虽然target的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**after**(content1: string \| any[] \| Element \| JQuery \| DocumentFragment \| Text, ...content2: any[]): JQuery | 在本元素之后添加节点<br />可以添加一个子节点, 也可以添加多个子节点<br />**添加多个节点时, 节点作为参数时的顺序就是结点的顺序**<br />==虽然content的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**before**(content1: string \| any[] \| Element \| JQuery \| DocumentFragment \| Text, ...content2: any[]): JQuery | 在本元素之前添加节点<br />可以添加一个子节点, 也可以添加多个子节点<br />**添加多个节点时, 节点作为参数时的顺序就是结点的顺序**<br />==虽然content的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**insertAfter**(target: string \| any[] \| JQuery \| Element \| Text): JQuery | 将本元素作为添加到target元素的后面<br />==虽然target的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**insertBefore**(target: string \| any[] \| JQuery \| Element \| Text): JQuery | 将本元素作为添加到target元素的前面<br />==虽然target的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
 
 ##### 2.3.7.3 替换节点
 
 | 方法                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| JQuery.**replaceWith**(newContent: string \| any[] \| JQuery \| Element \| Text): JQuery | 使用newContent元素将本元素替换掉<br />==虽然newContent的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
-| JQuery.**replaceAll**(target: string \| any[] \| JQuery \| Element): JQuery | 使用本元素替换到target元素<br />==虽然target的类型没有限制, 但最好还是使用jQuery对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**replaceWith**(newContent: string \| any[] \| JQuery \| Element \| Text): JQuery | 使用newContent元素将本元素替换掉<br />==虽然newContent的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
+| JQuery元素对象.**replaceAll**(target: string \| any[] \| JQuery \| Element): JQuery | 使用本元素替换到target元素<br />==虽然target的类型没有限制, 但最好还是使用JQuery元素对象, 这样出错率较小,也容易排除bug== |
 
 ##### 2.3.7.4 节点保存数据的方法
 
 - 用于元素存储数据, 或者获取一系列元素中第一个元素存储的数据[^注1]
-- `JQuery.data(key: string, value: any): JQuery`    存储或修改数据
-  - `JQuery.data(key, value):JQuery`
-  - `JQuery.data(obj):JQuery`      obj: An object of key-value pairs of data to update
-- `JQuery.data(key: string): any`    返回该系列匹配元素的第一个元素保存的数据
-  - `JQuery.data(key):any`
-  - `JQuery.data():Object`    返回值是该元素存储的所有数据的json对象
-- `JQuery.removeData([name] : string): JQuery`   移除该元素保存的数据
-  - `JQuery.removeData():JQuery`    移除所有的数据
-  - `JQuery.removeData([name]):JQuery`    移除指定的数据
-  - `JQuery.removeData([list]):JQuery`    移除指定的一些类数据, list : Type: Array or String.     An array or space-separated string naming the pieces of data to delete.
+- `JQuery元素对象.data(key: string, value: any): JQuery`    存储或修改数据
+  - `JQuery元素对象.data(key, value): JQuery元素对象.`
+  - `JQuery元素对象.data(obj): JQuery元素对象.`      obj: An object of key-value pairs of data to update
+- `JQuery元素对象.data(key: string): any`    返回该系列匹配元素的第一个元素保存的数据
+  - `JQuery元素对象.data(key):any`
+  - `JQuery元素对象.data():Object`    返回值是该元素存储的所有数据的json对象
+- `JQuery元素对象.removeData([name] : string): JQuery`   移除该元素保存的数据
+  - `JQuery元素对象.removeData(): JQuery元素对象.`    移除所有的数据
+  - `JQuery元素对象.removeData([name]): JQuery元素对象.`    移除指定的数据
+  - `JQuery元素对象.removeData([list]): JQuery元素对象.`    移除指定的一些类数据, list : Type: Array or String.     An array or space-separated string naming the pieces of data to delete.
 
 ##### 2.3.7.5 复制节点
 
 `JQuey.clone()`     克隆出一份相同的元素(包括所有的属性和后代元素)
 
-- `JQuery.clone([withDataAndEvents?: boolean]): JQuery`    克隆出一份相同的元素(包括所有的属性和后代元素), withDataAndEvents是个可选参数, 默认值是false, 表示是否克隆该元素保存的数据(通过`JQuery.data()`方法保存的数据)和该元素的事件处理器, true为克隆, false为不克隆
-- `JQuery.clone(withDataAndEvents?: boolean[, deepWithDataAndEvents?: boolean]): JQuery`    克隆出一份相同的元素(包括所有的属性和后代元素), deepWithDataAndEvents是个可选参数, 默认值是false, 表示是否克隆该元素的后代元素保存的数据(通过`JQuery.data()`方法保存的数据)和该元素后代元素的事件处理器, true为克隆, false为不克隆;
-  - 注意: 只有withDataAndEvents的值为true时, 设置deepWithDataAndEvents的值才有意义, 如果withDataAndEvents的值为false, 那么不论deepWithDataAndEvents值是什么, 都**不会克隆**该元素的后代元素保存的数据(通过`JQuery.data()`方法保存的数据)和该元素后代元素的事件处理器
+- `JQuery元素对象.clone([withDataAndEvents?: boolean]): JQuery`    克隆出一份相同的元素(包括所有的属性和后代元素), withDataAndEvents是个可选参数, 默认值是false, 表示是否克隆该元素保存的数据(通过`JQuery元素对象.data()`方法保存的数据)和该元素的事件处理器, true为克隆, false为不克隆
+- `JQuery元素对象.clone(withDataAndEvents?: boolean[, deepWithDataAndEvents?: boolean]): JQuery`    克隆出一份相同的元素(包括所有的属性和后代元素), deepWithDataAndEvents是个可选参数, 默认值是false, 表示是否克隆该元素的后代元素保存的数据(通过`JQuery元素对象.data()`方法保存的数据)和该元素后代元素的事件处理器, true为克隆, false为不克隆;
+  - 注意: 只有withDataAndEvents的值为true时, 设置deepWithDataAndEvents的值才有意义, 如果withDataAndEvents的值为false, 那么不论deepWithDataAndEvents值是什么, 都**不会克隆**该元素的后代元素保存的数据(通过`JQuery元素对象.data()`方法保存的数据)和该元素后代元素的事件处理器
 
 ```html
   <style>
@@ -949,7 +977,7 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 ###### 2.3.7.6.1 删除整个节点
 
-- `JQuery.remove([selector?: string]):JQuery`
+- `JQuery元素对象.remove([selector?: string]): JQuery元素对象.`
   - selector是个可选参数
     - 当不写这个参数时, 就会将工厂函数匹配的所有元素从document中移除
     - 当写这个参数时, 就会从工厂函数匹配的所有元素中筛选出selector匹配的所有元素, 然后将这些筛选出的元素从document中移除
@@ -1006,7 +1034,7 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 ###### 2.3.7.6.2 清空节点内容
 
-- `JQuery.empty():JQuery`    会从document中移除此元素下的所有文本内容和子元素
+- `JQuery元素对象.empty(): JQuery元素对象.`    会从document中移除此元素下的所有文本内容和子元素
 
 ```html
  <style>
@@ -1054,29 +1082,29 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 **本元素的长辈节点**
 
-| 方法                                          | 说明                                                         |
-| --------------------------------------------- | ------------------------------------------------------------ |
-| `JQuery.parent([selector?: string]): JQuery`  | **父元素中遍历**==Get the parent== of each element in the current set of matched elements, optionally filtered by a selector.<br />selector:    A string containing a selector expression to match elements against. |
-| `JQuery.parents([selector?: string]): JQuery` | **长辈元素中遍历**==Get the ancestors(长辈)== of each element in the current set of matched elements, optionally filtered by a selector.<br />selector:    A string containing a selector expression to match elements against. |
+| 方法                                                  | 说明                                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
+| `JQuery元素对象.parent([selector?: string]): JQuery`  | **父元素中遍历**==Get the parent== of each element in the current set of matched elements, optionally filtered by a selector.<br />selector:    A string containing a selector expression to match elements against. |
+| `JQuery元素对象.parents([selector?: string]): JQuery` | **长辈元素中遍历**==Get the ancestors(长辈)== of each element in the current set of matched elements, optionally filtered by a selector.<br />selector:    A string containing a selector expression to match elements against. |
 
 ###### 2.3.7.7.2 同辈节点
 
 **本元素的同辈节点**
 
-| 方法                                           | 说明                                                         |
-| ---------------------------------------------- | ------------------------------------------------------------ |
-| `JQuery.next([selector?: string]): JQuery`     | **相邻的下一个**Get the ==immediately following== sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector.<br />selector:    A string containing a selector expression to match elements against. |
-| `JQuery.prev([selector?: string]): JQuery`     | **相邻的上一个**Get the ==immediately preceding== sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector.<br />selector:    A string containing a selector expression to match elements against. |
-| `JQuery.siblings([selector?: string]): JQuery` | **同辈的节点(前后都选)**Get the siblings of each element in the set of matched elements, optionally filtered by a selector.<br />selector:    A string containing a selector expression to match elements against. |
+| 方法                                                   | 说明                                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| `JQuery元素对象.next([selector?: string]): JQuery`     | **相邻的下一个**Get the ==immediately following== sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector.<br />selector:    A string containing a selector expression to match elements against. |
+| `JQuery元素对象.prev([selector?: string]): JQuery`     | **相邻的上一个**Get the ==immediately preceding== sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector.<br />selector:    A string containing a selector expression to match elements against. |
+| `JQuery元素对象.siblings([selector?: string]): JQuery` | **同辈的节点(前后都选)**Get the siblings of each element in the set of matched elements, optionally filtered by a selector.<br />selector:    A string containing a selector expression to match elements against. |
 
 ###### 2.3.7.7.3 晚辈节点
 
 **本元素的晚辈节点**
 
-| 方法                                                   | 说明                                                         |
-| ------------------------------------------------------ | ------------------------------------------------------------ |
-| `JQuery.children([selector?: string]): JQuery`         | **子节点**Get the children of each element in the set of matched elements, optionally filtered by a selector.<br />selector:    A string containing a selector expression to match elements against. |
-| `JQuery.find(selector: string|JQuery|element): JQuery` | **后辈节点**Get the descendants  of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.<br />selector:    必需写的参数 |
+| 方法                                                         | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `JQuery元素对象.children([selector?: string]): JQuery`       | **子节点**Get the children of each element in the set of matched elements, optionally filtered by a selector.<br />selector:    A string containing a selector expression to match elements against. |
+| `JQuery元素对象.find(selector: string|JQuery|element): JQuery` | **后辈节点**Get the descendants  of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.<br />selector:    必需写的参数 |
 
 
 
@@ -1084,14 +1112,14 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 | 方法                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `JQuery.first(): JQuery`                                     | **第一个**Reduce the set of matched elements to the first in the set. |
-| `JQuery.last(): JQuery`                                      | **最后一个**Reduce the set of matched elements to the final one in the set. |
-| `JQuery.even(): JQuery`                                      | 偶数索引                                                     |
-| `JQuery.odd(): JQuery`                                       | 奇数索引                                                     |
-| `JQuery.eq(index: number): JQuery`                           | Reduce the set of matched elements to the one at the specified index. |
-| `JQuery.not(selector: string|JQuery|element|Araray): JQuery` | **挑选出所有不匹配的**Remove elements from the set of matched elements. |
-| JQuery.filter(selector: string): JQuery                      | **挑选出所有匹配的**Reduce the set of matched elements to those that match the selector . |
-| `JQuery.is(selector: string|JQuery|element): boolean`        | **判断是否有匹配的**check the current matched set of elements against a selector, element, or jQuery object and **return `true` if ==at least one== of these elements matches the given arguments.** |
+| `JQuery元素对象.first(): JQuery`                             | **第一个**Reduce the set of matched elements to the first in the set. |
+| `JQuery元素对象.last(): JQuery`                              | **最后一个**Reduce the set of matched elements to the final one in the set. |
+| `JQuery元素对象.even(): JQuery`                              | 偶数索引                                                     |
+| `JQuery元素对象.odd(): JQuery`                               | 奇数索引                                                     |
+| `JQuery元素对象.eq(index: number): JQuery`                   | Reduce the set of matched elements to the one at the specified index. |
+| `JQuery元素对象.not(selector: string|JQuery|element|Araray): JQuery` | **挑选出所有不匹配的**Remove elements from the set of matched elements. |
+| JQuery元素对象.filter(selector: string): JQuery              | **挑选出所有匹配的**Reduce the set of matched elements to those that match the selector . |
+| `JQuery元素对象.is(selector: string|JQuery|element): boolean` | **判断是否有匹配的**check the current matched set of elements against a selector, element, or jQuery object and **return `true` if ==at least one== of these elements matches the given arguments.** |
 
 ## 三. 案例
 
@@ -1141,7 +1169,7 @@ jQuery元素对象的所有方法的返回值几乎都是该对象本身, 所以
 
 ### 3.2 购物车结算
 
-![](%E7%AC%AC04%E7%AB%A0%20jQuery.assets/One_2021-04-21_121826.png)
+![](%E7%AC%AC04%E7%AB%A0%20JQuery元素对象.assets/One_2021-04-21_121826.png)
 
 ```html
  <style>

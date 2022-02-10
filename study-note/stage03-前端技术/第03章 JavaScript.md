@@ -747,7 +747,7 @@ console.log(test1());
 |                         |                                                              |
 | [style](#行内CSS的对象) | 获取本元素对象的行内css的对象                                |
 
-##### 行内CSS的对象`style`
+##### 4.3.1.1 行内CSS的对象`style`
 
 - 可以用来设置本元素的行内css
 - `style.color="red"`    `style.fontSize="2em"`    `style.height="100px"`等等
@@ -1412,6 +1412,14 @@ HTML事件的例子:
 
 ### 7.1 单个对象
 
+```javascript
+var tifa = {name : "蒂法", age : 30};
+```
+
+
+
+#### 7.1.1 json对象调用属性值
+
 ```js
 var tifa = {name : "蒂法", age : 30};
 var aerith = {name : "艾丽丝", age : 23};
@@ -1420,7 +1428,41 @@ console.log("姓名: " + tifa.name + ", 年龄: " + tifa.age);
 console.log("姓名: " + aerith.name + ", 年龄: " + aerith.age);
 ```
 
-### 7.2 多个对象组成的数组
+#### 7.1.2 json对象给属性赋值
+
+```javascript
+var nami = {name : "娜美", age : 22};
+console.log("姓名: " + nami.name + ", 年龄: " + nami.age);
+// 给属性赋值
+nami.age = 25;
+console.log("三年后, 姓名: " + nami.name + ", 年龄: " + nami.age);
+```
+
+#### 7.1.3 json对象添加新属性
+
+```js
+var robin = {name : "妮可·罗宾", age : 30};
+console.log("姓名: " + robin.name + ", 年龄: " + robin.age + ", 性别: " + robin.gender);
+// 添加属性
+robin.gender = "女";
+console.log("姓名: " + robin.name + ", 年龄: " + robin.age + ", 性别: " + robin.gender);
+```
+
+#### 7.1.4 json对象移除属性
+
+```js
+var burin = {name : "布琳", age : 26, gender : "女"};
+console.log("姓名: " + burin.name + ", 年龄: " + burin.age + ", 性别: " + burin.gender);
+// 移除属性
+delete burin.gender;
+console.log("姓名: " + burin.name + ", 年龄: " + burin.age + ", 性别: " + burin.gender);
+```
+
+
+
+### 7.2 多个json对象组成的数组
+
+参考[3.7 数组](# 3.7 数组)里面的内容, 数组也是一种json对象
 
 ```js
 var personArr = [{name : "蒂法", age : 30}, {name : "艾丽丝", age : 23}];

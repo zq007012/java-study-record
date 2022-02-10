@@ -459,7 +459,7 @@
 | String getContextPath()                   | `/test`<br />获取此请求中调用的servlet的部署环境<br />/demo01, `/`表示的是**web应用的部署路径** |
 | String getServletPath()                   | `/demo`<br />获取此请求中调用的servlet的urlPatterns值<br /> `/`表示的是**web应用的部署路径** |
 | String getRequestURI()                    | `/test/demo`<br />获取请求的资源的路径信息<br /> `/`表示的是**web应用的根路径** |
-| StringBuffet getRequestURL()              | `http://localhost:8080/test/demo`<br />获取请求的完整url路径信息 |
+| StringBuffer getRequestURL()              | `http://localhost:8080/test/demo`<br />获取请求的完整url路径信息 |
 | String getQueryString()                   | 获取HTTP请求的url路径后面附带的请求参数<br />name=tifa&password=11111111 |
 | String getMethod()                        | 获取发送此HTTP请求的方式, 例如GET  POST                      |
 | void setCharacterEncoding(String charset) | 要求浏览器以charset方式编码请求体中的文本内容                |

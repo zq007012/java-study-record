@@ -81,16 +81,16 @@ VScode的全称是Visual Studio Code
 
 ## 三. 自定义快捷键
 
-| 操作                          | 快捷键   |
-| ----------------------------- | -------- |
-| openInDefaultBrowser          | alt + b  |
-| copyLinesDownAction           | ctrl + d |
-| format                        | alt + f  |
-| go to next problem            | alt + d  |
-| extension.liveServer.goOnline | alt + a  |
-| files.save                    | alt + s  |
-| open in terminal              | alt + t  |
-| code runner                   | alt + e  |
+| 操作                                                      | 快捷键   |
+| --------------------------------------------------------- | -------- |
+| openInDefaultBrowser(在默认的浏览器打开)                  | alt + b  |
+| copyLinesDownAction(向下复制一行)                         | ctrl + d |
+| format(格式化文件内容)                                    | alt + f  |
+| go to next problem(跳转到下一个问题所在的位置)            | alt + d  |
+| extension.liveServer.goOnline(保存本网页更改并打开本网页) | alt + a  |
+| files.save(保存文件)                                      | alt + s  |
+| open in terminal(在terminal里打开)                        | alt + t  |
+| code runner(运行的代码)                                   | alt + e  |
 
 ```json
 // 将键绑定放在此文件中以覆盖默认值auto[]
