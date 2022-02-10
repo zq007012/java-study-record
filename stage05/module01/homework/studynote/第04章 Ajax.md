@@ -57,78 +57,15 @@ JS的ajax：出现最早。使用一个对象XmlHttpRequest对象。专门用于
   - 若使用`js`的AJAX技术，为了实现简单功能，就需要书写大量复杂代码。
   - `js`的AJAX代码，浏览器兼容性比较差。
 
+### 2.1 后端`LoginServlet`
 
-### 2.1 前端示例代码
-
-前端`js`代码,复制即可
-
-**login.jsp**
-
-```html
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>new jsp</title>
-
-    <script>
-        function run() {
-            //1.创建 核心对象
-            var xmlhttp;
-
-            //2.判断浏览器类型
-            if (window.XMLHttpRequest) {
-                xmlhttp=new XMLHttpRequest();
-            } else {
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-
-
-
-            //3.建立连接
-            /**
-             * 三个参数:
-             *      1.请求方式 get post
-             *      2.请求资源的路径
-             *      3.是否为异步 是 or 否
-             */
-            xmlhttp.open("GET","/login?username=tom",true);
-
-            //4.发送请求
-            xmlhttp.send();
-
-            //5.获取响应结果
-            /**
-             * 什么时候获取响应数据?
-             *      在服务器响应成功后获取
-             */
-            //监听readyState状态改变
-            xmlhttp.onreadystatechange=function() {
-                //readyState==4 响应已经就绪, 200 访问成功
-                if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                    //获取响应数据
-                    var text = xmlhttp.responseText;
-                    alert(text);
-                }
-            }
-        }
-    </script>
-</head>
-<body>
-    <input type="button" value="发送异步请求" onclick="run()"><br>
-    局部刷新 <input type="text">
-</body>
-</html>
-```
-
-
-
-### 2.3 后端servlet代码
+这个`servlet`会从请求中获取参数`username`的值, 然后将这个值响应给浏览器
 
 ```java
-@WebServlet("/login")
+@WebServlet(name = "LoginServlet", urlPatterns ={"/login"})
 public class LoginServlet extends HttpServlet {
+
+    private static final long serialVersionUID = -6149840476654716708L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -138,6 +75,8 @@ public class LoginServlet extends HttpServlet {
 
         //打印 username
         System.out.println(username);
+        resp.setContentType("text/text;charset=utf-8");
+        resp.setCharacterEncoding("utf-8");
         resp.getWriter().write(username);
     }
 
@@ -148,27 +87,104 @@ public class LoginServlet extends HttpServlet {
 }
 ```
 
+
+
+### 2.2 前端示例代码
+
+前端`js`代码,复制即可
+
+**demo.jsp**
+
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" isELIgnored="false" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>js方式的Ajax的demo</title>
+
+    <script>
+        function run() {
+            console.log("开始运行")
+            //1.创建 核心对象
+            var xmlHttp;
+
+            //2.判断浏览器类型
+            if (window.XMLHttpRequest) {
+                xmlHttp = new XMLHttpRequest();
+            } else {
+                xmlHttp = new ActiveXObject("MicroSoft.XMLHTTP");
+            }
+
+
+            //3.建立连接
+            /*
+             * 三个参数:
+             *      1.请求方式 get post
+             *      2.请求资源的路径
+             *      3.是否为异步 是 or 否
+             */
+            xmlHttp.open("GET", "/hello_maven/login?username=bayonetta", true)
+            //4.发送请求
+            xmlHttp.send();
+
+            //5.获取响应结果
+            /*
+             * 什么时候获取响应数据?
+             *     在服务器响应成功后获取
+             */
+            //监听readyState状态改变
+            xmlHttp.onreadystatechange=function () {
+                //readyState==4 响应已经就绪, status==200 访问成功
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    // 获取到响应了
+                    var text = xmlHttp.responseText;
+                    console.log(text);
+                    alert(text);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="发送异步请求" onclick="run()"><br>
+局部刷新 <input type="text">
+</body>
+</html>
+```
+
+
+
 ## 三. jQuery框架的ajax
 
 ### 3.1 JQuery框架的ajax简介
 
 - jquery是一个优秀的js框架，自然对js原生的ajax进行了封装，封装后的ajax的操 作方法更简洁，功能更强大.
 
-- 与ajax操作相关的jquery方法在开发中经常使用的有三: `get`  `post`  `ajax`
+- 与ajax操作相关的JQuery对象的方法在开发中经常使用的有三个: `get`  `post`  `ajax`
+
+- | 方法                                                    | 说明                                                         |
+  | ------------------------------------------------------- | ------------------------------------------------------------ |
+  | jQuery.get( url [, data ] [, success ] [, dataType ] )  | url<br />data: 请求时携带的数据, **通常为json对象**, 也可以是`key=value`  或者`  {username=’baby’,pwd:666}`<br />success: 成功获取响应后的回调函数, 一般是`function(param){//操作}`, param是响应的数据<br />dataType: 响应的数据类型, 有四种`json` `html` `xml` `text` |
+  | jQuery.post( url [, data ] [, success ] [, dataType ] ) | url<br />data: 请求时携带的数据, 请求时携带的数据, **通常为json对象**, 也可以是`key=value`  或者`  {username=’baby’,pwd:666}`<br />success: 成功获取响应后的回调函数, 一般是`function(params){//操作},`param是响应的数据<br />dataType: 响应数据的类型, 有四种`json` `html` `xml` `text` |
+  | jQuery.ajax( url [, settings ] )                        |                                                              |
+  | jQuery.ajax( settings )                                 |                                                              |
+
+
 
 ### 3.2 GET请求方式
 
-通过远程 HTTP GET 请求载入信息。这是一个简单的 GET 请求功能，如需复杂的ajax参数设置请使用$.ajax
+通过远程 HTTP GET 请求载入信息。这是一个简单的 GET 请求功能，如需复杂的ajax参数设置请使用`$.ajax`
 
 **Get请求方式语法**
 
-**$.get(url,data,callback,type)**
+`$.get( url [, data ] [, success ] [, dataType ] )`
 
 - 参数1:  `url` 	请求路径
-- 参数2:  `data` 	请求时携带的数据
-  格式:   `key=value`  或者  {username=’baby’,pwd:666}
-- 参数3: `callback`  响应成功后的回调函数
-- 参数4:  `type` 	响应的数据类型 text html xml json
+- 参数2:  `data` 	请求时携带的数据, **通常为json对象**, 也可以是`key=value`  或者`  {username=’baby’,pwd:666}`
+- 参数3: `success`    成功获取响应后的回调函数, 一般是`function(params){//操作},`param是响应的数据
+- 参数4:  `type` 	响应数据的类型, 有四种`json` `html` `xml` `text`
 
 **代码示例**
 
@@ -193,14 +209,14 @@ function run2() {
 
 ### 3.3 POST请求方式
 
-通过远程 HTTP POST 请求载入信息。这是一个简单的 POST 请求功能，如需复杂的ajax参数设置请使用$.ajax
+通过远程 HTTP POST 请求载入信息。这是一个简单的 POST 请求功能，如需复杂的ajax参数设置请使用`$.ajax`
 
-Post请求方式语法
+`$.post( url [, data ] [, success ] [, dataType ] )`
 
-	**$.post(url,data,callback,type)** 
-	里面的四个参数和get方式是一样, 不一样的是请求方式的不同
-
-
+- 参数1:  `url` 	请求路径
+- 参数2:  `data` 	请求时携带的数据, **通常为json对象**, 也可以是`key=value`  或者`  {username=’baby’,pwd:666}`
+- 参数3: `success`  成功获取响应后的回调函数, 一般是`function(params){//操作},`param是响应的数据
+- 参数4:  `type` 	响应数据的类型, 有四种`json` `html` `xml` `tex
 
 **代码示例**
 
@@ -225,14 +241,26 @@ function run3() {
 
 ### 3.4 Ajax请求方式
 
-$.ajax()方法可以更加详细的设置底层的参数。该方法通常用于其他方法不能完成的请求。
+`$.ajax()`方法可以更加详细的设置底层的参数。该方法通常用于其他方法不能完成的请求。
 
-ajax请求方式语法:
+### 3.4.1 ajax请求方式语法:
 
-- **方式1:  jQuery.ajax({[settings]})**
+- **方式1:  $.ajax({[settings]})**
 - **方式2: $.ajax({})**
+- **方式3: $.ajax( url [ , settings] )**
 
-settings是一个js字面量形式的对象，格式是键值对{name:value,name:value	}，常用的name属性名如下：
+settings是一个js字面量形式的对象，格式是键值对`{name1:value1,name2:value2}`，常用的name属性名如下：
+
+| name属性名   | value值                                                      |
+| ------------ | ------------------------------------------------------------ |
+| url          | 请求路径                                                     |
+| async        | true --- 异步通讯<br />false --- 同步通讯                    |
+| type         | 请求方式, `"post"`或者`"get"`                                |
+| `data`       | 请求中携带的数据, 一般是个json对象<br />例如: {username : "honoka" , password : "123456"} |
+| Content-Type | `post`请求时, 必须有着这个键值对, 可取值`"application/x-www-form-urlencoded"`  `"application/json;charset=utf-8"`  `"multipart/form-data"`<br />当取值`""application/json;charset=utf-8""`, 请求携带的数据是json格式的字符串, 所以`data`的值必须是json格式的字符串, 可以使用`JSON.stringify(json对象)`方法将json对象转换成json格式的字符串 |
+| dataType     | 响应数据的类型, `"text"`  `"html"`  `"json"  `  `"xml"`      |
+| success      | 获取响应成功时的回调函数, 一般是`function(param){...}`, `param`是相应的数据 |
+| error        | 获取响应失败时的回调函数, 一般是`function(){}`               |
 
 
 
@@ -261,7 +289,7 @@ function run4() {
 
 #### 3.5.1 需求分析
 
-![](第04章 Ajax.assets/UniConverter 13_20220208185943.gif)
+![](第04章 Ajax.assets/UniConverter 13_20220210125238.gif)
 
 - 用户输入用户名,鼠标移除后, 对用户名进行判断,提示用户名是否可用
 
@@ -270,40 +298,40 @@ function run4() {
 ##### 3.5.2.1 步骤
 
 1. 准备Servlet ,对用户名进行校验,并返回结果(是否可用)
-2. 为页面输入框,绑定鼠标移除事件
+2. 为用户名输入框, 绑定失去焦点事件
 3. 进行异步请求,获取响应结果
 4. 根据结果,动态添加 HTML代码
 
 ##### 3.5.2.2 后台Servlet
 
 ```java
-@WebServlet("/checkName")
-public class CheckNameServelt extends HttpServlet {
+@WebServlet(name = "CheckNameServlet", urlPatterns ={"/checkName"})
+public class CheckNameServlet extends HttpServlet{
+    private static final long serialVersionUID = 7125575485985364716L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            // 1. 解析请求
+            req.setCharacterEncoding("utf-8");
+            String username = req.getParameter("username").trim();
+            // 2. 业务处理
+            String resqData = null;
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            if ("nami".equalsIgnoreCase(username)){
+                map.put("flag",false);
+                map.put("msg","用户名已存在, 不可使用!");
+            }else{
+                map.put("flag",true);
+                map.put("msg","用户名可以使用");
+            }
 
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html;charset=utf-8");
+            String respData = JSON.toJSONString(map);
 
-        //获取姓名
-        String username = req.getParameter("username");
-
-        //封装数据
-        HashMap<String,Object> map = new HashMap<>();
-
-        //判断用户是否存在
-        if("tom".equals(username)){
-            map.put("flag",true);
-            map.put("msg","用户名已经被占用!");
-            String data = JSON.toJSONString(map);
-            resp.getWriter().print(data);
-        }else{
-            //用户名未被使用
-            map.put("flag",false);
-            map.put("msg","用户名可以使用!");
-            String data = JSON.toJSONString(map);
-            resp.getWriter().print(data);
+            //3. 进行响应
+            resp.getWriter().write(respData);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
@@ -317,57 +345,48 @@ public class CheckNameServelt extends HttpServlet {
 ##### 2.5.2.3 前台JSP
 
 ```html
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>new jsp</title>
-    <script typet="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-
+    <title>注册页面</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-        $(function() {
+        $(function () {
+            $("#msg").hide();
             $("#username").blur(function () {
-
-                //获取用户名
-                var name = $(this).val();
-
-                //判断用户名不为空
-                if(name != null && name != ""){
+                var name = $(this).val().trim();
+                console.log("${pageContext.request.contextPath}/checkName");
+                if (name == null || name.length === 0){
+                    $("#msg").hide();
+                }else{
                     $.ajax({
-                        url:"/checkName",
-                        type:"GET",
-                        data:{username:name},
-                        dataType:"json",
-                        success:function (data) {
-                            if(data.flag){
-                                //设置span内容体
-                                $("#spanMsg").html("<font color='red'>" + data.msg+ "</font>");
-
-                            }else if(!data.flag){
-                                $("#spanMsg").html("<font color='green'>"+ data.msg + "</font>");
-                            }
+                        url : "${pageContext.request.contextPath}/checkName",
+                        method : "GET",
+                        data : { username : name },
+                        dataType : "json",
+                        success : function (data) {
+                            console.log(data);
+                            console.log(data.msg);
+                            $("#msg").text(data.msg).show();
                         },
-                        error:function () {
-                            alert("请求处理失败!")
+                        error : function () {
+                            $("#msg").text("").hide();
+                            alert("请求处理失败");
                         }
-                    });
 
+                    });
                 }
             })
         });
-
     </script>
 </head>
 <body>
-<form action="#" method="post">
-
-    用户名: <input type="text" id="username" name="username" placeholder="请输入用户名">
-    <span id="spanMsg" style="color:red"></span><br>
-
-    密码: <input type="text" name="password" placeholder="请输入密码"><br>
-</form>
-
+    <form method="POST" action="#">
+        用户名: <input type="text" id="username" name="username"/><span id="msg" style="color:red ; font-size: 1em">吃了吗</span><br/>
+        密码: <input type="text">
+    </form>
 </body>
 </html>
 ```

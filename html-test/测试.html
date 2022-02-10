@@ -6,7 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>测试</title>
   </head>
+  <script>
+    var tifa = { name: "蒂法", age: 30 };
+    var aerith = { name: "艾丽丝", age: 23 };
+
+    console.log("姓名: " + tifa.name + ", 年龄: " + tifa.age);
+    console.log("姓名: " + aerith.name + ", 年龄: " + aerith.age);
+
+    var nami = { name: "娜美", age: 22 };
+    console.log("姓名: " + nami.name + ", 年龄: " + nami.age);
+    nami.age = 25;
+    console.log("三年后, 姓名: " + nami.name + ", 年龄: " + nami.age);
+
+    var robin = { name: "妮可·罗宾", age: 30 };
+    console.log(
+      "姓名: " + robin.name + ", 年龄: " + robin.age + ", 性别: " + robin.gender
+    );
+    robin.gender = "女";
+    console.log(
+      "姓名: " + robin.name + ", 年龄: " + robin.age + ", 性别: " + robin.gender
+    );
+
+    var burin = { name: "布琳", age: 26, gender: "女" };
+    console.log(
+      "姓名: " + burin.name + ", 年龄: " + burin.age + ", 性别: " + burin.gender
+    );
+    delete burin.gender;
+    console.log(
+      "姓名: " + burin.name + ", 年龄: " + burin.age + ", 性别: " + burin.gender
+    );
+  </script>
   <body>
-    <img src="./img/aaa.gif" />
+    <img src="./img/bbb.gif" />
   </body>
 </html>
