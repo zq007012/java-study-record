@@ -26,3 +26,6 @@ hs_err_pid*
 /**/homework/video/
 /**/out/
 /**/target/
+
+# idea配置文件
+/**/.idea/
