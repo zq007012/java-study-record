@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue+axios获取笑话</title>
+    <style>
+      /*
+        1.axios回调函数中,this的指向已经改变,无法访问data中的数据
+        2.解决方案: 将this进行保存
+      */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="button" value="点击获取一个笑话" @click="getJoke" />
+      <p>{{joke}}</p>
+    </div>
+  </body>
+
+  <script src="../js/vue.min.js"></script>
+  <script src="../js/axios.min.js"></script>
+  <script>
+    /*
+        请求地址:https://autumnfish.cn/api/joke
+        请求方法:get
+        请求参数:无
+        响应内容:随机笑话
+    */
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        joke: "笑口常开",
+      },
+      methods: {
+        getJoke: function () {
+          //把this进行保存
+          var that = this;
+
+          //异步访问
+          axios.get("https://autumnfish.cn/api/joke").then(
+            function (resp) {
+              console.log(resp.data);
+              //在回调函数内部 ,this无法正常使用,需要提前保存起来
+              console.log(that.joke); //undefined
+              that.joke = resp.data;
+            },
+            function (error) {}
+          );
+        },
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>获取笑话</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <script src="../lib/js/axios.min.js"></script>
+  <body>
+    <div id="app">
+      <button @click="getJoke">点击获取一个笑话</button><br />
+      <h1>{{joke}}</h1>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        joke: "笑口常开",
+      },
+      methods: {
+        getJoke: function () {
+          let model = this;
+          axios.get("https://autumnfish.cn/api/joke").then(
+            function (response) {
+              model.joke = response.data;
+            },
+            function (error) {
+              model.joke = "获取笑话失败";
+            }
+          );
+        },
+      },
+    });
+    //console.log(model);
+  </script>
+</html>

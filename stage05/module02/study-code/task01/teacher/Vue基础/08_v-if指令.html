@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /*
+      v-if指令: 根据表达式的真假,切换元素的显示和隐藏 (操作是dom)
+        频繁切换就使用 v-show,反之 v-if
+        本质上是通过操作dom元素来切换状态
+    */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="button" value="切换状态" @click="changeShow" />
+      <img v-if="isShow" src="img/car.gif" />
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        isShow: false,
+      },
+      methods: {
+        changeShow: function () {
+          this.isShow = !this.isShow;
+        },
+      },
+    });
+  </script>
+</html>

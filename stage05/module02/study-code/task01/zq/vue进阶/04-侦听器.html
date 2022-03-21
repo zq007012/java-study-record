@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04-侦听器</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      名字:
+      <input v-model="firstName" type="text" placeholder="请输入名字" /><br />
+      姓氏:
+      <input v-model="lastName" type="text" placeholder="请输入姓氏" /><br />
+      <p>全名: {{fullName}}</p>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        firstName: "",
+        lastName: "",
+        fullName: "",
+      },
+      watch: {
+        firstName: function (newValue, oldValue) {
+          console.log("============");
+          this.fullName = newValue + " · " + this.lastName;
+        },
+        lastName: function (newValue, oldValue) {
+          console.log("----------------");
+          this.fullName = this.firstName + " · " + newValue;
+        },
+      },
+    });
+  </script>
+</html>

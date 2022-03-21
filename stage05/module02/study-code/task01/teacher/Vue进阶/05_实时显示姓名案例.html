@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <label>名:<input type="text" v-model="fristName" /></label>
+      <label>姓:<input type="text" v-model="lastName" /></label>
+      {{fullNameComputed}}
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        fristName: "",
+        lastName: "",
+        fullName: "",
+      },
+      //侦听器
+      watch: {
+        fristName: function (nval, oval) {
+          //参数 1.新值,2.旧值
+          this.fullName = nval + " " + this.lastName;
+        },
+        lastName: function (nval, oval) {
+          this.fullName = this.fristName + " " + nval;
+        },
+      },
+    });
+  </script>
+</html>

@@ -30,6 +30,8 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
         super(dataSource);
     }
 
+
+
     /**
      * 更新<code>course_lesson</code>表中课时信息
      * <p>需要更新的字段是: <code>course_id, section_id, theme, duration, is_free, order_num, update_time</code></p>
@@ -39,7 +41,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
      * @return
      */
     @Override
-    public int updateCourseLesson(Course_Lesson lesson) {
+    public int updateLesson(Course_Lesson lesson) {
         //1. 编写SQL语句
         // language=MySQL
         String sql = "update course_lesson set course_id=?, section_id=?, theme=?, duration=?, is_free=?, order_num=?, update_time=? where id=?";
@@ -49,7 +51,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
         int result = 0;
         try {
             result = queryRunner.update(sql,
-                    lesson.getCourse_id(),lesson.getSection_id(),lesson.getTheme(),lesson.getDuration(),lesson.getIs_free(),lesson.getOrderNum(),lesson.getUpdate_time(),lesson.getId());
+                    lesson.getCourse_id(),lesson.getSection_id(),lesson.getTheme(),lesson.getDuration(),lesson.getIs_free(),lesson.getOrder_num(),lesson.getUpdate_time(),lesson.getId());
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
@@ -65,7 +67,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
      * @return
      */
     @Override
-    public List<Course_Lesson> findCourseLessonsBySectionId(int sectionId) {
+    public List<Course_Lesson> findLessonsBySectionId(int sectionId) {
         // 1. 编写SQL语句
         // language=MySQL
         String sql = "SELECT id, course_id, section_id, theme, duration, is_free, order_num, status FROM course_lesson WHERE section_id = ?;";
@@ -94,7 +96,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
      * @return
      */
     @Override
-    public List<Course_Section> findCourseSectionsWithLessonsByCourseId(int courseId) {
+    public List<Course_Section> findSectionsWithLessonsByCourseId(int courseId) {
         // 1. 编写SQL语句
         // language=MySQL
         String sql = "SELECT id, course_id, section_name, description, order_num, status FROM course_section WHERE course_id = ?;";
@@ -113,7 +115,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
             // 遍历章节集合, 给每个章节配上课时信息
             for (Course_Section courseSection :
                     query) {
-                List<Course_Lesson> lessons = findCourseLessonsBySectionId(courseSection.getId());
+                List<Course_Lesson> lessons = findLessonsBySectionId(courseSection.getId());
                 courseSection.setCourseLessonList(lessons);
             }
         } catch (SQLException e) {
@@ -163,7 +165,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
      * @return
      */
     @Override
-    public int saveCourseSection(Course_Section courseSection) {
+    public int saveSection(Course_Section courseSection) {
         //1. 编写SQL语句
         // language=MySQL
         String sql = "insert into course_section(course_id, section_name,description,order_num,status,create_time,update_time) values(?,?,?,?,?,?,?)";
@@ -193,7 +195,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
      * @return
      */
     @Override
-    public int updateCourseSection(Course_Section courseSection) {
+    public int updateSection(Course_Section courseSection) {
         //1. 编写SQL语句
         // language=MySQL
         String sql = "UPDATE course_section SET section_name=?, description=?, order_num=?, update_time=? WHERE id=?;";
@@ -222,7 +224,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
      * @return
      */
     @Override
-    public int updateCourseSectionStatus(Course_Section section) {
+    public int updateSectionStatus(Course_Section section) {
         //1. 编写SQL语句
         // language=MySQL
         String sql = "update course_section set status=?,update_time=? where id=?";
@@ -250,7 +252,7 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
      * @return
      */
     @Override
-    public int saveCourseLesson(Course_Lesson lesson) {
+    public int saveLesson(Course_Lesson lesson) {
         //1. 编写SQL语句
         // language=MySQL
         String sql = "insert into course_lesson(course_id, section_id, theme, duration, is_free, order_num,  create_time, update_time, status) values(?,?,?,?,?,?,?,?,?)";
@@ -260,12 +262,43 @@ public class CourseContentDaoImpl extends BaseDao implements CourseContentDao {
         int result = 0;
         try {
             result = queryRunner.update(sql,
-                    lesson.getCourse_id(), lesson.getSection_id(), lesson.getTheme(), lesson.getDuration(), lesson.getIs_free(), lesson.getOrderNum(), lesson.getCreate_time(), lesson.getUpdate_time(), lesson.getStatus());
+                    lesson.getCourse_id(), lesson.getSection_id(), lesson.getTheme(), lesson.getDuration(), lesson.getIs_free(), lesson.getOrder_num(), lesson.getCreate_time(), lesson.getUpdate_time(), lesson.getStatus());
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
         }
         return result;
+
+    }
+
+    /**
+     * 根据章节id获取章节信息
+     * <p>获取的字段有<code>id, section_name</code></p>
+     *
+     * @param sectionId
+     * @return
+     */
+    @Override
+    public Course_Section findSectionById(int sectionId) {
+        // 1. 编写SQL语句
+        // language=MySQL
+        String sql = "select id, section_name from course_section where id = ?";
+        // 2. 创建QueryRunner对象
+        QueryRunner queryRunner = getQueryRunner();
+        // 3. 创建一个可以对下划线和驼峰命名进行转换的BeanHandler对象
+        GenerousBeanProcessor gbp = new GenerousBeanProcessor();
+        BasicRowProcessor brp = new BasicRowProcessor(gbp);
+        BeanHandler<Course_Section> beanHandler = new BeanHandler<>(Course_Section.class, brp);
+        //4. 执行查找并以JavaBean的形式获得结果
+        Course_Section query = null;
+        try {
+            query = queryRunner.query(sql, beanHandler,
+                    sectionId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return query;
 
     }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/inputNum.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 计算功能区域 -->
+      <div>
+        <input type="button" class="btn btn_plus" v-on:click="add" />
+        <span>{{num}}</span>
+        <input type="button" class="btn btn_minus" @click="sub"/>
+      </div>
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        num: 1,
+      },
+      methods: {
+        add:function(){
+          if(this.num < 10){
+            this.num++;
+          }else{
+            alert("别点了!最大了!");
+          }
+        },
+        sub:function(){
+          if(this.num > 0){
+            this.num--;
+          }else{
+            alert("别点了! 最小了!");
+          }
+        }
+      },
+    });
+  </script>
+  <script>
+    /*
+      案例总结
+        1.创建Vue实例时: el(挂载点), data(数据),methods(方法)
+        2.v-on 指令 作用是绑定事件, 可以简写为 @事件名
+        3.方法中,使用this关键字 获取data中的数据
+        4.v-text 和 {{}} 都可以获取data中的数据,设置到元素中
+    */
+  </script>
+</html>

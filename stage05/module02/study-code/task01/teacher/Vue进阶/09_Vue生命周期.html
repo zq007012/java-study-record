@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2 id="msg">{{message}}</h2>
+      <button @click="next">获取下一句</button>
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        message: "想当年,金戈铁马",
+      },
+      methods: {
+        show() {
+          alert("show方法执行了!");
+        },
+        next() {
+          this.message = "气吞万里如虎!";
+        },
+      },
+      // beforeCreate() {
+      //   alert("1.beforeCreate函数,在Vue对象实例化之前执行");
+      //   console.log(this.message); //undefined
+      //   this.show(); //this.show is not a function
+      // },
+      // created() {
+      //   alert("2.created函数执行时,组件的实例化完成,但是DOM页面还未生成")
+      //   console.log(this.message);
+      //   this.show();
+      // },
+      // beforeMount() {
+      //   alert(
+      //     "3.beforeMount函数执行时,模板已经在内存中编辑完成了,但是还没有被渲染到页面中"
+      //   );
+      //   console.log(
+      //     "页面显示的内容" + document.getElementById("msg").innerText
+      //   );
+      //   console.log("data中的数据: " + this.message);
+      // },
+      // mounted() {
+      //   alert("4.mounted函数执行时,模板已经被渲染到页面,执行完就会显示页面");
+      //   console.log(
+      //     "页面显示的内容" + document.getElementById("msg").innerText
+      //   );
+      // },
+      // beforeUpdate() {
+      //   alert("5.beforeUpdate执行时,内存中的数据已经更新,但是还没有渲染到页面");
+      //   console.log(
+      //     "页面显示的内容" + document.getElementById("msg").innerText
+      //   );
+      //   console.log("data中的数据: " + this.message);
+      // },
+      updated() {
+        alert("6.updated执行时,内存中的数据已经更新,此方法执行完显示页面");
+        console.log(
+          "页面显示的内容" + document.getElementById("msg").innerText
+        );
+        console.log("data中的数据: " + this.message);
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10-v-for指令2</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <img style="height: 200px" v-for="imgUrl in imgUrls" :src="imgUrl" />
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        imgUrls: [
+          "../lib/img/360se_picture.gif",
+          "../lib/img/75_Vampire widoemaker HD.jpg",
+          "../lib/img/71_Thanos HD.jpg",
+          "../lib/img/68_Swimsuit Tifa HD2.jpg",
+          "../lib/img/xn1guu.webp",
+          "../lib/img/62_Supergirl_HD 02.jpg",
+          "../lib/img/41_Midnight HD.jpg",
+          "../lib/img/Burin (4).gif",
+          "../lib/img/24_Elsa_Frozen HD.jpg",
+          "../lib/img/27_JIill_valentine HD.jpg",
+        ],
+      },
+    });
+  </script>
+</html>

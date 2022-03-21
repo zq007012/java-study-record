@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if指令</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <img v-bind:src="img1" v-bind:title="title1" v-bind:style="css" />
+      <img :src="img2" :title="title2" :style="css" />
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        img1: "../lib/img/19_Chun-Li HD.jpg",
+        title1: "春丽",
+        img2: "../lib/img/68_Swimsuit Tifa HD2.jpg",
+        title2: "蒂法",
+        css: "height: 500px",
+      },
+    });
+  </script>
+</html>

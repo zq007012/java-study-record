@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01-vue入门程序</title>
+  </head>
+  <!-- 1.创建html文件, 引入vue.js-->
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <!-- 2. 定义app div区域, 此区域作为vue的接管区域-->
+    <div id="app">
+      <!--6.在app中展示数据-->
+      {{name}}<br />
+      <input type="button" value="{{name}}" />
+    </div>
+
+    <div class="app2">
+      {{name}}<br />
+      <input type="button" value="{{name}}" />
+    </div>
+  </body>
+  <script>
+    // 3. 定义vue对象
+    var vm1 = new Vue({
+      // 4. 接管app区域
+      el: "#app",
+      // 5. 定义model(数据对象)
+      data: { name: "蒂法" },
+    });
+
+    var vm2 = new Vue({
+      el: ".app2",
+      data: { name: "艾瑞丝" },
+    });
+  </script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01-computed属性</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <!-- <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style> -->
+  <body>
+    <div id="app">
+      <h2>a: <input v-model="a" type="text" /></h2>
+      <h2>b: <input v-model="b" type="text" /></h2>
+      <h2>c: <input v-model="c" type="text" /></h2>
+      <h2>c: <input v-model="d" type="text" /></h2>
+      <h1>a * b = {{test}}</h1>
+    </div>
+  </body>
+  <script>
+    var vue = new Vue({
+      el: "#app",
+      data: {
+        a: "",
+        b: "",
+        c: "",
+        d: "",
+      },
+      methods: {},
+      computed: {
+        /*只要data中的a, b, c发生了改变, test就会被执行, 值会同步渲染到view上;
+        d发生改变时对本函数没有影响, 因为本函数从未调用过d*/
+        test: function () {
+          console.log("开始计算了.....");
+          console.log(this.c);
+          return this.a * this.b;
+        },
+      },
+    });
+  </script>
+</html>

@@ -18,6 +18,21 @@ import java.util.List;
 public interface CourseContentService {
 
     /**
+     * 根据课时id获取 携带了课时信息的章节信息
+     * @param sectionId
+     * @return
+     */
+    List<Course_Lesson> findLessonsBySectionId(int sectionId);
+
+    /**
+     * 根据章节id获取章节信息
+     * <p>获取的字段有<code>id, section_name</code></p>
+     * @param sectionId
+     * @return
+     */
+    Course_Section findSectionById(int sectionId);
+
+    /**
      * 更新课时信息
      * <p>需要更新的字段是: <code>course_id, section_id, theme, duration, is_free, order_num, update_time</code>,
      * update_time由本服务设置</p>
@@ -25,14 +40,14 @@ public interface CourseContentService {
      * @param lesson
      * @return {@link StatusCode#toString()}
      */
-    String updateCourseLesson(Course_Lesson lesson);
+    String updateLesson(Course_Lesson lesson);
 
     /**
      * 根据课程id获取课程内容
      * @param courseId
      * @return
      */
-    List<Course_Section> findCourseSectionsWithLessonsByCourseId(int courseId);
+    List<Course_Section> findSectionsWithLessonsByCourseId(int courseId);
 
     /**
      * 根据课程id获取课程信息, 课程信息只包含<code>id, course_name</code>
@@ -47,7 +62,7 @@ public interface CourseContentService {
      * @param courseSection
      * @return {@link StatusCode#toString()}
      */
-    String saveCourseSection(Course_Section courseSection);
+    String saveSection(Course_Section courseSection);
 
     /**
      * 更新课程信息, 更新的字段有
@@ -55,7 +70,7 @@ public interface CourseContentService {
      * @param courseSection
      * @return {@link StatusCode#toString()}
      */
-    String updateCourseSection(@NonNull Course_Section courseSection);
+    String updateSection(@NonNull Course_Section courseSection);
 
     /**
      * 更新课程状态
@@ -64,7 +79,7 @@ public interface CourseContentService {
      * @param courseSection
      * @return {@link StatusCode#toString()}
      */
-    String updateCourseSectionStatus(@NonNull Course_Section courseSection);
+    String updateSectionStatus(@NonNull Course_Section courseSection);
 
     /**
      * 保存新课时
@@ -74,5 +89,9 @@ public interface CourseContentService {
      * @param lesson
      * @return {@link StatusCode#toString()}
      */
-    String saveCourseLesson(Course_Lesson lesson);
+    String saveLesson(Course_Lesson lesson);
+
+
+
+
 }

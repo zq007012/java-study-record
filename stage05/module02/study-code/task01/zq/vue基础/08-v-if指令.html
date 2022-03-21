@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <img
+        v-if="exist"
+        src="../lib/img/06_Alice_madness HD.jpg"
+        style="height: 500px"
+      /><br />
+      <button @click="deleteImg">去掉图片</button>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        exist: true,
+      },
+      methods: {
+        deleteImg: function () {
+          this.exist = !this.exist;
+        },
+      },
+    });
+  </script>
+</html>

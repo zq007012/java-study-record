@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-show指令</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <img
+        v-show="show"
+        style="height: 200px"
+        src="../lib/img/10_Blackcat HD.jpg"
+      /><br />
+      <img
+        v-show="num > 1"
+        style="height: 200px"
+        src="../lib/img/11_Bowsette HD.jpg"
+      /><br />
+      <button @click="change1">切换图1的显示状态</button>
+      <button @click="change2">切换图2的显示状态</button>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        show: true,
+        num: 2,
+      },
+      methods: {
+        change1: function () {
+          this.show = !this.show;
+        },
+        change2: function () {
+          this.num = this.num > 1 ? 1 : 2;
+          console.log(this.num);
+        },
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <web-msg></web-msg>
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    //创建局部组件
+    var VM = new Vue({
+      el:"#app",
+      components:{
+        //组件名
+        "web-msg":{
+          template:"<div><h1>{{msg1}}</h1><h1>{{msg2}}</h1></div>",
+          data() {
+            return {
+              msg1:"开发ing...",
+              msg2:"开发完成!"
+            }
+          },
+        }
+      }
+
+    })
+  </script>
+</html>

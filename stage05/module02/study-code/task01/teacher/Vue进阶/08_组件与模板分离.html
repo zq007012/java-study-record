@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 使用组件 -->
+      <web-msg></web-msg>
+    </div>
+
+    <!-- 将模板写在 HTML中,给模板一个id -->
+    <template id="t1">
+      <div>
+        <button @click="show">{{msg}}</button>
+      </div>
+    </template>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      components: {
+        "web-msg": {
+          template: "#t1",
+          data() {
+            return {
+              msg: "点击查询",
+            };
+          },
+          methods: {
+            show() {
+              alert("正在查询,请稍后...");
+            },
+          },
+        },
+      },
+    });
+  </script>
+</html>

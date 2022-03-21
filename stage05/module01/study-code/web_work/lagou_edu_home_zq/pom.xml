@@ -23,6 +23,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
+                    <!-- maven编译器使用的 jdk的版本 -->
                     <release>11</release>
                 </configuration>
             </plugin>
@@ -31,6 +32,14 @@
     </build>
 
     <dependencies>
+        <!-- 解决跨域策略的问题 -->
+        <!-- https://mvnrepository.com/artifact/com.thetransactioncompany/cors-filter -->
+        <dependency>
+            <groupId>com.thetransactioncompany</groupId>
+            <artifactId>cors-filter</artifactId>
+            <version>2.10</version>
+        </dependency>
+
         <!-- Servlet -->
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>

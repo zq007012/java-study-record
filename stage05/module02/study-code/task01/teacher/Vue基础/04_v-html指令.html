@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 
+        v-html指令: 设置元素的innerHTML, 向元素中写入标签
+       */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 获取普通文本 -->
+      {{message}}
+      <h2 v-text="message"></h2>
+      <h2 v-html="message"></h2>
+
+      <!-- 设置元素的innerHTML -->
+      <h2 v-html="url"></h2>
+      <h2 v-text="url"></h2>
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        message: "Java程序员",
+        url: "<a href='https://www.baidu.com'>百度一下</a>",
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /*
+        1.计算属性可以 减少运算次数,用于重复相同的计算
+        2.定义函数也可以实现与计算属性相同的效果,但是计算属性可以简化运算
+      */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <h1>{{a*b}}</h1>
+      <h1>{{a*b}}</h1> -->
+      <!-- 
+      <h1>{{res()}}</h1>
+      <h1>{{res()}}</h1> -->
+
+      <h1>{{res2}}</h1>
+      <h1>{{res2}}</h1>
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        a: 10,
+        b: 20,
+      },
+      methods: {
+        res: function () {
+          console.log("res方法执行了! !");
+          return this.a + this.b;
+        },
+      },
+      //使用计算属性 进行优化,减少运算次数,用于重复的运算
+      computed: {
+        res2: function () {
+          console.log("res2方法执行了! !");
+          return this.a + this.b;
+        },
+      },
+    });
+  </script>
+</html>

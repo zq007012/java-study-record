@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 
+        v-model: 实现双向数据绑定
+        单向数据绑定: 将model绑定到view上,当model发生变化时,view会随之变化
+        双向数据绑定: view视图发生变化时,model也会随之改变
+       */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="button" value="修改message" @click="update" />
+
+      <!-- View 视图 -->
+      <!-- <input type="text" v-bind:value="message" /> -->
+
+      <!-- v-model 实现双向数据绑定 -->
+      <input type="text" v-model="message" />
+      <input type="text" v-model="password" />
+      <h2>{{message}}</h2>
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    //VM 业务逻辑控制
+    var VM = new Vue({
+      el: "#app",
+      //Model 数据存储
+      data: {
+        message: "拉钩教育训练营",
+        password: 123,
+      },
+      methods: {
+        update: function () {
+          this.message = "拉钩";
+        },
+      },
+    });
+  </script>
+</html>

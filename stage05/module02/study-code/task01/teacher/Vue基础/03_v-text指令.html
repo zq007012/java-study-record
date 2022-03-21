@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 插值表达式 不会覆盖原来的内容体 -->
+      <h2>{{message}}高薪训练营</h2>
+
+      <!-- v-text 获取data数据,设置标签的内容, 会覆盖之前的内容体 -->
+      <h2 v-text="message">高薪训练营</h2>
+
+      <!-- 拼接字符串 -->
+      <h2 v-text="message+1"></h2>
+      <h2 v-text="message+'abc"></h2>
+    </div>
+  </body>
+  <script src="js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        message: "Java程序员",
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-on</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+
+  <body>
+    <div id="app">
+      <p>{{desc1}}</p>
+      <p>{{desc2}}</p>
+      <p>{{desc3}}</p>
+      <p>{{desc4}}</p>
+      <p>{{desc5}}</p>
+      <p>{{desc6}}</p>
+      <button @click="run1">run1</button>
+      <button @click="run2()">run2</button>
+      <button @click="run2(),run3()">run2和run3</button>
+      <button @click="run4($event)">run4</button>
+      <button @click.once="run5" @click="run6">run5</button>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        desc1: "desc1",
+        count1: 0,
+        desc2: "desc2",
+        count2: 0,
+        desc3: "desc3",
+        count3: 0,
+        desc4: "desc4",
+        count5: 0,
+        desc5: "desc5",
+        count6: 0,
+        desc6: "desc6",
+      },
+      methods: {
+        run1: function () {
+          this.count1++;
+          this.desc1 = "第" + this.count1 + "次运行了run1";
+        },
+        run2: function () {
+          this.count2++;
+          this.desc2 = "第" + this.count2 + "次运行了run2";
+        },
+        run3: function () {
+          this.count3++;
+          this.desc3 = "第" + this.count3 + "次运行了run3";
+        },
+        run4: function ($event) {
+          this.desc4 = $event.type;
+        },
+        run5: function () {
+          this.count5++;
+          this.desc5 = "第" + this.count5 + "次运行了run5";
+        },
+        run6: function () {
+          this.count6++;
+          this.desc6 = "第" + this.count6 + "次运行了run6";
+        },
+      },
+    });
+  </script>
+</html>

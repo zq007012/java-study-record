@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全局过滤器</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <input v-model="name" type="text" placeholder="请输入名字" />
+      <p>全名:{{name | addLastName}}</p>
+    </div>
+  </body>
+  <script>
+    Vue.filter("addLastName", function (value) {
+      return value.length === 0 ? "" : value + "· 诺诺罗亚";
+    });
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        name: "",
+      },
+    });
+  </script>
+</html>

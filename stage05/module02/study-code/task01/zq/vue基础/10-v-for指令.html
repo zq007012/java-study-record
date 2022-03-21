@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-for指令</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <ul type="disc">
+        <li v-for="(game,index) in games">
+          {{index + ". " + game.gameName}}
+          <ul type="circle">
+            <li v-for="(gameRole, index) in game.gameRoles ">{{gameRole}}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        games: [
+          {
+            gameName: "死或生",
+            gameRoles: ["红叶", "穗乃果", "米拉", "不知火舞", "海莲娜"],
+          },
+          {
+            gameName: "最终幻想7",
+            gameRoles: ["蒂法", "艾瑞丝", "杰西", "斯嘉莱特"],
+          },
+          {
+            gameName: "守望先锋",
+            gameRoles: ["小美", "Mercy", "法老之鹰", "猎空", "黑百合", "黑影"],
+          },
+        ],
+      },
+    });
+  </script>
+</html>

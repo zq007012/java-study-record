@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-html指令</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <p>{{message}}娜美</p>
+      <p v-html="message">娜美 <a href="https://www.google.com">谷歌搜索</a></p>
+      <p v-html="message+url">
+        娜美 <a href="https://www.baidu.com">百度搜索</a>
+      </p>
+      <p v-html="message+1">娜美</p>
+      <p v-html="message+url">娜美</p>
+      <p v-html="num+1">娜美</p>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        message: "最终幻想7",
+        url: "<a href='https://www.google.com'>谷歌搜索</a>",
+        num: 8,
+      },
+    });
+  </script>
+</html>

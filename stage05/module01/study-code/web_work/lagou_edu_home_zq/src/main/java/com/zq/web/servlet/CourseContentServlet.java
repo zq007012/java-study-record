@@ -11,6 +11,7 @@ import com.zq.pojo.Course_Section;
 import com.zq.service.CourseContentService;
 import com.zq.service.impl.CourseContentServiceImpl;
 import com.zq.utils.DruidPool;
+import com.zq.utils.EmptyUtils;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -34,6 +35,56 @@ public class CourseContentServlet extends BaseServlet {
     private static final long serialVersionUID = -2030989247169628487L;
 
     /**
+     * 获取 携带了课时信息的章节信息
+     *
+     * @param req
+     * @param resp
+     */
+    public void findLessonsBySectionId(HttpServletRequest req, HttpServletResponse resp) {
+        // 1. 解析请求
+        String sectionId = req.getParameter("section_id");
+        // 2. 处理业务
+        CourseContentDao courseContentDao = new CourseContentDaoImpl(getDataSource());
+        CourseContentService courseContentService = new CourseContentServiceImpl(courseContentDao);
+        List<Course_Lesson> lessonList = courseContentService.findLessonsBySectionId(Integer.parseInt(sectionId));
+        /*jsonFilter -- 实体类对象转换成json对象时, 可以指定实体类中的哪些字段能够转换成json字符串*/
+        SimplePropertyPreFilter jsonFilter = new SimplePropertyPreFilter(Course_Lesson.class,
+                "id", "course_id", "section_id", "theme", "duration", "is_free", "order_num");
+        String respStr = JSON.toJSONString(lessonList, jsonFilter);
+        // 3. 进行响应
+        try {
+            resp.getWriter().println(respStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 章节信息回显
+     *
+     * @param req
+     * @param resp
+     */
+    public void findSectionById(HttpServletRequest req, HttpServletResponse resp) {
+        // 1. 解析请求
+        String sectionId = req.getParameter("section_id");
+        // 2. 处理业务
+        CourseContentDao courseContentDao = new CourseContentDaoImpl(getDataSource());
+        CourseContentService courseContentService = new CourseContentServiceImpl(courseContentDao);
+        Course_Section section = courseContentService.findSectionById(Integer.parseInt(sectionId));
+        /*jsonFilter -- 实体类对象转换成json对象时, 可以指定实体类中的哪些字段能够转换成json字符串*/
+        SimplePropertyPreFilter jsonFilter = new SimplePropertyPreFilter(Course_Section.class,
+                "id", "section_name");
+        String respStr = JSON.toJSONString(section, jsonFilter);
+        // 3. 进行响应
+        try {
+            resp.getWriter().println(respStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 保存或更新课时信息, 请求参数中携带'id'参数则保存, 请求参数中未携带'id'参数则更新
      *
      * @param req  是个post请求, req在{@link BaseServlet#doGet(HttpServletRequest, HttpServletResponse)}方法
@@ -52,11 +103,11 @@ public class CourseContentServlet extends BaseServlet {
 
             BeanUtils.populate(lesson, map);
             // 判断map里是否包含'id'键, 包含则跟新课时信息, 不包含则保存课时信息
-            if (map.containsKey("id")) {
+            if (!EmptyUtils.isEmpty(map.get("id"))) {
                 //更新课时信息
-                respData = courseContentService.updateCourseLesson(lesson);
+                respData = courseContentService.updateLesson(lesson);
             } else {
-                respData = courseContentService.saveCourseLesson(lesson);
+                respData = courseContentService.saveLesson(lesson);
             }
             // 3. 进行响应
             resp.getWriter().println(respData);
@@ -79,7 +130,7 @@ public class CourseContentServlet extends BaseServlet {
         CourseContentDao courseContentDao = new CourseContentDaoImpl(getDataSource());
         CourseContentService courseContentService = new CourseContentServiceImpl(courseContentDao);
         List<Course_Section> courseSectionsWithLessonsByCourseId =
-                courseContentService.findCourseSectionsWithLessonsByCourseId(Integer.parseInt(courseId));
+                courseContentService.findSectionsWithLessonsByCourseId(Integer.parseInt(courseId));
 
         // 3. 进行响应
         String respString = JSON.toJSONString(courseSectionsWithLessonsByCourseId);
@@ -99,7 +150,7 @@ public class CourseContentServlet extends BaseServlet {
      */
     public void findCourseById(HttpServletRequest req, HttpServletResponse resp) {
         // 1. 解析请求
-        String courseId = req.getParameter("id");
+        String courseId = req.getParameter("course_id");
         // 2. 处理业务
         CourseContentDao courseContentDao = new CourseContentDaoImpl(getDataSource());
         CourseContentService courseContentService = new CourseContentServiceImpl(courseContentDao);
@@ -134,12 +185,12 @@ public class CourseContentServlet extends BaseServlet {
             CourseContentDao courseContentDao = new CourseContentDaoImpl(getDataSource());
             CourseContentService courseContentService = new CourseContentServiceImpl(courseContentDao);
             // 判断map是否携带id
-            if (map.get("id") == null) {
+            if (EmptyUtils.isEmpty(map.get("id"))) {
                 // 不携带id, 就是保存章节
-                result = courseContentService.saveCourseSection(section);
+                result = courseContentService.saveSection(section);
             } else {
                 // 携带id, 就是更新章节
-                result = courseContentService.updateCourseSection(section);
+                result = courseContentService.updateSection(section);
             }
             // 3. 进行响应
             resp.getWriter().println(result);
@@ -165,7 +216,7 @@ public class CourseContentServlet extends BaseServlet {
         section.setStatus(Integer.parseInt(status));
         CourseContentDao courseContentDao = new CourseContentDaoImpl(getDataSource());
         CourseContentService courseContentService = new CourseContentServiceImpl(courseContentDao);
-        String respString = courseContentService.updateCourseSectionStatus(section);
+        String respString = courseContentService.updateSectionStatus(section);
         // 3. 进行响应
         try {
             resp.getWriter().println(respString);

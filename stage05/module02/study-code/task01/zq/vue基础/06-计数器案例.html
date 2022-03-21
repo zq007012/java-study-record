@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计数器</title>
+    <!--引入inputNum.css-->
+    <link href="../lib/css/inputNum.css" rel="stylesheet" />
+  </head>
+  <!--引入vue.min.js-->
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <button @click="plus" class="btn btn_plus">+</button>
+      <span @click="zero">&nbsp;{{num}}&nbsp;</span>
+      <button @click="minus" class="btn btn_minus">-</button>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        num: 0,
+      },
+      methods: {
+        plus: function () {
+          this.num++;
+        },
+        minus: function () {
+          this.num--;
+        },
+        zero: function () {
+          this.num = 0;
+        },
+      },
+    });
+  </script>
+</html>

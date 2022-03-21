@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>钩子函数</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <h1 style="color: red">这是直接在html中定义的数据</h1>
+      <component-demo></component-demo>
+    </div>
+
+    <template id="templateDemo">
+      <div>
+        <h1>{{msg}}</h1>
+        <button @click="updateMsg">点击一下, 更新上面的数据</button>
+      </div>
+    </template>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      components: {
+        "component-demo": {
+          template: "#templateDemo",
+          data: function () {
+            return {
+              msg: "这是在组件中定义的数据",
+            };
+          },
+
+          methods: {
+            updateMsg: function () {
+              this.msg = "这是组件中更新后的数据";
+            },
+          },
+
+          beforeCreate: function () {
+            console.log("beforeCreate: msg=" + this.msg);
+            alert("将要创建Vue实例了");
+          },
+
+          created: function () {
+            console.log("created: msg=" + this.msg);
+            alert(
+              "Vue实例创建完成, 属性都绑定好了, 但跟Vue实例中的组件的模板还没有在内存中生成. 这时会执行这个钩子函数"
+            );
+          },
+
+          beforeMount: function () {
+            console.log("beforeMount: msg=" + this.msg);
+            alert(
+              "组件的模板已经在内存中编辑完成了, 尚未放到跟Vue实例绑定了的View中 (注2), 这时会执行这个钩子函数. "
+            );
+          },
+
+          mounted: function () {
+            console.log("mounted: msg=" + this.msg);
+            alert(
+              "组件中的模板被放到与Vue实例绑定了的View中, 渲染到了页面上. 这时会执行这个钩子函数."
+            );
+          },
+
+          beforeUpdate: function () {
+            console.log("beforeUpdate: msg=" + this.msg);
+            alert(
+              "Vue实例或者组件中的Model里面的数据进行了更新, 在这个数据更新之前会先执行这个钩子函数."
+            );
+          },
+
+          updated: function () {
+            console.log("updated: msg=" + this.msg);
+            alert(
+              "Vue实例或者组件中的Model里面的数据进行了更新, 在这个数据更新之后会立刻执行这个钩子函数."
+            );
+          },
+        },
+      },
+    });
+  </script>
+</html>

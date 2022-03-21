@@ -6,7 +6,6 @@ import com.zq.dao.impl.CourseContentDaoImpl;
 import com.zq.pojo.Course;
 import com.zq.pojo.Course_Lesson;
 import com.zq.pojo.Course_Section;
-import com.zq.service.CourseService;
 import com.zq.utils.DateTimeUtils;
 import com.zq.utils.DruidPool;
 import org.junit.jupiter.api.Test;
@@ -33,21 +32,21 @@ public class CourseContentDaoTest {
     }
 
     /**
-     * 测试{@link CourseContentDao#findCourseLessonsBySectionId(int)}方法的功能
+     * 测试{@link CourseContentDao#findLessonsBySectionId(int)}方法的功能
      */
     @Test
     public void testFindCourseLessonsBySectionId(){
-        List<Course_Lesson> lessons = courseContentDao.findCourseLessonsBySectionId(5);
+        List<Course_Lesson> lessons = courseContentDao.findLessonsBySectionId(5);
         System.out.println(JSON.toJSONString(lessons));
     }
 
     /**
-     * 测试{@link CourseContentDao#findCourseSectionsWithLessonsByCourseId(int)}方法的功能
+     * 测试{@link CourseContentDao#findSectionsWithLessonsByCourseId(int)}方法的功能
      */
     @Test
     public void testFindCourseSectionsWithLessonsByCourseId(){
         List<Course_Section> courseSections =
-                courseContentDao.findCourseSectionsWithLessonsByCourseId(2);
+                courseContentDao.findSectionsWithLessonsByCourseId(2);
         for (Course_Section section:
              courseSections) {
             System.out.println(section.getSection_name() + ":");
@@ -72,7 +71,7 @@ public class CourseContentDaoTest {
     }
 
     /**
-     * 测试{@link CourseContentDao#saveCourseSection(Course_Section)}方法的功能
+     * 测试{@link CourseContentDao#saveSection(Course_Section)}方法的功能
      */
     @Test
     public void testSaveCourseSection(){
@@ -87,12 +86,12 @@ public class CourseContentDaoTest {
         section.setCreate_time(now);
         section.setUpdate_time(now);
 
-        int row = courseContentDao.saveCourseSection(section);
+        int row = courseContentDao.saveSection(section);
         System.out.println("保存" + (row > 0 ? "成功" : "失败"));
     }
 
     /**
-     * 测试{@link CourseContentDao#updateCourseSection(Course_Section)}方法的功能
+     * 测试{@link CourseContentDao#updateSection(Course_Section)}方法的功能
      */
     @Test
     public void testUpdateCourseSection(){
@@ -103,13 +102,13 @@ public class CourseContentDaoTest {
         section.setOrder_num(2);
         section.setUpdate_time(DateTimeUtils.getDateTime());
 
-        int row = courseContentDao.updateCourseSection(section);
+        int row = courseContentDao.updateSection(section);
         System.out.println("修改" + (row > 0 ? "成功" : "失败"));
 
     }
 
     /**
-     * 测试{@link CourseContentDao#updateCourseSectionStatus(Course_Section)}方法的功能
+     * 测试{@link CourseContentDao#updateSectionStatus(Course_Section)}方法的功能
      */
     @Test
     public void testUpdateCourseSectionStatus(){
@@ -117,12 +116,12 @@ public class CourseContentDaoTest {
         section.setId(6);
         section.setStatus(1);
         section.setUpdate_time(DateTimeUtils.getDateTime());
-        int row = courseContentDao.updateCourseSectionStatus(section);
+        int row = courseContentDao.updateSectionStatus(section);
         System.out.println("修改" + (row > 0 ? "成功" : "失败"));
     }
 
     /**
-     * 测试{@link CourseContentDao#saveCourseLesson(Course_Lesson)}方法的功能
+     * 测试{@link CourseContentDao#saveLesson(Course_Lesson)}方法的功能
      */
     @Test
     public void testSaveCourseLesson(){
@@ -132,19 +131,19 @@ public class CourseContentDaoTest {
         lesson.setTheme("微服务架构第0讲");
         lesson.setDuration(15);
         lesson.setIs_free(1);
-        lesson.setOrderNum(0);
+        lesson.setOrder_num(0);
         String now = DateTimeUtils.getDateTime();
         lesson.setCreate_time(now);
         lesson.setUpdate_time(now);
         lesson.setStatus(2);
 
-        int row = courseContentDao.saveCourseLesson(lesson);
+        int row = courseContentDao.saveLesson(lesson);
         System.out.println("新增课时" + (row > 0 ? "成功" : "失败"));
 
     }
 
     /**
-     * 测试{@link CourseContentDao#updateCourseLesson(Course_Lesson)}方法的功能
+     * 测试{@link CourseContentDao#updateLesson(Course_Lesson)}方法的功能
      */
     @Test
     public void testUpdateCourseLesson(){
@@ -155,10 +154,11 @@ public class CourseContentDaoTest {
         lesson.setTheme("微服务架构第102讲");
         lesson.setDuration(150);
         lesson.setIs_free(0);
-        lesson.setOrderNum(102);
+        lesson.setOrder_num(102);
         String now = DateTimeUtils.getDateTime();
         lesson.setUpdate_time(now);
-        int row = courseContentDao.updateCourseLesson(lesson);
+        int row = courseContentDao.updateLesson(lesson);
         System.out.println("更新课时" + (row > 0 ? "成功" : "失败"));
     }
+
 }

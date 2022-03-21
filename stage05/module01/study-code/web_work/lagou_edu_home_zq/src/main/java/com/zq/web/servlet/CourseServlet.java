@@ -100,7 +100,22 @@ public class CourseServlet extends BaseServlet {
         Course course = courseService.findCourseById(Integer.parseInt(id));
         /*jsonFilter -- 实体类对象转换成json对象时, 可以指定实体类中的哪些字段能够转换成json字符串*/
         SimplePropertyPreFilter jsonFilter = new SimplePropertyPreFilter(Course.class,
-                "id", "course_name", "teacher_name", "teacher_info", "preview_first_field", "preview_second_field", "discounts", "price", "price_tag", "course_img_url", "share_title", "share_image_title", "share_description", "course_description", "status");
+                "id",
+                "course_name",
+                "brief",
+                "teacher_name",
+                "teacher_info",
+                "preview_first_field",
+                "preview_second_field",
+                "discounts",
+                "price",
+                "price_tag",
+                "course_img_url",
+                "share_title",
+                "share_image_title",
+                "share_description",
+                "course_description",
+                "status");
         String respString = JSON.toJSONString(course, jsonFilter);
         // 3. 进行响应
         try {

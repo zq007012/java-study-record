@@ -22,7 +22,7 @@ public interface CourseContentDao {
      * @param lesson
      * @return
      */
-    int updateCourseLesson(Course_Lesson lesson);
+    int updateLesson(Course_Lesson lesson);
 
     /**
      * 根据章节id查询该章节下的所有课时
@@ -30,7 +30,7 @@ public interface CourseContentDao {
      * @param sectionId 章节id
      * @return
      */
-    List<Course_Lesson> findCourseLessonsBySectionId(int sectionId);
+    List<Course_Lesson> findLessonsBySectionId(int sectionId);
 
     /**
      * 根据课程id获取该课程下的所有章节, 同时每个章节都携带有课时信息
@@ -38,7 +38,7 @@ public interface CourseContentDao {
      * @param courseId 课程id
      * @return
      */
-    List<Course_Section> findCourseSectionsWithLessonsByCourseId(int courseId);
+    List<Course_Section> findSectionsWithLessonsByCourseId(int courseId);
 
     /**
      * 根据课程id获取该课程的<code>id, course_name</code>
@@ -55,7 +55,7 @@ public interface CourseContentDao {
      * @param courseSection
      * @return
      */
-    int saveCourseSection(Course_Section courseSection);
+    int saveSection(Course_Section courseSection);
 
     /**
      * 更新course_section表中的一条记录, 更新的字段有
@@ -64,7 +64,7 @@ public interface CourseContentDao {
      * @param courseSection
      * @return
      */
-    int updateCourseSection(Course_Section courseSection);
+    int updateSection(Course_Section courseSection);
 
     /**
      * 修改课程状态, 修改的字段有
@@ -74,7 +74,7 @@ public interface CourseContentDao {
      * @param section
      * @return
      */
-    int updateCourseSectionStatus(Course_Section section);
+    int updateSectionStatus(Course_Section section);
 
     /**
      * 保存新课时
@@ -84,5 +84,13 @@ public interface CourseContentDao {
      * @param lesson
      * @return
      */
-    int saveCourseLesson(Course_Lesson lesson);
+    int saveLesson(Course_Lesson lesson);
+
+    /**
+     * 根据章节id获取章节信息
+     * <p>获取的字段有<code>id, section_name</code></p>
+     * @param sectionId
+     * @return
+     */
+    Course_Section findSectionById(int sectionId);
 }

@@ -14,6 +14,8 @@
           <element id="module-output" name="lagou_edu_home_zq" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.thetransactioncompany:cors-filter:2.10" />
+          <element id="library" level="project" name="Maven: com.thetransactioncompany:java-property-utils:1.16" />
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.9.4" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.2" />
           <element id="library" level="project" name="Maven: commons-dbutils:commons-dbutils:1.7" />

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件与模板分离</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <web-msg></web-msg>
+    </div>
+
+    <!--组件<web-msg>的模板-->
+    <template id="templateDemo">
+      <p><button @click="show">{{msg}}</button></p>
+    </template>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      components: {
+        "web-msg": {
+          template: "#templateDemo",
+          data: function () {
+            return {
+              msg: "点击查询",
+            };
+          },
+          methods: {
+            show: function () {
+              alert("努力查询中...");
+            },
+          },
+        },
+      },
+    });
+  </script>
+</html>

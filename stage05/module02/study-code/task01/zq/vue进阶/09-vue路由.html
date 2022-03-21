@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue路由</title>
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/vue-router@4"></script>
+  <body>
+    <div id="app">
+      <router-link to="/home">主页</router-link>
+      <router-link to="/news">新闻</router-link>
+
+      <router-view></router-view>
+    </div>
+  </body>
+  <script>
+    const app = Vue.createApp();
+    // 创建组件
+    const homeComponent = app.component("homeComponent", {
+      template: "<h1 style='color:red'>{{msg}}</h1>",
+      data: function () {
+        return {
+          msg: "这是主页内容",
+        };
+      },
+    });
+    // 创建组件
+    const newsComponent = app.component("homeComponent", {
+      template: "<h1 style='color:blue'>{{msg}}</h1>",
+      data: function () {
+        return {
+          msg: "这是新闻内容",
+        };
+      },
+    });
+
+    //创建路由组
+    const routesDemo = [
+      { path: "/home", component: homeComponent },
+      { path: "/news", component: newsComponent },
+    ];
+    // 创建VueRouter实例.
+    const routerDemo = VueRouter.createRouter({
+      history: VueRouter.createWebHashHistory(),
+      routes: routesDemo,
+    });
+    // Vue实例使用router
+    app.use(routerDemo);
+    // Vue实例绑定View
+    app.mount("#app");
+  </script>
+</html>

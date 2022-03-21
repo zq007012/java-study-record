@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02-局部过滤器</title>
+  </head>
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <input v-model="price" type="text" placeholder="请输入一个价格" />
+      <p>电脑价格: {{price | addUnit}}</p>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        price: "",
+      },
+      methods: {},
+      computed: {},
+      filters: {
+        addUnit: function (value) {
+          console.log("----------------");
+          return value.length === 0 ? "" : value + "元";
+        },
+      },
+    });
+  </script>
+</html>

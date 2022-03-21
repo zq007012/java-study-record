@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 使用插值表达式,调用过滤器 -->
+      <p>电脑价格: {{price | addIcon}}</p>
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    //局部过滤器 在vue实例的内部创建filter
+    var VM = new Vue({
+      el: "#app", //挂载点
+      data: {
+        //model
+        price: 200,
+      },
+      methods: {
+        //方法
+      },
+      computed: {
+        //计算属性
+      },
+
+      //局部过滤器
+      filters: {
+        //定义处理函数 value = price
+        addIcon(value) {
+          return "$" + value;
+        },
+      },
+    });
+  </script>
+</html>

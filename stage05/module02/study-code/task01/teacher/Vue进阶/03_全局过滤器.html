@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /*
+        需求: 将用户名开头字母大写
+        总结:
+          1.过滤器经常被用来处理文本格式化操作
+          2.过滤器使用的两个位置: {{}} 插值表达式中, v-bind表达式中
+          3.过滤器是通过管道传输数据的 |
+      */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{user.name | changeName}}</p>
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+
+    //在创建vue实例之前,创建全局过滤器
+    Vue.filter("changeName", function (value) {
+      //将姓名的开头字母大写
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    });
+
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        user: { name: "jack" },
+      },
+    });
+
+   
+  </script>
+</html>

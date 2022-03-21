@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /*
+      v-for指令:根据数据生成列表结构
+        1.数组经常和v-for结合使用
+        2.语法格式: (item,index) in 数据
+        3.数组的长度变化,会同步更新到页面上, 响应式的
+    */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="button" value="添加数据" @click="add" />
+      <input type="button" value="移除数据" @click="remove" />
+
+      <ul>
+        <!-- 在li标签中 获取数组的元素 -->
+        <li v-for="(item,index) in arr">
+          {{index+1}}城市: {{item}}
+        </li>
+      </ul>
+
+      <!-- 使用h2标签显示
+      
+      -->
+      <h2 v-for="p in persons">
+        {{p.name}}
+      </h2>
+    </div>
+  </body>
+
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        //数组
+        arr: ["上海", "北京", "广东", "深圳"],
+
+        //对象数组
+        persons: [
+          { name: "尼古拉斯·赵四" },
+          { name: "莱昂纳多·小沈阳" },
+          { name: "多利安·刘能" },
+        ],
+      },
+      methods: {
+        add: function () {
+          //向数组添加元素 push
+          this.persons.push({ name: "小斌" });
+        },
+        remove: function () {
+          //移除数据
+          this.persons.shift();
+        },
+      },
+    });
+  </script>
+</html>

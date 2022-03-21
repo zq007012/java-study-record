@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全局组件的使用</title>
+  </head>
+  <!--引入Vue-->
+  <script src="../lib/js/vue.min.js"></script>
+  <body>
+    <div id="app">
+      <component-demo></component-demo>
+    </div>
+  </body>
+  <script>
+    var demo = Vue.component("component-demo", {
+      template: "<div>头部组件的html代码<h1 @click='hello'>{{msg}}</h1></div>",
+      data: function () {
+        return { msg: "hello这里是组件中的data数据" };
+      },
+
+      methods: {
+        hello: function () {
+          alert("嗨, 你好啊!");
+        },
+      },
+    });
+    var vm = new Vue({
+      el: "#app",
+    });
+  </script>
+</html>

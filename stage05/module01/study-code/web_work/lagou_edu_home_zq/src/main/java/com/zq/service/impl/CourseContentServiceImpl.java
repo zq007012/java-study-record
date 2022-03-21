@@ -32,6 +32,28 @@ public class CourseContentServiceImpl implements CourseContentService {
     }
 
     /**
+     * 根据课时id获取 携带了课时信息的 章节信息
+     * @param sectionId
+     * @return
+     */
+    @Override
+    public List<Course_Lesson> findLessonsBySectionId(int sectionId) {
+        return courseContentDao.findLessonsBySectionId(sectionId);
+    }
+
+    /**
+     * 根据章节id获取章节信息
+     * <p>获取的字段有<code>id, section_name</code></p>
+     *
+     * @param sectionId
+     * @return
+     */
+    @Override
+    public Course_Section findSectionById(int sectionId) {
+        return courseContentDao.findSectionById(sectionId);
+    }
+
+    /**
      * 更新课时信息
      * <p>需要更新的字段是: <code>course_id, section_id, theme, duration, is_free, order_num, update_time</code>,
      * update_time由本服务设置</p>
@@ -41,9 +63,9 @@ public class CourseContentServiceImpl implements CourseContentService {
      * @return {@link StatusCode#toString()}
      */
     @Override
-    public String updateCourseLesson(Course_Lesson lesson) {
+    public String updateLesson(Course_Lesson lesson) {
         lesson.setUpdate_time(DateTimeUtils.getDateTime());
-        int row = courseContentDao.updateCourseLesson(lesson);
+        int row = courseContentDao.updateLesson(lesson);
         return row > 0 ? StatusCode.SUCCESS.toString() : StatusCode.FAIL.toString();
     }
 
@@ -54,8 +76,8 @@ public class CourseContentServiceImpl implements CourseContentService {
      * @return
      */
     @Override
-    public List<Course_Section> findCourseSectionsWithLessonsByCourseId(int courseId) {
-        return courseContentDao.findCourseSectionsWithLessonsByCourseId(courseId);
+    public List<Course_Section> findSectionsWithLessonsByCourseId(int courseId) {
+        return courseContentDao.findSectionsWithLessonsByCourseId(courseId);
     }
 
     /**
@@ -78,12 +100,12 @@ public class CourseContentServiceImpl implements CourseContentService {
      * @return {@link StatusCode#toString()}
      */
     @Override
-    public String saveCourseSection(@NonNull Course_Section courseSection) {
+    public String saveSection(@NonNull Course_Section courseSection) {
         courseSection.setStatus(2);
         String now = DateTimeUtils.getDateTime();
         courseSection.setCreate_time(now);
         courseSection.setUpdate_time(now);
-        int row = courseContentDao.saveCourseSection(courseSection);
+        int row = courseContentDao.saveSection(courseSection);
         return row > 0 ? StatusCode.SUCCESS.toString() : StatusCode.FAIL.toString();
     }
 
@@ -95,16 +117,16 @@ public class CourseContentServiceImpl implements CourseContentService {
      * @return {@link StatusCode#toString()}
      */
     @Override
-    public String updateCourseSection(@NonNull Course_Section courseSection) {
+    public String updateSection(@NonNull Course_Section courseSection) {
         courseSection.setUpdate_time(DateTimeUtils.getDateTime());
-        int row = row = courseContentDao.updateCourseSection(courseSection);
+        int row = row = courseContentDao.updateSection(courseSection);
         return row > 0 ? StatusCode.SUCCESS.toString() : StatusCode.FAIL.toString();
     }
 
     @Override
-    public String updateCourseSectionStatus(@NonNull Course_Section courseSection) {
+    public String updateSectionStatus(@NonNull Course_Section courseSection) {
         courseSection.setUpdate_time(DateTimeUtils.getDateTime());
-        int row = courseContentDao.updateCourseSectionStatus(courseSection);
+        int row = courseContentDao.updateSectionStatus(courseSection);
         return row > 0 ? StatusCode.SUCCESS.toString() : StatusCode.FAIL.toString();
     }
 
@@ -118,12 +140,12 @@ public class CourseContentServiceImpl implements CourseContentService {
      * @return {@link StatusCode#toString()}
      */
     @Override
-    public String saveCourseLesson(Course_Lesson lesson) {
+    public String saveLesson(Course_Lesson lesson) {
         lesson.setStatus(2);
         String now = DateTimeUtils.getDateTime();
         lesson.setCreate_time(now);
         lesson.setUpdate_time(now);
-        int row = courseContentDao.saveCourseLesson(lesson);
+        int row = courseContentDao.saveLesson(lesson);
         return row > 0 ? StatusCode.SUCCESS.toString() : StatusCode.FAIL.toString();
     }
 }

@@ -50,13 +50,15 @@ public abstract class BaseServlet extends HttpServlet {
         //已经在EncodingFilter中对req的编码进行了设置, 这里就不必再设置了
         //req.setCharacterEncoding("utf-8");
         //String contentType = req.getHeader("Content-Type");
-        String contentType = req.getContentType();
+        String reqContentType = req.getContentType();
         String methodName = null;
-        if ("application/json;charset=utf-8".equalsIgnoreCase(contentType)) {
+        // 判断请求携带的数据类型
+        if (reqContentType != null &&
+                reqContentType.toLowerCase().contains("application/json")) {
+            // Post方式提交的数据, 数据为json格式的字符串
             String postJson = getPostJson(req);
-            Map<String,Object> postJsonMap = JSON.parseObject(postJson, Map.class);
-            req.setAttribute("postJsonMap",postJsonMap);
-
+            Map<String, Object> postJsonMap = JSON.parseObject(postJson, Map.class);
+            req.setAttribute("postJsonMap", postJsonMap);
             assert postJsonMap != null;
             methodName = (String) postJsonMap.get("methodName");
         } else {

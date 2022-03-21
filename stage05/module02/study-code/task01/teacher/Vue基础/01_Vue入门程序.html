@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- 1.引入vue.js -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script> -->
+    <script src="./js/vue.min.js"></script>
+  </head>
+  <body>
+    <!-- 2.创建 id为 app 的div -->
+    <div id="app">
+      {{name}} <br />
+      {{school.name}} {{school.mobile}}<br />
+      <ul>
+        <li>{{names[0]}}</li>
+        <li>{{names[1]}}</li>
+        <li>{{names[2]}}</li>
+      </ul>
+    </div>
+  </body>
+
+  <script>
+    //3.创建Vue实例
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        name: "你好世界 我不好",
+        //对象类型
+        school: {
+          name: "拉钩教育",
+          mobile: "1001001",
+        },
+        //数组类型
+        names: ["尼古拉斯", "赵四", "凯撒"],
+      },
+    });
+  </script>
+</html>

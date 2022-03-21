@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>计数器:{{count}}</h2>
+      <input type="button" @click="count++" value="点我+1" />
+    </div>
+  </body>
+  <script src="./js/vue.min.js"></script>
+  <script>
+    var VM = new Vue({
+      el: "#app",
+      data: {
+        count: 1,
+      },
+      watch: {
+        //监测属性的值的变化
+        count: function (nval, oval) {
+          //参数1:原来的值 参数2:新的值
+          alert("计数器发生变化: " + oval + " 变化为 " + nval);
+        },
+      },
+    });
+  </script>
+</html>
