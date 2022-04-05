@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.mapper.UserMapper">
+    <!--<resultMap id="userResultMap" type="user" autoMapping="true">
+        <id column="id" property="ida"/>
+        <result column="age" property="agea"/>
+        <result column="username" property="usernamea"/>
+        <result column="birthday" property="birthdaya"/>
+    </resultMap>-->
+    <select id="findAll" resultType="user">
+        select *
+        from user
+    </select>
+
+    <select id="findByArg" resultType="user">
+        select *
+        from user
+        where age = #{arg0}
+          and debut_works like #{arg1}
+    </select>
+
+    <select id="findByParam" resultType="user">
+        select *
+        from user
+        where age = #{param1}
+          and debut_works like #{param2}
+    </select>
+
+    <select id="findByAnnoParam" resultType="user">
+        select *
+        from user
+        where age = #{age}
+          and debut_works like #{debutWorks}
+    </select>
+    <select id="findByMap" parameterType="map" resultType="user">
+        select *
+        from user
+        where age = #{age}
+          and debut_works like #{debutWorks}
+    </select>
+
+    <select id="findByPojo" parameterType="user" resultType="user">
+        select *
+        from user
+        where age = #{age}
+          and debut_works like #{debutWorks}
+    </select>
+
+    <select id="findFuzzy1" parameterType="string" resultType="user">
+        select *
+        from user
+        where username like #{username}
+    </select>
+
+    <select id="findFuzzy2" parameterType="string" resultType="user">
+        select *
+        from user
+        where username like concat('%', #{username}, '%')
+    </select>
+    <select id="findFuzzy3" parameterType="string" resultType="user">
+        select *
+        from user
+        where username like '%${value}%'
+    </select>
+
+    <insert id="saveAndGetId1" parameterType="user" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        insert into user(username, age, birthday, gender, debut_works)
+        values (#{username}, #{age}, #{birthday}, #{gender}, #{debutWorks})
+    </insert>
+
+    <insert id="saveAndGetId2" parameterType="user">
+        <selectKey resultType="int" order="AFTER" keyColumn="id"
+                   keyProperty="id">
+            select last_insert_id();
+        </selectKey>
+        insert into user(username, age, birthday, gender, debut_works)
+        values (#{username}, #{age}, #{birthday}, #{gender}, #{debutWorks})
+    </insert>
+
+    <select id="findByIf" resultType="user" parameterType="user">
+        select * from user
+        <where>
+            <if test="id > 0">
+                or id = #{id}
+            </if>
+
+            <if test="username != null and !username.isEmpty()">
+                and username like concat('%',#{username},'%')
+            </if>
+
+            <if test="debutWorks != null and !debutWorks.isEmpty()">
+                and debut_works like concat('%',#{debutWorks},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findByChoose" resultType="user" parameterType="user">
+        select * from user
+        <where>
+            <choose>
+                <when test="id > 0">
+                    id = #{id}
+                </when>
+
+                <when test="username != null and !username.isEmpty()">
+                    and username like concat('%',#{username},'%')
+                </when>
+
+                <when test="debutWorks != null and !debutWorks.isEmpty()">
+                    and debut_works like concat('%',#{debutWorks},'%')
+                </when>
+                <otherwise>
+
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateUserBySet" parameterType="user">
+        update user
+        <set>
+            <if test="username != null and !username.isEmpty()">
+                username = #{username},
+            </if>
+            <if test="age &gt; 0 and age &lt;= 120">
+                age = #{age},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="debutWorks != null and !debutWorks.isEmpty()">
+                debut_works = #{debutWorks},
+            </if>
+
+        </set>
+        <where>
+            <!--判断一下id的值, 如果id值大于0时, 就拼接 id = #{id}, 更新对应的记录
+            如果id值小于等于0, 就拼接1 != 1, 不更新任何记录-->
+            <choose>
+                <when test="id &gt; 0">
+                    id = #{id}
+                </when>
+                <otherwise>
+                    1 != 1
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <sql id="selectAllFields">
+        select *
+        from user
+    </sql>
+    <select id="findByForeach" resultType="user">
+        <include refid="selectAllFields"/>
+        <where>
+            <foreach collection="array" open="age in (" close=")" item="age"
+                     separator=",">
+                #{age}
+            </foreach>
+        </where>
+    </select>
+</mapper>

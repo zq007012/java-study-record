@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.mapper.ArticleMapper">
+    <select id="findAll" resultType="article">
+        select *
+        from t_article;
+    </select>
+
+    <resultMap id="articleWithComments" type="article" autoMapping="true">
+        <id property="id" column="id"/>
+        <collection property="commentList" ofType="comment"
+                    select="com.zq.mapper.CommentMapper.findByArticleId"
+                    column="id"/>
+    </resultMap>
+    <select id="findAllWithComments" resultMap="articleWithComments">
+        select *
+        from t_article;
+    </select>
+</mapper>
