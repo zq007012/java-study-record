@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--扫描并启用该剥下的Spring注解-->
+    <context:component-scan base-package="com.zq"/>
+    <aop:aspectj-autoproxy/>
+    <!--引入外部的jdbc.properties文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner">
+        <constructor-arg name="ds" ref="dataSource"/>
+    </bean>
+
+
+    <!--<aop:config>
+        <aop:pointcut id="transfer"
+                      expression="execution(void com.zq.service.impl.AccountServiceImpl.transfer(..))"/>
+
+        <aop:aspect ref="transferAdvice">
+            <aop:before method="beforeTransfer"
+                        pointcut-ref="transfer"/>
+            <aop:after-returning method="afterReturningTransfer"
+                                 pointcut-ref="transfer"/>
+            <aop:after-throwing method="afteThrowingTransfer"
+                                pointcut-ref="transfer"/>
+            <aop:after method="afterTransfer"
+                       pointcut-ref="transfer"/>
+        </aop:aspect>
+    </aop:config>-->
+</beans>

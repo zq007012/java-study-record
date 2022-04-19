@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="accountService" class="com.zq.service.impl.AccountServiceImpl"/>
+    <bean id="transferAdvice" class="com.zq.advice.TransferAdvice"/>
+
+    <!--AOP配置, 对各个切面对象中的通知进行配置, 按需要与切点进行组合, 这样这个组合就会被织入到代理对象的对应方法中-->
+    <aop:config>
+        <aop:pointcut id="transfer"
+                      expression="execution(public void com.zq.service.impl.AccountServiceImpl.transfer())"/>
+        <!--一个切面对象的配置-->
+        <aop:aspect ref="transferAdvice">
+            <!--切面对象中的一个通知与切点的组合方式-->
+            <aop:before method="before"
+                        pointcut-ref="transfer"/>
+
+            <aop:after-returning method="afterReturing"
+                                 pointcut-ref="transfer"/>
+
+            <aop:after-throwing method="afterThrowing"
+                                pointcut-ref="transfer"/>
+
+            <aop:after method="ending"
+                       pointcut-ref="transfer"/>
+
+            <aop:around method="around"
+                        pointcut-ref="transfer"/>
+        </aop:aspect>
+
+    </aop:config>
+</beans>
