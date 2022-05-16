@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.EmployeeDao">
+    <select id="findAll" resultType="Employee">
+        select e.*, d.dept_name
+        from tb_employee e
+                 left join tb_dept d
+                           on e.dept_id = d.dept_id
+    </select>
+
+    <select id="searchByEmpName" resultType="employee">
+        select e.*, d.dept_name
+        from tb_employee e left join tb_dept d
+        on e.dept_id = d.dept_id
+        <where>
+            e.emp_name like concat("%", #{empNameKeyword},"%")
+        </where>
+    </select>
+
+    <insert id="save" parameterType="employee">
+        insert into tb_employee(emp_name, dept_id, job_name, join_date,
+                                telephone)
+        values (#{empName}, #{ deptId}, #{ jobName}, #{ joinDate},
+                #{ telephone})
+    </insert>
+</mapper>

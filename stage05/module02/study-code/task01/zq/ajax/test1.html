@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="../lib//js/jquery.min.js"></script>
+  <body>
+    <button id="btn1">get请求</button>
+  </body>
+  <script>
+    $("#btn1").click(function () {
+      console.log("点击了btn1----------------");
+      let data = { name: "穗乃果", money: 1000 };
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:2222/hhh",
+        data: data,
+      });
+    });
+  </script>
+</html>

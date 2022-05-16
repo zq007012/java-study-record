@@ -1,0 +1,31 @@
+DROP DATABASE IF EXISTS z_company;
+CREATE DATABASE z_company character set utf8mb4;
+
+USE z_company;
+SELECT DATABASE();
+
+CREATE TABLE tb_dept(
+	dept_id INT NOT NULL AUTO_INCREMENT COMMENT '部门号',
+	dept_name VARCHAR(32) COMMENT '部门名',
+	major_name VARCHAR(32) COMMENT '主管',
+	telephone VARCHAR(12) COMMENT '联系电话',
+	email VARCHAR(320) COMMENT '邮箱',
+	PRIMARY KEY(dept_id)
+) COMMENT='部门表';
+
+SHOW FULL COLUMNS FROM tb_dept;
+
+USE z_company;
+CREATE TABLE tb_employee(
+	emp_id INT NOT NULL AUTO_INCREMENT COMMENT '员工号',
+	emp_name VARCHAR(32) COMMENT '姓名',
+	dept_id INT COMMENT '部门号',
+	job_name VARCHAR(32) COMMENT '职位, 包括包括产品经理、销售经理、 客户经理等',
+	join_date DATE COMMENT '入职时间',
+	telephone VARCHAR(12) COMMENT '联系方式',
+	PRIMARY KEY(emp_id),
+	CONSTRAINT dept_emp_index FOREIGN KEY(dept_id) REFERENCES tb_dept(dept_id)
+	
+);
+
+SHOW FULL COLUMNS FROM tb_employee;

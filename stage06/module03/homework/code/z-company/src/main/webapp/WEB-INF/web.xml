@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!--配置前端控制器DispatcherServlet以及SpringMVC核心配置文件的位置-->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!--SpringMVC核心配置文件的位置-->
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+        <!--启动时就创建前端控制器DispatcherServlet, 以避免第一次访问时的卡顿问题-->
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <!--会拦截所有非'.jsp'结尾的请求, 并将这些请求交给前端控制器去处理,
+    前端控制器就会将这些请求交给处理器映射器去找对应的处理器, 如果该请求
+    没有对应的处理器, 则会返回404状态码-->
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--注册springframework的CharacterEncodingFilter过滤器, 解决post请求的中文乱码问题-->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!--CharacterEncodingFilter的初始化参数设置为UTF-8, 表示以UTF-8编码解码请求中的参数-->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--Web应用整合Spirng容器-->
+    <!--注册ContextLoaderListener监听器,
+    当监听到本Web应用的ServletContext容器的创建时, 就会加载Spring的配置文件,
+    当监听到本Web应用的ServletContext容器的创建时, 就会销毁Spring的IOC容器-->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <!--将Spring核心配置文件的路径保存到SevletContext对象的param中-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+</web-app>

@@ -1,0 +1,11 @@
+USE z_company;
+INSERT INTO tb_dept VALUES(1, '市场部', '拉勾招聘', '400-400-4008', 'lagou@163.com'),(2,'销售部','拉勾教育','400-400-4002', 'laggou@163.com');
+
+INSERT INTO tb_employee VALUES
+	(1,'小王',1,'客户经理', '2020-06-06', '13212345678'),
+	(2,'老于',1,'客户经理','2019-04-27','13512345679'),
+	(3,'老方',2,'销售经理','2015-08-14','13512345610');
+
+SELECT * FROM tb_dept;
+
+SELECT * FROM tb_employee;

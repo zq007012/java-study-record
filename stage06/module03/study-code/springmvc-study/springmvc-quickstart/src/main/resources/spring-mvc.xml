@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--扫描并启用该包下的SpringMVC注解-->
+    <context:component-scan base-package="com.zq.controller"/>
+
+    <!--处理器映射器和处理器适配器功能增强, 自动将请求参数转换为handler方法中对应的参数的类型-->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <!--可以自定义多个类型转换器, 然后添加到类型转换器服务中-->
+        <property name="converters">
+            <set>
+                <bean class="com.zq.converter.DateConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--给逻辑视图名添加前缀-->
+        <property name="prefix" value="/pages/"/>
+        <!--给逻辑视图名添加后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--前端控制器拦截到的关于静态资源的请求(有后缀名的请求)不交处理器映射器处理, 而是交给
+    Tomcat服务其默认的servlet处理器去处理, Tomcat服务其默认的servlet处理器会直接找到对应的静态资源-->
+    <mvc:default-servlet-handler/>
+
+    <!--将前端控制器拦截到的'/img/**'格式的请求, 映射到本web应用下的img目录中的对应静态资源-->
+    <mvc:resources mapping="/img/**" location="/img/"/>
+</beans>
