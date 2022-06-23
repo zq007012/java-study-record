@@ -46,4 +46,6 @@ public interface UserMapper {
     int updateUserBySet(User user);
 
     List<User> findByForeach(int[] ages);
+
+    List<User> findByGenderAndDebutWorks(String gender);
 }

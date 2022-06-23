@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.UserMapper">
+    <!--
+    在user表中以
+    where is_del != 1 and name like concat('%', #{username}, '%') and create_time between #{startCreateTime} and {endCreateTime}
+    为条件进行条件查询
+    -->
+    <select id="findUserByNameAndCreateTime" parameterType="userVo"
+            resultType="user">
+        select * from user
+        <where>
+            is_del != 1
+            <if test="username != null and !username.trim().isEmpty()">
+                and name like concat('%', #{username}, '%')
+            </if>
+            <if test="startCreateTime != null and endCreateTime != null">
+                and create_time between #{startCreateTime} and #{endCreateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--
+    更新user表中where id = #{id}多的记录的status, update_time
+    -->
+    <update id="updateUserStatus" parameterType="user">
+        update user
+        <set>
+            <if test="status != null and !status.trim().isEmpty()">
+                status = #{status},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <otherwise>false</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--
+     * 在usr表中获取一条
+     * where phone = #{phone}的记录
+     * @param phone phone对应user表中的字段phone
+     * @return 查询到的user对象-->
+    <select id="findUserByPhone" resultType="user">
+        select *
+        from user
+        where phone like #{phone}
+    </select>
+
+    <!--
+    使用内连接查询
+    在user_role_ralation表中查找到本用户关联的所有角色的主键id
+    根据角色的主键id在roles表中查询该角色的详细信息-->
+    <select id="findRolesAssociatedWithUserByUserId" resultType="roles">
+        select r.*
+        from user_role_relation urr
+                 join roles r on urr.user_id = #{userId} and r.id = urr.role_id;
+    </select>
+
+    <!--
+    在user_role_relation表中批量添加记录-->
+    <insert id="saveUserRoleRelationInBatches">
+        insert into user_role_relation(user_id, role_id,
+        created_time,updated_time, created_by, updated_by) values
+        <foreach collection="array" separator="," item="userRoleRelation">
+            (#{userRoleRelation.userId}, #{userRoleRelation.roleId},
+            #{userRoleRelation.createdTime},#{userRoleRelation.updatedTime},
+            #{userRoleRelation.createdBy}, #{userRoleRelation.updatedBy})
+        </foreach>
+    </insert>
+
+    <!--
+    在user_role_relation表中删除where user_id=#{userId}的记录, 这样该用户就不会担任这些角色了-->
+    <delete id="deleteUserRoleRelationByUserId">
+        delete
+        from user_role_relation
+        where user_id = #{userId}
+    </delete>
+</mapper>

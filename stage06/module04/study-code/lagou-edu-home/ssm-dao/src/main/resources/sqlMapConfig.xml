@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/>
+    <settings>
+        <!--值为true时, 全局允许使用二级缓存, 值为false时, 全局不允许使用二级缓存, 默认是true-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--值为SESSION时开启一级缓存, 值为STATEMENT时关闭一级缓存, 默认是SESSION-->
+        <setting name="localCacheScope" value="SESSION"/>
+        <!--开启 有下划线的表字段名 与 驼峰命名的成员变量名 之间的映射, 默认值是false-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启全局延迟加载(true), 默认值是false-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--关闭侵入性延迟加载, 若是开启(值为true), 则调用嵌套查询对象的任意方法都会引发延迟加载的子对象的加载, 从3.4开始默认值是fasle-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--设置调用嵌套查询对象的哪些方法会引发延迟加载的子对象的加载, 默认值是"equals,hashCode,clone,toString"-->
+        <setting name="lazyLoadTriggerMethods" value=""/>
+    </settings>
+    <typeAliases>
+        <!--实体类所在的包-->
+        <package name="com.zq.domain"/>
+    </typeAliases>
+    <plugins>
+        <!--拦截器, 拦截mybatis的sql操作, 从而做出修改, 还需要在pom中添加依赖-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--配置当前所用数据库的方言, 数据库Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL, 从pagehelper插件4.0.0开始本插件支持自动识别使用的数据库，不需要配置数据库方言,否则会报错-->
+            <!--<property name="dialect" value="mysql"/>-->
+        </plugin>
+    </plugins>
+
+    <!--引入mapper文件注册为映射器, 这些被引入的mapper文件中的sql操作才可以在上面启用的数据库环境中使用-->
+    <mappers>
+        <!--映射器对应的包-->
+        <package name="com.zq.dao"/>
+    </mappers>
+</configuration>

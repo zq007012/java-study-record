@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.PromotionSpaceMapper">
+    <!--获取所有promotion_space表中的记录,
+    每条记录中的属性有id, name, spaceKey, createTime, updateTime, isDel-->
+    <select id="findAllPromotionSpace" resultType="promotionSpace">
+        select id, name, spaceKey, createTime, updateTime, isDel
+        from promotion_space
+    </select>
+
+    <!--
+        在promotion_space表中添加一条记录,
+        这条记录中要赋值的字段是<code>name, createTime, updateTime</code>
+     -->
+    <insert id="savePromotionSpace" parameterType="promotionSpace">
+        insert into promotion_space(name, spaceKey, createTime, updateTime)
+        values (#{name}, #{spaceKey}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!--
+    根据id修改promotion_space表中的一条记录,
+    这条记录中要修改的字段时<code>name,updateTime</code>
+    -->
+    <update id="updatePromotionSpace" parameterType="promotionSpace">
+        update promotion_space
+        <set>
+            <if test="name != null and !name.trim().isEmpty()">
+                name = #{name},
+            </if>
+            <if test="updateTime != null ">
+                updateTime = #{updateTime},
+            </if>
+        </set>
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <otherwise>false</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--
+    根据广告位id回显广告位信息, 回显的广告位信息有id, name
+    -->
+    <select id="findPromotionSpaceById" parameterType="int" resultType="promotionSpace">
+        select id, name
+        from promotion_space
+        where id = #{id}
+    </select>
+</mapper>

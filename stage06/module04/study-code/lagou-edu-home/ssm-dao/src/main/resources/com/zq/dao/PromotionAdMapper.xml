@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.PromotionAdMapper">
+    <!--dao层要做的是: 查询所有广告信息, 每条广告信息除了广告信息外, 还携带着对应的广告位信息-->
+    <select id="findAllPromotionAd"
+            resultMap="promotionAdContainsPromotionSpace">
+        select *
+        from promotion_ad
+    </select>
+
+    <resultMap id="promotionAdContainsPromotionSpace" type="promotionAd">
+        <id column="id" property="id"/>
+        <association property="promotionSpace" javaType="promotionSpace"
+                     column="spaceId"
+                     select="com.zq.dao.PromotionSpaceMapper.findPromotionSpaceById"
+                     fetchType="eager"/>
+    </resultMap>
+
+    <!--
+    向promotion_ad表中插入一条记录, 插入的字段有
+    <code>name, img, link, priority, spaceId, startTime, endTime, status, text, createTime, updateTime</code>
+    -->
+    <insert id="savePromotionAd" parameterType="promotionAd">
+        insert into promotion_ad(name, img, link, priority, spaceId, startTime,
+                                 endTime, status, text, createTime, updateTime)
+        values (#{name}, #{img}, #{link}, #{priority}, #{spaceId}, #{startTime},
+                #{endTime}, #{status}, #{text}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!--
+    根据广告id更新promotion_ad表中的一条记录, 更新到字段有
+    <code>name, img, link, priority, spaceId, startTime, endTime, status, text, updateTime</code>
+    -->
+    <update id="updatePromotionAd" parameterType="promotionAd">
+        update promotion_ad
+        <set>
+            <if test="name != null and !name.trim().isEmpty()">
+                name = #{name},
+            </if>
+            <if test="img != null and !img.trim().isEmpty()">
+                img = #{img},
+            </if>
+            <if test="link != null and !link.trim().isEmpty()">
+                link = #{link},
+            </if>
+            <if test="priority != null ">
+                priority = #{priority},
+            </if>
+            <if test="spaceId != null">
+                spaceId = #{spaceId},
+            </if>
+            <if test="startTime != null ">
+                startTime = #{startTime},
+            </if>
+            <if test="endTime != null ">
+                endTime = #{endTime},
+            </if>
+            <if test="status != null ">
+                status = #{status},
+            </if>
+            <if test="text != null and !text.trim().isEmpty()">
+                text = #{text},
+            </if>
+            <if test="createTime != null ">
+                createTime = #{createTime},
+            </if>
+            <if test="updateTime != null ">
+                updateTime = #{updateTime},
+            </if>
+        </set>
+        <where>
+            <choose>
+                <when test="id != null ">
+                    id = #{id}
+                </when>
+                <otherwise>false</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--
+    根据广告id回显广告信息
+    -->
+    <select id="findPromotionAdById" resultType="promotionAd">
+        select *
+        from promotion_ad
+        where id = #{promotionAdId}
+    </select>
+
+    <!--
+    根据广告id修改广告status
+    修改promotion_ad表中指定id的记录的status, updateTime
+    -->
+    <update id="updatePromotionAdStatus" parameterType="promotionAd">
+        update promotion_ad
+        set status    = #{status},
+            updateTime=#{updateTime}
+        where id = #{id}
+    </update>
+</mapper>

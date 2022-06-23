@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.RoleMapper">
+    <!--
+    在roles表中以name为条件进行模糊搜索, 否则搜索roles表中所有的记录
+    -->
+    <select id="findAllByName" parameterType="string" resultType="roles">
+        select * from roles
+        <where>
+            <if test="roleName != null and !roleName.trim().isEmpty()">
+                name like concat("%", #{roleName}, "%")
+            </if>
+        </where>
+    </select>
+
+    <!--
+    将name, code, description, createdBy, updatedBy这些数据保存到roles表中, 这些数据封装在了Roles对象中
+    -->
+    <insert id="saveRole" parameterType="roles">
+        insert into roles(name, code, description, created_by,
+                          updated_by) value (#{name}, #{code}, #{description},
+                                             #{createdBy}, #{updatedBy})
+    </insert>
+    <!--
+    修改roles表中where id = #{id}的记录中的name, code, description, updatedBy, updateTime所映射的字段, 这些数据封装在了Roles对象中
+    -->
+    <update id="updateRole" parameterType="roles">
+        update roles
+        <set>
+            <if test="name != null and !name.trim().isEmpty()">
+                name = #{name},
+            </if>
+            <if test="code != null and !code.trim().isEmpty()">
+                code = #{code},
+            </if>
+            <if test="description != null and !description.trim().isEmpty()">
+                description = #{description},
+            </if>
+            <if test="updatedBy != null and !updatedBy.trim().isEmpty()">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </set>
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <otherwise>
+                    false
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--
+    根据角色id查询关联菜单id
+    -->
+    <select id="findMenuIdsByRoleId" resultType="int">
+        select rmr.menu_id
+        from role_menu_relation rmr
+                 join menu m on rmr.role_id = #{roleId} and rmr.menu_id = m.id
+    </select>
+
+    <!--
+    删除role_menu_relation表中where id = #{roleId}的记录
+    -->
+    <delete id="deleteRoleContextMenuByRoleId">
+        delete
+        from role_menu_relation
+        where role_id = #{roleId}
+    </delete>
+
+    <!--
+    向role_menu_relation表中插入新的记录, 利用foreach节点进行批处理
+    -->
+    <insert id="saveRoleContextMenu">
+        insert into role_menu_relation(menu_id, role_id, created_time,
+        updated_time, created_by, updated_by)
+        <foreach collection="array" item="roleMenu" separator="," open="values">
+            (#{roleMenu.menuId}, #{roleMenu.roleId},
+            #{roleMenu.createdTime}, #{roleMenu.updatedTime},
+            #{roleMenu.createdBy}, #{roleMenu.updatedBy})
+        </foreach>
+    </insert>
+
+    <!--在roles表中删除本角色-->
+    <delete id="deleteRoleById">
+        delete
+        from roles
+        where id = #{roleId}
+    </delete>
+</mapper>

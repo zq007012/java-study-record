@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.MenuMapper">
+
+    <!--
+    获取所有where parent_id = #{parentId}的菜单记录,
+    获取的菜单如果有下级菜单的话同时也要获取该菜单的所有下级菜单
+    可以利用递归的方式来完成本功能, 根据parentId获取某一层级的所有菜单,
+    然后将这些菜单的主键id作为parent_id获取这些菜单的子菜单, 以此递归,
+    最终会获得该层级的所有菜单, 这些菜单的子菜单, 以及子菜单的子菜单
+    -->
+    <select id="findAllMenusContainsSubMenusByPrentId" parameterType="int"
+            resultMap="menusContainsSubMenus">
+        select *
+        from menu
+        where parent_id = #{parentId}
+    </select>
+
+    <resultMap id="menusContainsSubMenus" type="menu" autoMapping="true">
+        <id property="id" column="id"/>
+        <collection property="subMenus" column="id" ofType="menu"
+                    select="findAllMenusContainsSubMenusByPrentId"
+                    autoMapping="true"
+                    fetchType="eager"/>
+    </resultMap>
+
+    <!--在menu表中查询所有菜单信息-->
+    <select id="findAllMenu" resultType="menu">
+        select *
+        from menu
+    </select>
+
+    <!--在menu表中获取id=menuId的记录-->
+    <select id="findMenuById" resultType="menu">
+        select *
+        from menu
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{menuId}
+                </when>
+                <otherwise>
+                    false
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--向menu表中保存一条菜单记录,
+    要保存的字段有description, href, icon, name, orderNum, parentId, shown, level, createdTime, updatedTime, createdBy, updatedBy-->
+    <insert id="saveMenu" parameterType="menu">
+        insert into menu(description, href, icon, name, order_num, parent_id,
+                         shown, level, created_time, updated_time, created_by,
+                         updated_by) value (#{description}, #{href}, #{icon},
+                                            #{name}, #{orderNum}, #{parentId},
+                                            #{shown}, #{level}, #{createdTime},
+                                            #{updatedTime}, #{createdBy},
+                                            #{updatedBy})
+    </insert>
+
+    <!--修改menu表中where id = #{id}的记录, 
+    需要修改的字段有description, href, icon, name, orderNum, parentId, shown, level, updatedTime, updatedBy-->
+    <update id="updateMenu" parameterType="menu">
+        update menu
+        <set>
+            <if test="description != null and !description.trim().isEmpty()">
+                description = #{description},
+            </if>
+            <if test="href != null and !href.trim().isEmpty()">
+                href = #{href},
+            </if>
+            <if test="icon != null and !icon.trim().isEmpty()">
+                icon = #{icon},
+            </if>
+            <if test="name != null and !name.trim().isEmpty()">
+                name = #{name},
+            </if>
+            <if test="orderNum != null ">
+                order_num = #{orderNum},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="shown != null">
+                shown = #{shown},
+            </if>
+            <if test="level != null ">
+                level = #{level},
+            </if>
+            <if test="updatedTime != null ">
+                updated_time = #{updatedTime},
+            </if>
+            <if test="updatedBy != null and !updatedBy.trim().isEmpty()">
+                updated_by = #{updatedBy},
+            </if>
+        </set>
+            <where>
+                <choose>
+                    <when test="id != null">
+                        id = #{id}
+                    </when>
+                    <otherwise>
+                        false
+                    </otherwise>
+                </choose>
+            </where>
+    </update>
+</mapper>

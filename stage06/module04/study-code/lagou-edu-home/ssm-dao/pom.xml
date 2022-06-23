@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lagou-edu-home</artifactId>
+        <groupId>com.zq</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ssm-dao</artifactId>
+
+    <packaging>jar</packaging>
+
+    <!-- properties节点下可以自定义标签名, 这个标签的值可以在其他标签中通过${标签名}调用到-->
+    <properties>
+        <!--全局配置,可以设置整个maven项目的编译器的JDK版本,编码-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+
+    </properties>
+
+    <build>
+        <!-- 编译器使用的依赖 -->
+        <plugins>
+            <!--  maven编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <!-- maven编译器使用的 jdk的版本 -->
+                    <release>11</release>
+                </configuration>
+            </plugin>
+
+            <!--打包时忽略test目录, <skip>false</skip>表示不忽略-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M6</version>
+                <configuration>
+                    <!--值为true时表示打包时忽略test目录, false表示不忽略-->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--对依赖进行版本锁定-->
+    <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 本项目使用的依赖 -->
+    <dependencies>
+        <dependency>
+            <groupId>com.zq</groupId>
+            <artifactId>ssm-domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>

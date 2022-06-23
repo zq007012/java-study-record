@@ -34,6 +34,19 @@ public class UserMapperTest {
         }
     }
 
+    /**
+     * 测试{@link UserMapper#findByGenderAndDebutWorks(String, String)}方法的功能
+     */
+    @Test
+    public void findByGenderAndDebutWorksTest(){
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> userList = mapper.findByGenderAndDebutWorks("女");
+        for (User user : userList) {
+            System.out.println(user);
+        }
+        sqlSession.close();
+    }
+
     @Test
     public void findAllTest() {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);

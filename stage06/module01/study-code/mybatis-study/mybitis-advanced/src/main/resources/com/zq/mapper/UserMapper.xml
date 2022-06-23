@@ -163,4 +163,11 @@
             </foreach>
         </where>
     </select>
+
+    <select id="findByGenderAndDebutWorks" resultType="user">
+        select *
+        from user
+        where gender like #{gender}
+
+    </select>
 </mapper>

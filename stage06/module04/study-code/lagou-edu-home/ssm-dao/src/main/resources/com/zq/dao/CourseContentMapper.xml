@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.CourseContentMapper">
+    <!--
+    根据课程id查询该课程下的所有章节信息, 并且每条章节信息都携带着所有对应的课时信息
+    章节信息中要有id, courseId, sectionName, description, createTime, updateTime, isDe, orderNum, status和lessonList
+    章节信息中的lessonList携带者该章节下的所有课时信息,
+    每条课时信息要有id, courseId, sectionId, theme, duration, isFree, createTime, updateTime, isDel, orderNum, status
+    -->
+    <select id="findSectionAndLessonByCourseId" parameterType="int"
+            resultMap="sectionWithLessonList">
+        select cs.*,
+               cl.id          clId,
+               cl.section_id,
+               cl.theme,
+               cl.duration,
+               cl.is_free,
+               cl.create_time clCreateTime,
+               cl.update_time clUpdateTime,
+               cl.is_del      clIsDel,
+               cl.order_num   clOrderNum,
+               cl.status
+        from course_section cs
+                 left join course_lesson cl on cs.id = cl.section_id
+        where cs.course_id = #{courseId}
+    </select>
+
+    <resultMap id="sectionWithLessonList" type="courseSection"
+               autoMapping="true">
+        <id property="id" column="id"/>
+        <collection property="lessonList" ofType="courseLesson"
+                    autoMapping="true">
+            <id property="id" column="clId"/>
+            <result property="createTime" column="clCreateTime"/>
+            <result property="updateTime" column="clUpdateTime"/>
+            <result property="isDel" column="clIsDel"/>
+            <result property="orderNum" column="clOrderNum"/>
+        </collection>
+    </resultMap>
+
+    <!--根据课程id获取课程id和课程名称-->
+    <select id="findCourseByCourseId" resultType="course" parameterType="int">
+        select id, course_name
+        from course
+        where id = #{course_id}
+    </select>
+
+    <!--保存章节信息,<code>courseId, sectionName, description, orderNum,status, createTime, updateTime</code>-->
+    <insert id="saveSection" parameterType="courseSection">
+        insert into course_section(course_id, section_name, description,
+                                   order_num, create_time, update_time)
+        values (#{courseId}, #{sectionName}, #{description}, #{orderNum},
+                #{createTime}, #{updateTime})
+    </insert>
+
+    <!--根据章节id更新course_section表中指定记录的<code>sectionName, description, orderNum, updateTime</code>-->
+    <update id="updateCourseSection" parameterType="courseSection">
+        update course_section
+        <set>
+            <if test="sectionName != null and !sectionName.trim().isEmpty()">
+                section_name = #{sectionName},
+            </if>
+            <if test="description != null and !description.trim().isEmpty()">
+                description = #{description},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+
+        </set>
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <otherwise>false</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--根据章节id跟新course_section表中指定记录的<code>status, updateTime</code>-->
+    <update id="updateSectionStatus" parameterType="courseSection">
+        update course_section
+        <set>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <otherwise>false</otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--在course_lesson表中保存课时信息, 包含以下属性
+     <code>courseId, sectionId, theme, duration, isFree, orderNum, createTime, updateTime</code>
+     -->
+    <insert id="saveCourseLesson" parameterType="courseLesson">
+        insert into course_lesson(course_id, section_id, theme, duration,
+                                  is_free, order_num, create_time, update_time)
+        values (#{courseId}, #{sectionId}, #{theme}, #{duration}, #{isFree},
+                #{orderNum}, #{createTime}, #{updateTime})
+    </insert>
+
+
+</mapper>

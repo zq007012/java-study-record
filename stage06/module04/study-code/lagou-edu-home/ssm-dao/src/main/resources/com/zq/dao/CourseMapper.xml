@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.CourseMapper">
+    <select id="findCourseByCondition" parameterType="courseVO"
+            resultType="course">
+        select id,course_name,price,sort_num,status from course
+        <where>
+            is_del != 1
+            <if test="courseName != null and !courseName.isEmpty()">
+                and course_name like concat("%", #{courseName}, "%")
+            </if>
+
+            <if test="status != null">
+                and status = #{status}
+            </if>
+
+        </where>
+    </select>
+
+    <!--保存课程信息-->
+    <insert id="saveCourse" parameterType="course">
+        insert into course(course_name, brief, preview_first_field,
+        preview_second_field, discounts, price,
+        discounts_tag, course_img_url, course_list_img,
+        sort_num, course_description_mark_down, sales,
+        create_time, update_time)
+        value (#{courseName}, #{brief}, #{ previewFirstField},
+        #{previewSecondField}, #{discounts}, #{price},
+        #{discountsTag}, #{courseImgUrl}, #{courseListImg},
+        #{sortNum}, #{courseDescriptionMarkDown}, #{sales},
+        #{createTime}, #{updateTime});
+        <!--将新插入的course记录的id列的值封装到作为参数的course对象的id属性中-->
+        <selectKey keyColumn="id" order="AFTER" resultType="int"
+                   keyProperty="id">
+            select last_insert_id();
+        </selectKey>
+    </insert>
+
+    <!--保存将是信息-->
+    <insert id="saveTeacher" parameterType="teacher">
+        insert into teacher(teacher_name, description, position, create_time,
+                            update_time, course_id)
+            value (#{teacherName}, #{description}, #{position}, #{createTime},
+                   #{updateTime}, #{courseId})
+    </insert>
+
+    <!--根据课程id获取课程回显信息-->
+    <select id="findCourseById" resultType="courseVO" parameterType="int">
+        select c.id,
+               c.course_name,
+               c.brief,
+               c.preview_first_field,
+               c.preview_second_field,
+               c.discounts,
+               c.price,
+               c.discounts_tag,
+               c.course_img_url,
+               c.course_list_img,
+               c.sort_num,
+               c.course_description_mark_down,
+               c.sales,
+               t.teacher_name,
+               t.position,
+               t.description
+        from course c
+                 left join teacher t on c.id = t.course_id
+        where c.id = #{courseId}
+    </select>
+
+    <!--更新课程信息, 更新course表中id=course.getId()的记录, 会根据course对象中的属性
+     <code>courseName, brief,  previewFirstField, previewSecondField, discounts, price, discountsTag, courseImgUrl, courseListImg, sortNum, courseDescriptionMarkDown, sales, updateTime</code>
+     更新这条记录中的对应字段-->
+    <update id="updateCourse" parameterType="course">
+        update course
+        <set>
+            <if test="courseName != null and !courseName.trim().isEmpty()">
+                course_name = #{courseName},
+            </if>
+            <if test="brief != null and !brief.trim().isEmpty()">
+                brief = #{brief},
+            </if>
+            <if test="previewFirstField != null and !previewFirstField.trim().isEmpty()">
+                preview_first_field = #{previewFirstField},
+            </if>
+            <if test="previewSecondField != null and !previewSecondField.trim().isEmpty()">
+                preview_second_field = #{previewSecondField},
+            </if>
+            <if test="discounts != null ">
+                discounts = #{discounts},
+            </if>
+            <if test="price != null ">
+                price = #{price},
+            </if>
+            <if test="discountsTag != null and !discountsTag.trim().isEmpty()">
+                discounts_tag = #{discountsTag},
+            </if>
+            <if test="courseImgUrl != null and !courseImgUrl.trim().isEmpty()">
+                course_img_url = #{courseImgUrl},
+            </if>
+            <if test="courseListImg != null and !courseListImg.trim().isEmpty()">
+                course_list_img = #{courseListImg},
+            </if>
+            <if test="sortNum != null ">
+                sort_num = #{sortNum},
+            </if>
+            <if test="courseDescriptionMarkDown != null and !courseDescriptionMarkDown.trim().isEmpty()">
+                course_description_mark_down = #{courseDescriptionMarkDown},
+            </if>
+            <if test="sales != null ">
+                sales = #{sales},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        <!--where节点内不可为空, 否则会更新所有的记录-->
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <otherwise>
+                    false
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--更新讲师信息, 更新teacher表中course_id=teacher.getCourseId()的记录, 会根据teacher对象中的属性
+     <code>teacherName, description, position, updateTime</code>
+     更新这条记录中的对应字段-->
+    <update id="updateTeacher" parameterType="teacher">
+        update teacher
+        <set>
+            <if test="teacherName != null and !teacherName.trim().isEmpty()">
+                teacher_name = #{teacherName},
+            </if>
+            <if test="description != null and !description.trim().isEmpty()">
+                description = #{description},
+            </if>
+            <if test="position != null and !position.trim().isEmpty()">
+                position = #{position},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime},
+            </if>
+
+        </set>
+        <where>
+            <choose>
+                <when test="courseId != null">
+                    course_id = #{courseId}
+                </when>
+                <otherwise>
+                    false
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <!--更新课程状态-->
+    <update id="updateCourseStatus" parameterType="course">
+        update course
+        set status      = #{status},
+            update_time = #{updateTime}
+        where id = #{id}
+    </update>
+</mapper>

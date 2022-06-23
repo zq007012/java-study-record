@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.dao.ResourceMapper">
+    <!--以categoryId, name, url
+     为条件进行多条件模糊查询-->
+    <select id="findAllResource" parameterType="resourceVo"
+            resultType="resource">
+        select * from resource
+        <where>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="name != null and !name.trim().isEmpty()">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="url != null and !url.trim().isEmpty()">
+                and url like concat('%',#{url},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--在resource表中新增一条记录来保存这些信息,
+     要保存的字段有name,  url,  categoryId,  description, createdTime, updatedTime, createdBy, updatedBy-->
+    <insert id="saveResource" parameterType="resource">
+        insert into resource(name, url, category_id, description, created_time,
+                             updated_time, created_by,
+                             updated_by) value (#{name}, #{url}, #{categoryId},
+                                                #{description}, #{createdTime},
+                                                #{updatedTime}, #{createdBy},
+                                                #{updatedBy})
+    </insert>
+
+    <!--更新resource表中where id = #{id}这条记录的
+    name,  url,  categoryId,  description, updatedTime, updatedBy关联字段-->
+    <update id="updateResource" parameterType="resource">
+        update resource
+        <set>
+            <if test="name != null and !name.trim().isEmpty()">
+                name = #{name},
+            </if>
+            <if test="url != null and !url.trim().isEmpty()">
+                url = #{url},
+            </if>
+            <if test="categoryId != null ">
+                category_id = #{categoryId},
+            </if>
+            <if test="description != null and !description.trim().isEmpty()">
+                description = #{description},
+            </if>
+            <if test="updatedTime != null ">
+                updated_time = #{updatedTime},
+            </if>
+            <if test="updatedBy != null ">
+                updated_by = #{updatedBy},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--删除role_resource_relaton表中where resource_id = #{resourceId}的记录-->
+    <delete id="deleteRoleResourceRelationByResourceId">
+        delete
+        from role_resource_relation
+        where resource_id = #{resourceId}
+    </delete>
+
+    <!--删除resource表中where id = #{resourceI}的记录-->
+    <delete id="deleteResourceById">
+        delete
+        from resource
+        where id = #{roleId}
+    </delete>
+</mapper>

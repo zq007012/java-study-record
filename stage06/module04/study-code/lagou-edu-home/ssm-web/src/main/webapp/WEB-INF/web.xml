@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!--配置前端控制器DispatcherServlet以及SpringMVC核心配置文件的位置, SpringMVC会在
+    DispatcherServlet对象创建时创建一个ApplicationContext对象来创建和维护一个Spring容器,
+    这个Application对象会根据SpringMVC的配置文件和保存在ServletContext对象中的Spring的配置
+    文件来创建和维护这个Spring容器-->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!--SpringMVC核心配置文件的位置-->
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+        <!--启动时就创建前端控制器DispatcherServlet, 以避免第一次访问时的卡顿问题-->
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <!--会拦截所有非'.jsp'结尾的请求, 并将这些请求交给前端控制器去处理,
+    前端控制器就会将这些请求交给处理器映射器去找对应的处理器, 如果该请求
+    没有对应的处理器, 则会返回404状态码-->
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--注册springframework的CharacterEncodingFilter过滤器, 解决post请求的中文乱码问题-->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!--CharacterEncodingFilter的初始化参数设置为UTF-8, 表示以UTF-8编码解码请求中的参数-->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--SpringMVC整合Spring-->
+    <!--注册ContextLoaderListener监听器,
+    当监听到本Web应用的ServletContext容器的创建时,
+    就会获取contextParam中的Spring配置文件的位置并保存到ServletContext对象中-->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <!--将Spring核心配置文件的路径保存到SevletContext对象的param中-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContextWeb.xml</param-value>
+    </context-param>
+
+    <!--用来解决跨域资源共享问题的监听器-->
+    <filter>
+        <filter-name>corsFilter</filter-name>
+        <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--配置log4j2配置文件的路径,将log4j2配置文件的路径存放到ServletContext对象的param中-->
+    <context-param>
+      <param-name>log4jConfiguration</param-name>
+      <!--param-value的值也可以是file:///filePath 或者网址 或者是/本应用中的资源-->
+      <param-value>classpath:log4j2.xml</param-value>
+    </context-param>
+
+    <!--log4j2监听器, 监听到ServletContext对象创建时, 就会加载log4j的配置文件, 配置文件的路径是从ServletContext对象的parma中获取的-->
+    <listener>
+      <listener-class>
+          org.apache.logging.log4j.web.Log4jServletContextListener
+        </listener-class>
+    </listener>
+</web-app>

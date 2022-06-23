@@ -2,6 +2,7 @@ package com.zq.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
+@ToString
 public class User implements Serializable {
 
     private static final long serialVersionUID =  5347681743777973980L;
