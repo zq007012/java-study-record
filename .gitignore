@@ -28,7 +28,7 @@ hs_err_pid*
 /**/target/
 
 # idea配置文件夹
-/**/.idea/
+/**/.idea/*
 
 # 不忽略idea配置文件夹中的
 /**/.idea/!.gitignore
