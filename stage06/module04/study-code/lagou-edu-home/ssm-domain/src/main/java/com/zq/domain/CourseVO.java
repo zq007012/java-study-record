@@ -132,4 +132,11 @@ public class CourseVO implements Serializable {
     @Setter
     @Getter
     private Integer sales;
+
+    /**
+     * 课程状态，0-草稿，1-上架
+     */
+    @Setter
+    @Getter
+    private Integer status;
 }

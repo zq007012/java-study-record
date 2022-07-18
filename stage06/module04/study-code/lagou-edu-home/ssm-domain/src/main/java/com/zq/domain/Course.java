@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Course implements Serializable {
 
     private static final long serialVersionUID = 702910674163727716L;

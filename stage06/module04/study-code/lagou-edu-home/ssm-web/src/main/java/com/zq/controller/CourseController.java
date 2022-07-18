@@ -41,14 +41,14 @@ public class CourseController {
     @RequestMapping("/updateCourseStatus")
     public ResponseResult updateCourseStatus(@RequestParam("id") Integer courseId, Integer status) {
         courseService.updateCourseStatus(courseId, status);
-        HashMap<String, Integer> map = new HashMap<>();
+        HashMap<String, Integer> map = new HashMap<>(1);
         map.put("status", status);
         return new ResponseResult(true, 200, "响应成功", map);
     }
 
     @RequestMapping("/findCourseByCondition")
     public ResponseResult findCourseByCondition(@RequestBody CourseVO courseVO) {
-        logger.debug(courseVO);
+        logger.info(courseVO);
         ResponseResult responseResult = new ResponseResult();
         responseResult.setSuccess(true);
         responseResult.setStatus(200);
