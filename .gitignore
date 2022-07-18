@@ -23,12 +23,9 @@
 hs_err_pid*
 
 # 模块中需要排除的文件夹
-/**/homework/video/
-/**/out/
-/**/target/
+homework/video/
+out/
+target/
 
-# idea配置文件夹
-/**/.idea/*
-
-# 不忽略idea配置文件夹中的
-/**/.idea/!.gitignore
+# 忽略.idea目录
+.idea/
