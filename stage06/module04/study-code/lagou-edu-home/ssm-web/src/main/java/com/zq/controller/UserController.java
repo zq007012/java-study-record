@@ -5,6 +5,7 @@ import com.zq.domain.ResponseResult;
 import com.zq.domain.User;
 import com.zq.domain.UserVo;
 import com.zq.service.UserService;
+import com.zq.utils.EmptyUtils;
 import com.zq.utils.UUIDUtils;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +72,8 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("access_token", accessToken);
             session.setAttribute("user_id", user.getId());
-
-            HashMap<String, Object> map = new HashMap<>();
+            logger.info("access_token: " + accessToken);
+            HashMap<String, Object> map = new HashMap<>(3);
             map.put("access_token", accessToken);
             map.put("user_id", user.getId());
             map.put("user", user);
@@ -103,5 +104,32 @@ public class UserController {
                 200,
                 "响应成功",
                 null);
+    }
+
+    /**
+     * 从请求头中获取access_token和user_id, 与session中的access_token和user_id进行比较,
+     * 如果不相同则表明用户还未登录, 响应中提醒用户登录
+     * 如果都相同则表明用户已登录, 根据user_id获取该用户拥有的权限, 其实就是获取用户的菜单列表和资源列表
+     *
+     * @return
+     */
+    @RequestMapping("/getUserPermissions")
+    public ResponseResult getUserPermissions(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Integer userIdFromSession = (Integer) session.getAttribute("user_id");
+        String accessTokenFromSession = (String) session.getAttribute("access_token");
+        //session中没有保存登录账号或者登录令牌, 需要先登录
+        if (EmptyUtils.isEmpty(userIdFromSession) || EmptyUtils.isEmpty(accessTokenFromSession)) {
+            return new ResponseResult(true, 400, "请先登录", null);
+        }
+
+        String accessTokenFromHeader = request.getHeader("Authorization");
+        //请求头中的登录令牌与session中的登录令牌是否匹配
+        if (accessTokenFromSession.equalsIgnoreCase(accessTokenFromHeader)) {
+            return new ResponseResult(true, 1, "success",
+                    userService.getUserPermissions(userIdFromSession));
+        } else {
+            return new ResponseResult(true, 400, "请先登录", null);
+        }
     }
 }

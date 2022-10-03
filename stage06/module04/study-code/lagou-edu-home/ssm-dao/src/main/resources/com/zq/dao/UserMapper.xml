@@ -85,4 +85,38 @@
         from user_role_relation
         where user_id = #{userId}
     </delete>
+
+    <!--获取用户所担任角色的主键id组成的列表roleIdList-->
+    <select id="findRoleIdListOfUser" parameterType="int" resultType="int">
+        select distinct role_id
+        from user_role_relation
+        where user_id = #{userId}
+    </select>
+
+    <!--获取roleIdList表示的所有角色掌握的资源-->
+    <select id="findResourceListByRoleIdList" parameterType="list" resultType="resource">
+        select distinct r.* from resource r inner join role_resource_relation rrr on
+        rrr.role_id in
+        (
+        <foreach collection="list" item="roleId" close="," separator=",">
+            #{roleId}
+        </foreach>
+        null
+        ) and r.id = rrr.resource_id
+    </select>
+
+    <!--获取roleIdList表示的所有角色掌握的所有菜单的id组成的menuIdList-->
+    <select id="findMenuIdListByRoleIdList" parameterType="list" resultType="int">
+        select distinct menu_id from role_menu_relation where role_id in(
+            <foreach collection="list" item="roleId" close="," separator=",">
+                #{roleId}
+            </foreach>
+            null
+            )
+    </select>
+
+    <!--获取某个父菜单的所有子菜单对象组成的集合-->
+    <select id="findSubMenuListByParentId" parameterType="int" resultType="menu">
+        select * from menu where parent_id = #{parentId}
+    </select>
 </mapper>

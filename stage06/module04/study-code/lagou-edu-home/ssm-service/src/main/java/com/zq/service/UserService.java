@@ -6,6 +6,7 @@ import com.zq.domain.User;
 import com.zq.domain.UserVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * TODO
@@ -52,5 +53,12 @@ public interface UserService {
      * @return
      */
     List<Roles> findRolesAssociatedWithUserByUserId(Integer userId);
+
+    /**
+     * 获取该用户拥有的权限, 其实就是获取用户的菜单列表和资源列表
+     * @param userId
+     * @return "menuList"是菜单对象组成的列表, "resourceList"是资源对象组成的列表
+     */
+    Map<String, List> getUserPermissions(Integer userId);
 
 }

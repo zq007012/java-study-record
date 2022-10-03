@@ -3,10 +3,7 @@ package com.zq.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zq.dao.UserMapper;
-import com.zq.domain.Roles;
-import com.zq.domain.User;
-import com.zq.domain.UserRoleRelation;
-import com.zq.domain.UserVo;
+import com.zq.domain.*;
 import com.zq.service.UserService;
 import com.zq.utils.Md5Utils;
 import org.apache.logging.log4j.Logger;
@@ -17,9 +14,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * TODO
@@ -130,5 +125,54 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Roles> findRolesAssociatedWithUserByUserId(Integer userId) {
         return userMapper.findRolesAssociatedWithUserByUserId(userId);
+    }
+
+    /**
+     * 获取该用户拥有的权限, 其实就是获取用户的菜单列表和资源列表
+     *
+     * @param userId
+     * @return "menuList"是菜单对象组成的列表, "resourceList"是资源对象组成的列表
+     */
+    @Override
+    public Map<String, List> getUserPermissions(Integer userId) {
+        HashMap<String, List> map = new HashMap<>(2);
+        // 获取资源列表
+        List<Integer> roleIdList = userMapper.findRoleIdListOfUser(userId);
+        List<Resource> resourceList = userMapper.findResourceListByRoleIdList(roleIdList);
+        map.put("resourceList", resourceList);
+
+        //获取与roleIdList关联的菜单id列表menuIdList
+        List<Integer> menuIdList = userMapper.findMenuIdListByRoleIdList(roleIdList);
+        //获取具有层级结构的主菜单列表, 并且这些菜单要在menuIdList范围内
+        List<Menu> menuList = getSubMenuListByParnentIdAndMenuIdList(-1, menuIdList);
+        map.put("menuList", menuList);
+        return map;
+    }
+
+    /**
+     * 获取某个菜单的子菜单列表, 这些子菜单的id要在menuIdList范围内并且有着同一个父菜单(parentId表示这个父菜单的id),
+     * 利用本方法递归使子菜单也有自己的子菜单列表, 这样在菜单对象中就形成了菜单的层级结构,
+     * 如果parentId的值为-1, 那么获取到的则是具有层级结构的主菜单列表
+     *
+     * @param parentId   表示子菜单的parentId属性, 如果parentId的值为-1, 那么获取到的则是主菜单列表
+     * @param menuIdList 子菜单id的取值范围
+     * @return 子菜单列表
+     */
+    private List<Menu> getSubMenuListByParnentIdAndMenuIdList(Integer parentId, List<Integer> menuIdList) {
+        //1. 根据parentId获取子菜单列表
+        List<Menu> menuList = userMapper.findSubMenuListByParentId(parentId);
+        /* 2. 遍历子菜单列表, 删除掉不在menuIdList中的子菜单,
+            对于在menuIdList中的子菜单, 可通过本方法的递归来获取这个子菜单的子菜单列表
+        */
+        for (Iterator<Menu> iterator = menuList.iterator(); iterator.hasNext(); ) {
+            Menu menu = iterator.next();
+            if (menuIdList.contains(menu.getId())) {
+                //通过本方法的递归获取子菜单的子菜单列表
+                menu.setSubMenus(getSubMenuListByParnentIdAndMenuIdList(menu.getId(), menuIdList));
+            } else {
+                iterator.remove();
+            }
+        }
+        return menuList;
     }
 }

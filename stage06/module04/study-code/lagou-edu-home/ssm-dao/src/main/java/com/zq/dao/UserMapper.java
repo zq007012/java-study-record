@@ -1,9 +1,6 @@
 package com.zq.dao;
 
-import com.zq.domain.Roles;
-import com.zq.domain.User;
-import com.zq.domain.UserRoleRelation;
-import com.zq.domain.UserVo;
+import com.zq.domain.*;
 
 import java.util.List;
 
@@ -68,4 +65,35 @@ public interface UserMapper {
      * @return
      */
     int saveUserRoleRelationInBatches(UserRoleRelation... userRoleRelations);
+
+    /**
+     * 获取用户所担任角色的主键id组成的列表roleIdList
+     *
+     * @param userId
+     * @return
+     */
+    List<Integer> findRoleIdListOfUser(Integer userId);
+
+    /**
+     * 获取roleIdList表示的所有角色掌握的资源
+     *
+     * @param roleIdList roleIdList是角色的主键id组成的集合
+     * @return
+     */
+    List<Resource> findResourceListByRoleIdList(List<Integer> roleIdList);
+
+    /**
+     * 获取roleIdList表示的所有角色掌握的所有菜单的id组成的menuIdList
+     *
+     * @param roleIdList roleIdList是角色的主键id组成的集合
+     * @return
+     */
+    List<Integer> findMenuIdListByRoleIdList(List<Integer> roleIdList);
+
+    /**
+     * 获取某个父菜单的所有子菜单对象组成的集合
+     * @param parentId
+     * @return
+     */
+    List<Menu> findSubMenuListByParentId(Integer parentId);
 }
